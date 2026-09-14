@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abbasi Publication Network (APN) - Inventory & Production ERP</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        apn: {
+                            blue: '#1e3a8a',
+                            light: '#3b82f6',
+                            teal: '#0d9488',
+                            amber: '#f59e0b',
+                            rose: '#e11d48'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Custom Style with Urdu Typography -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="lang-ur min-h-screen bg-slate-50 antialiased selection:bg-blue-600 selection:text-white">
+    <!-- Main Application Container rendered by app.js -->
+    <div id="appRoot">
+        <div class="flex items-center justify-center min-h-screen">
+            <div class="text-center p-8 bg-white rounded-2xl shadow-lg border border-slate-200">
+                <div class="w-12 h-12 border-4 border-blue-600 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+                <h3 class="text-lg font-bold text-slate-800">عباسی پبلیکیشن نیٹ ورک</h3>
+                <p class="text-xs text-slate-500 mt-1">سسٹم لوڈ ہو رہا ہے، براہِ کرم انتظار فرمائیں...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/barcode.js"></script>
+    <script src="js/store.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
