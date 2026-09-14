@@ -1,12 +1,63 @@
 // UI Renderer and Application Controller
 // Abbasi Publication Network (APN) - Permanent Left Sidebar & Full Bilingual Urdu/English
 
+// ==================== ENTERPRISE SVG VECTOR ICONS REGISTRY ====================
+const APN_ICONS = {
+    // 1. Raw Materials: 3D Box & Paper Pallet Stacks
+    raw_materials: `<svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/><path d="m7.5 4.5 9 5"/></svg>`,
+    
+    // 2. Book Master & BOM: Open Book with Ribbon & Spine
+    books: `<svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/><path d="M6 2v20"/><path d="M10 6h6"/><path d="M10 10h6"/><path d="M10 14h4"/></svg>`,
+    
+    // 3. Work Orders: Clipboard with Checklist & Barcode
+    work_orders: `<svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect width="16" height="20" x="4" y="2" rx="2"/><path d="M9 2v4h6V2"/><path d="m9 11 2 2 4-4"/><path d="M8 17h8"/><path d="M8 14h2"/></svg>`,
+    
+    // 4. Inner Printing: Modern Offset Press / Sheet Feeder
+    printing: `<svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M6 9V3a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v6"/><rect x="6" y="14" width="12" height="8" rx="1"/><circle cx="18" cy="12" r="1" fill="currentColor"/></svg>`,
+    
+    // 5. Outer Cover & Lamination: Finish Swatches & Gloss Layer
+    outer: `<svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/><path d="M5 3v4"/><path d="M3 5h4"/><path d="M19 17v4"/><path d="M17 19h4"/></svg>`,
+    
+    // 6. Binding & Assembly: Precision Cutter Shears & Book Spine
+    binding: `<svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="3"/><path d="M8.12 8.12 12 12"/><path d="M20 4 8.12 15.88"/><circle cx="6" cy="18" r="3"/><path d="M14.8 14.8 20 20"/></svg>`,
+    
+    // 7. Finished Goods Warehouse: Facility Building & Storage Bays
+    warehouse: `<svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21V9.5a1.5 1.5 0 0 1 .65-1.24l7.5-5a1.5 1.5 0 0 1 1.7 0l7.5 5A1.5 1.5 0 0 1 21 9.5V21"/><path d="M3 21h18"/><path d="M7 10h2v4H7z"/><path d="M15 10h2v4h-2z"/><path d="M10 21v-5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v5"/></svg>`,
+    
+    // 8. Damage & Wastage: Safety Shield with Warning
+    damage: `<svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg>`,
+    
+    // 9. Admin & Reports: Analytical Trends & Control Hub
+    admin: `<svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/><circle cx="19" cy="9" r="2" fill="currentColor"/></svg>`,
+
+    // Sidebar Small Icons (w-4 h-4)
+    nav_dashboard: `<svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></svg>`,
+    nav_raw_materials: `<svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg>`,
+    nav_books: `<svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/><path d="M6 2v20"/></svg>`,
+    nav_work_orders: `<svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="16" height="20" x="4" y="2" rx="2"/><path d="M9 2v4h6V2"/><path d="m9 11 2 2 4-4"/></svg>`,
+    nav_printing: `<svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M6 9V3a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v6"/><rect x="6" y="14" width="12" height="8" rx="1"/></svg>`,
+    nav_outer: `<svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>`,
+    nav_binding: `<svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="3"/><path d="M8.12 8.12 12 12"/><path d="M20 4 8.12 15.88"/><circle cx="6" cy="18" r="3"/></svg>`,
+    nav_warehouse: `<svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21V9.5a1.5 1.5 0 0 1 .65-1.24l7.5-5a1.5 1.5 0 0 1 1.7 0l7.5 5A1.5 1.5 0 0 1 21 9.5V21"/><path d="M3 21h18"/></svg>`,
+    nav_damage: `<svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg>`,
+    nav_admin: `<svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>`,
+
+    // Top 4 Color Action Buttons
+    top_chart: `<svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg>`,
+    top_plus: `<svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14m-7-7h14"/></svg>`,
+    top_jobs: `<svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect width="16" height="20" x="4" y="2" rx="2"/><path d="M9 2v4h6V2"/><path d="M8 12h8"/><path d="M8 16h5"/></svg>`,
+    top_bell: `<svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>`,
+
+    // KPI Cards Icons
+    kpi_books: `<svg class="w-5 h-5 text-blue-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/><path d="M6 2v20"/><path d="M10 6h6"/><path d="M10 10h6"/></svg>`,
+    kpi_jobs: `<svg class="w-5 h-5 text-amber-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>`,
+    kpi_alerts: `<svg class="w-5 h-5 text-red-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>`,
+    kpi_loss: `<svg class="w-5 h-5 text-rose-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 17 13.5 8.5 8.5 13.5 2 7"/><polyline points="16 17 22 17 22 11"/></svg>`
+};
+
 async function initApp() {
     APN_API.seedLocalMockData();
     await APN_API.checkBackend();
-    
-    document.body.className = window.apnStore.lang === 'ur' ? 'lang-ur' : 'lang-en';
-
     await refreshData();
     renderApp();
 }
@@ -38,6 +89,10 @@ function renderApp() {
     const s = window.apnStore;
     const root = document.getElementById('appRoot');
     if (!root) return;
+
+    // Apply language classes dynamically
+    document.body.className = s.lang === 'ur' ? 'min-h-screen bg-[#f4f7f9] antialiased lang-ur' : 'min-h-screen bg-[#f4f7f9] antialiased lang-en';
+    document.documentElement.lang = s.lang;
 
     const isCollapsed = s.sidebarCollapsed;
     const isUrdu = s.lang === 'ur';
@@ -104,32 +159,32 @@ function renderApp() {
                 <div>
                     <!-- Top 4 Color Buttons row matching user screenshot -->
                     <div class="grid grid-cols-4 gap-0.5 p-1 bg-slate-100 border-b border-slate-200">
-                        <button onclick="switchTab('raw_materials')" title="${s.t('btn_tt_stats')}" class="h-8 top-btn-green text-white flex items-center justify-center rounded-xs transition text-sm">
-                            📊
+                        <button onclick="switchTab('raw_materials')" title="${s.t('btn_tt_stats')}" class="h-8 top-btn-green text-white flex items-center justify-center rounded-xs transition shadow-xs">
+                            ${APN_ICONS.top_chart}
                         </button>
-                        <button onclick="openAddBookModal()" title="${s.t('btn_tt_new_book')}" class="h-8 top-btn-blue text-white flex items-center justify-center rounded-xs transition text-sm">
-                            ✏️
+                        <button onclick="openAddBookModal()" title="${s.t('btn_tt_new_book')}" class="h-8 top-btn-blue text-white flex items-center justify-center rounded-xs transition shadow-xs">
+                            ${APN_ICONS.top_plus}
                         </button>
-                        <button onclick="switchTab('work_orders')" title="${s.t('btn_tt_jobs')}" class="h-8 top-btn-orange text-white flex items-center justify-center rounded-xs transition text-sm">
-                            👥
+                        <button onclick="switchTab('work_orders')" title="${s.t('btn_tt_jobs')}" class="h-8 top-btn-orange text-white flex items-center justify-center rounded-xs transition shadow-xs">
+                            ${APN_ICONS.top_jobs}
                         </button>
-                        <button onclick="showLowStockModal()" title="${s.t('btn_tt_alerts')}" class="h-8 top-btn-red text-white flex items-center justify-center rounded-xs transition text-sm">
-                            ⚙️
+                        <button onclick="showLowStockModal()" title="${s.t('btn_tt_alerts')}" class="h-8 top-btn-red text-white flex items-center justify-center rounded-xs transition shadow-xs">
+                            ${APN_ICONS.top_bell}
                         </button>
                     </div>
 
                     <!-- Sidebar Navigation List -->
                     <nav class="p-2 space-y-1">
-                        ${renderSidebarLink('dashboard', '🎛️', s.t('nav_dashboard'), false)}
-                        ${renderSidebarLink('raw_materials', '📦', s.t('nav_raw_materials'), true)}
-                        ${renderSidebarLink('books', '📚', s.t('nav_books'), true)}
-                        ${renderSidebarLink('work_orders', '📝', s.t('nav_work_orders'), true)}
-                        ${renderSidebarLink('printing', '📄', s.t('nav_printing'), true)}
-                        ${renderSidebarLink('outer', '🎨', s.t('nav_outer'), true)}
-                        ${renderSidebarLink('binding', '✂️', s.t('nav_binding'), true)}
-                        ${renderSidebarLink('warehouse', '🏭', s.t('nav_warehouse'), true)}
-                        ${renderSidebarLink('damage', '⚠️', s.t('nav_damage'), true)}
-                        ${renderSidebarLink('admin', '⚙️', s.t('nav_reports'), false)}
+                        ${renderSidebarLink('dashboard', 'nav_dashboard', s.t('nav_dashboard'), false)}
+                        ${renderSidebarLink('raw_materials', 'nav_raw_materials', s.t('nav_raw_materials'), true)}
+                        ${renderSidebarLink('books', 'nav_books', s.t('nav_books'), true)}
+                        ${renderSidebarLink('work_orders', 'nav_work_orders', s.t('nav_work_orders'), true)}
+                        ${renderSidebarLink('printing', 'nav_printing', s.t('nav_printing'), true)}
+                        ${renderSidebarLink('outer', 'nav_outer', s.t('nav_outer'), true)}
+                        ${renderSidebarLink('binding', 'nav_binding', s.t('nav_binding'), true)}
+                        ${renderSidebarLink('warehouse', 'nav_warehouse', s.t('nav_warehouse'), true)}
+                        ${renderSidebarLink('damage', 'nav_damage', s.t('nav_damage'), true)}
+                        ${renderSidebarLink('admin', 'nav_admin', s.t('nav_reports'), false)}
                     </nav>
                 </div>
 
@@ -167,15 +222,16 @@ function renderApp() {
     `;
 }
 
-function renderSidebarLink(tabId, icon, label, hasArrow) {
+function renderSidebarLink(tabId, iconKey, label, hasArrow) {
     const s = window.apnStore;
     const isActive = s.activeTab === tabId;
     const isCollapsed = s.sidebarCollapsed;
+    const iconSvg = APN_ICONS[iconKey] || iconKey;
 
     return `
         <div onclick="switchTab('${tabId}')" class="sidebar-link ${isActive ? 'active' : ''}" title="${label}">
             <div class="flex items-center gap-2.5">
-                <span class="text-base">${icon}</span>
+                <span class="w-4 h-4 shrink-0 flex items-center justify-center ${isActive ? 'text-[#0288d1]' : 'text-slate-500'}">${iconSvg}</span>
                 ${!isCollapsed ? `<span class="text-xs font-semibold">${label}</span>` : ''}
             </div>
             ${!isCollapsed && hasArrow ? `<span class="text-slate-400 text-xs font-bold">›</span>` : ''}
@@ -207,15 +263,96 @@ function renderDepartmentGrid() {
     const isUrdu = s.lang === 'ur';
 
     const departments = [
-        { id: 'raw_materials', icon: '📦', title: s.t('dept_raw_title'), sub: s.t('dept_raw_sub'), count: `${s.rawMaterials.length} ${isUrdu ? 'آئٹمز' : 'Items'}` },
-        { id: 'books', icon: '📚', title: s.t('dept_book_title'), sub: s.t('dept_book_sub'), count: `${s.books.length} ${s.t('kpi_books_unit')}` },
-        { id: 'work_orders', icon: '📝', title: s.t('dept_wo_title'), sub: s.t('dept_wo_sub'), count: `${m.active_jobs_count || 0} ${isUrdu ? 'فعال' : 'Active'}` },
-        { id: 'printing', icon: '📄', title: s.t('dept_inner_title'), sub: s.t('dept_inner_sub'), count: isUrdu ? 'مشین روم 1' : 'Room 1' },
-        { id: 'outer', icon: '🎨', title: s.t('dept_outer_title'), sub: s.t('dept_outer_sub'), count: isUrdu ? 'مشین روم 2' : 'Room 2' },
-        { id: 'binding', icon: '✂️', title: s.t('dept_binding_title'), sub: s.t('dept_binding_sub'), count: isUrdu ? 'بائنڈنگ فلور' : 'Floor 1' },
-        { id: 'warehouse', icon: '🏭', title: s.t('dept_warehouse_title'), sub: s.t('dept_warehouse_sub'), count: `${(m.total_finished_books || 0).toLocaleString()} ${s.t('kpi_books_unit')}` },
-        { id: 'damage', icon: '⚠️', title: s.t('dept_damage_title'), sub: s.t('dept_damage_sub'), count: `${m.total_damage_items || 0} ${isUrdu ? 'ویسٹیج' : 'Loss'}` },
-        { id: 'admin', icon: '⚙️', title: s.t('dept_admin_title'), sub: s.t('dept_admin_sub'), count: isUrdu ? 'کنٹرول' : 'Controls' }
+        { 
+            id: 'raw_materials', 
+            icon: APN_ICONS.raw_materials, 
+            accent: '#0284c7',
+            wrapperClass: 'bg-gradient-to-b from-sky-50 to-sky-100/70 text-sky-600 border border-sky-200/80',
+            badgeClass: 'bg-sky-50 text-sky-700 border border-sky-200/70',
+            title: s.t('dept_raw_title'), 
+            sub: s.t('dept_raw_sub'), 
+            count: `${s.rawMaterials.length} ${isUrdu ? 'آئٹمز' : 'Items'}` 
+        },
+        { 
+            id: 'books', 
+            icon: APN_ICONS.books, 
+            accent: '#7c3aed',
+            wrapperClass: 'bg-gradient-to-b from-violet-50 to-violet-100/70 text-violet-600 border border-violet-200/80',
+            badgeClass: 'bg-violet-50 text-violet-700 border border-violet-200/70',
+            title: s.t('dept_book_title'), 
+            sub: s.t('dept_book_sub'), 
+            count: `${s.books.length} ${s.t('kpi_books_unit')}` 
+        },
+        { 
+            id: 'work_orders', 
+            icon: APN_ICONS.work_orders, 
+            accent: '#d97706',
+            wrapperClass: 'bg-gradient-to-b from-amber-50 to-amber-100/70 text-amber-600 border border-amber-200/80',
+            badgeClass: 'bg-amber-50 text-amber-700 border border-amber-200/70',
+            title: s.t('dept_wo_title'), 
+            sub: s.t('dept_wo_sub'), 
+            count: `${m.active_jobs_count || 0} ${isUrdu ? 'فعال' : 'Active'}` 
+        },
+        { 
+            id: 'printing', 
+            icon: APN_ICONS.printing, 
+            accent: '#2563eb',
+            wrapperClass: 'bg-gradient-to-b from-blue-50 to-blue-100/70 text-blue-600 border border-blue-200/80',
+            badgeClass: 'bg-blue-50 text-blue-700 border border-blue-200/70',
+            title: s.t('dept_inner_title'), 
+            sub: s.t('dept_inner_sub'), 
+            count: isUrdu ? 'مشین روم 1' : 'Room 1' 
+        },
+        { 
+            id: 'outer', 
+            icon: APN_ICONS.outer, 
+            accent: '#db2777',
+            wrapperClass: 'bg-gradient-to-b from-pink-50 to-pink-100/70 text-pink-600 border border-pink-200/80',
+            badgeClass: 'bg-pink-50 text-pink-700 border border-pink-200/70',
+            title: s.t('dept_outer_title'), 
+            sub: s.t('dept_outer_sub'), 
+            count: isUrdu ? 'مشین روم 2' : 'Room 2' 
+        },
+        { 
+            id: 'binding', 
+            icon: APN_ICONS.binding, 
+            accent: '#0d9488',
+            wrapperClass: 'bg-gradient-to-b from-teal-50 to-teal-100/70 text-teal-600 border border-teal-200/80',
+            badgeClass: 'bg-teal-50 text-teal-700 border border-teal-200/70',
+            title: s.t('dept_binding_title'), 
+            sub: s.t('dept_binding_sub'), 
+            count: isUrdu ? 'بائنڈنگ فلور' : 'Floor 1' 
+        },
+        { 
+            id: 'warehouse', 
+            icon: APN_ICONS.warehouse, 
+            accent: '#16a34a',
+            wrapperClass: 'bg-gradient-to-b from-emerald-50 to-emerald-100/70 text-emerald-600 border border-emerald-200/80',
+            badgeClass: 'bg-emerald-50 text-emerald-700 border border-emerald-200/70',
+            title: s.t('dept_warehouse_title'), 
+            sub: s.t('dept_warehouse_sub'), 
+            count: `${(m.total_finished_books || 0).toLocaleString()} ${s.t('kpi_books_unit')}` 
+        },
+        { 
+            id: 'damage', 
+            icon: APN_ICONS.damage, 
+            accent: '#e11d48',
+            wrapperClass: 'bg-gradient-to-b from-rose-50 to-rose-100/70 text-rose-600 border border-rose-200/80',
+            badgeClass: 'bg-rose-50 text-rose-700 border border-rose-200/70',
+            title: s.t('dept_damage_title'), 
+            sub: s.t('dept_damage_sub'), 
+            count: `${m.total_damage_items || 0} ${isUrdu ? 'ویسٹیج' : 'Loss'}` 
+        },
+        { 
+            id: 'admin', 
+            icon: APN_ICONS.admin, 
+            accent: '#475569',
+            wrapperClass: 'bg-gradient-to-b from-slate-100 to-slate-200/70 text-slate-700 border border-slate-300/80',
+            badgeClass: 'bg-slate-100 text-slate-700 border border-slate-300/70',
+            title: s.t('dept_admin_title'), 
+            sub: s.t('dept_admin_sub'), 
+            count: isUrdu ? 'کنٹرول' : 'Controls' 
+        }
     ];
 
     return `
@@ -226,8 +363,8 @@ function renderDepartmentGrid() {
                     <p class="text-[11px] font-bold text-slate-500 uppercase">${s.t('kpi_total_finished')}</p>
                     <h4 class="text-xl font-extrabold text-slate-900 mt-0.5">${(m.total_finished_books || 0).toLocaleString()} <span class="text-xs font-normal text-slate-500">${s.t('kpi_books_unit')}</span></h4>
                 </div>
-                <div class="w-10 h-10 rounded-lg bg-blue-50 text-blue-700 flex items-center justify-center text-xl font-bold">
-                    📚
+                <div class="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 border border-blue-200/80 flex items-center justify-center shadow-xs">
+                    ${APN_ICONS.kpi_books}
                 </div>
             </div>
 
@@ -236,8 +373,8 @@ function renderDepartmentGrid() {
                     <p class="text-[11px] font-bold text-slate-500 uppercase">${s.t('kpi_active_jobs')}</p>
                     <h4 class="text-xl font-extrabold text-slate-900 mt-0.5">${m.active_jobs_count || 0} <span class="text-xs font-normal text-slate-500">${s.t('kpi_jobs_unit')}</span></h4>
                 </div>
-                <div class="w-10 h-10 rounded-lg bg-amber-50 text-amber-700 flex items-center justify-center text-xl font-bold">
-                    ⚙️
+                <div class="w-10 h-10 rounded-xl bg-amber-50 text-amber-600 border border-amber-200/80 flex items-center justify-center shadow-xs">
+                    ${APN_ICONS.kpi_jobs}
                 </div>
             </div>
 
@@ -246,8 +383,8 @@ function renderDepartmentGrid() {
                     <p class="text-[11px] font-bold text-slate-500 uppercase">${s.t('kpi_low_stock')}</p>
                     <h4 class="text-xl font-extrabold ${(m.low_stock_count || 0) > 0 ? 'text-red-600' : 'text-slate-900'} mt-0.5">${m.low_stock_count || 0} <span class="text-xs font-normal text-slate-500">${s.t('kpi_alerts_unit')}</span></h4>
                 </div>
-                <div class="w-10 h-10 rounded-lg bg-red-50 text-red-600 flex items-center justify-center text-xl font-bold ${(m.low_stock_count || 0) > 0 ? 'badge-pulse-red' : ''}">
-                    🚨
+                <div class="w-10 h-10 rounded-xl bg-red-50 text-red-600 border border-red-200/80 flex items-center justify-center shadow-xs ${(m.low_stock_count || 0) > 0 ? 'badge-pulse-red' : ''}">
+                    ${APN_ICONS.kpi_alerts}
                 </div>
             </div>
 
@@ -256,24 +393,24 @@ function renderDepartmentGrid() {
                     <p class="text-[11px] font-bold text-slate-500 uppercase">${s.t('kpi_damage_loss')}</p>
                     <h4 class="text-xl font-extrabold text-slate-900 mt-0.5">${(m.total_financial_loss || 0).toLocaleString()} <span class="text-xs font-normal text-slate-500">${s.t('kpi_pkr')}</span></h4>
                 </div>
-                <div class="w-10 h-10 rounded-lg bg-rose-50 text-rose-700 flex items-center justify-center text-xl font-bold">
-                    📉
+                <div class="w-10 h-10 rounded-xl bg-rose-50 text-rose-600 border border-rose-200/80 flex items-center justify-center shadow-xs">
+                    ${APN_ICONS.kpi_loss}
                 </div>
             </div>
         </div>
 
-        <!-- 9 Department Cards Grid (Clean 2-Row Layout) -->
+        <!-- 9 Department Cards Grid (Clean Responsive Layout) -->
         <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 mb-8">
             ${departments.map(d => `
-                <div onclick="switchTab('${d.id}')" class="dept-card">
-                    <div class="dept-card-icon">
-                        <span>${d.icon}</span>
+                <div onclick="switchTab('${d.id}')" class="dept-card group text-center" style="--card-accent: ${d.accent};">
+                    <div class="dept-card-icon-wrapper ${d.wrapperClass}">
+                        ${d.icon}
                     </div>
                     <div class="dept-card-title">${d.title}</div>
                     <div class="dept-card-subtitle">${d.sub}</div>
                     <div class="mt-3 pt-2 border-t border-slate-100 flex justify-between items-center text-[10px] text-slate-400">
-                        <span>${s.t('th_status')}</span>
-                        <span class="font-bold text-blue-700 bg-blue-50 px-1.5 py-0.5 rounded">${d.count}</span>
+                        <span class="font-medium">${s.t('th_status')}</span>
+                        <span class="font-bold px-2 py-0.5 rounded-md text-[11px] ${d.badgeClass}">${d.count}</span>
                     </div>
                 </div>
             `).join('')}
@@ -383,9 +520,14 @@ function renderRawMaterials() {
     return `
         <div class="bg-white rounded-xl border border-slate-200 p-6 shadow-xs">
             <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-slate-100">
-                <div>
-                    <h3 class="text-base font-bold text-slate-900">${s.t('dept_raw_title')}</h3>
-                    <p class="text-xs text-slate-500">${s.t('dept_raw_sub')}</p>
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-sky-50 text-sky-600 border border-sky-200/80 flex items-center justify-center shrink-0 shadow-xs">
+                        ${APN_ICONS.raw_materials}
+                    </div>
+                    <div>
+                        <h3 class="text-base font-bold text-slate-900">${s.t('dept_raw_title')}</h3>
+                        <p class="text-xs text-slate-500">${s.t('dept_raw_sub')}</p>
+                    </div>
                 </div>
                 <div class="flex items-center gap-2">
                     <button onclick="openStockInwardModal()" class="px-3 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold rounded-lg shadow-xs transition">
@@ -457,9 +599,14 @@ function renderBooks() {
     return `
         <div class="bg-white rounded-xl border border-slate-200 p-6 shadow-xs">
             <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-slate-100">
-                <div>
-                    <h3 class="text-base font-bold text-slate-900">${s.t('dept_book_title')}</h3>
-                    <p class="text-xs text-slate-500">${s.t('dept_book_sub')}</p>
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-violet-50 text-violet-600 border border-violet-200/80 flex items-center justify-center shrink-0 shadow-xs">
+                        ${APN_ICONS.books}
+                    </div>
+                    <div>
+                        <h3 class="text-base font-bold text-slate-900">${s.t('dept_book_title')}</h3>
+                        <p class="text-xs text-slate-500">${s.t('dept_book_sub')}</p>
+                    </div>
                 </div>
                 <button onclick="openAddBookModal()" class="px-3.5 py-1.5 bg-[#4885a6] hover:bg-[#3b7596] text-white text-xs font-bold rounded-lg shadow-xs transition">
                     ${s.t('btn_add_book')}
@@ -475,7 +622,9 @@ function renderBooks() {
                                 <h4 class="text-base font-bold text-slate-900 mt-2">${b.title}</h4>
                                 <p class="text-xs text-slate-500 font-medium">${b.subject || ''} • ${isUrdu ? 'زبان' : 'Language'}: ${b.language}</p>
                             </div>
-                            <span class="text-2xl text-slate-400">📖</span>
+                            <div class="w-9 h-9 rounded-lg bg-violet-50 text-violet-600 border border-violet-200/80 flex items-center justify-center shrink-0">
+                                ${APN_ICONS.books}
+                            </div>
                         </div>
 
                         <div class="grid grid-cols-3 gap-2 bg-slate-50 p-2.5 rounded-lg mt-3 text-xs text-center border border-slate-100">
@@ -520,9 +669,14 @@ function renderWorkOrders() {
     return `
         <div class="bg-white rounded-xl border border-slate-200 p-6 shadow-xs">
             <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-slate-100">
-                <div>
-                    <h3 class="text-base font-bold text-slate-900">${s.t('dept_wo_title')}</h3>
-                    <p class="text-xs text-slate-500">${s.t('dept_wo_sub')}</p>
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-amber-50 text-amber-600 border border-amber-200/80 flex items-center justify-center shrink-0 shadow-xs">
+                        ${APN_ICONS.work_orders}
+                    </div>
+                    <div>
+                        <h3 class="text-base font-bold text-slate-900">${s.t('dept_wo_title')}</h3>
+                        <p class="text-xs text-slate-500">${s.t('dept_wo_sub')}</p>
+                    </div>
                 </div>
                 <button onclick="openNewWorkOrderModal()" class="px-3.5 py-1.5 bg-[#4885a6] hover:bg-[#3b7596] text-white text-xs font-bold rounded-lg shadow-xs transition">
                     ${s.t('btn_new_job')}
@@ -596,9 +750,11 @@ function renderProductionFloor(specificStage = null) {
 
     return `
         <div class="bg-white rounded-xl border border-slate-200 p-6 shadow-xs">
-            <div class="pb-4 border-b border-slate-100">
-                <h3 class="text-base font-bold text-slate-900">${isUrdu ? 'پروڈکشن فلور مانیٹرنگ' : 'Production Floor Monitoring'}</h3>
-                <p class="text-xs text-slate-500">${isUrdu ? 'انر فارمے چھپائی، ٹائٹل لیمینیشن، اور بائنڈنگ اسمبلی کی تفصیلی ورکنگ' : 'Inner text printing, cover thermal lamination, and binding assembly tracking'}</p>
+            <div class="pb-4 border-b border-slate-100 flex items-center justify-between">
+                <div>
+                    <h3 class="text-base font-bold text-slate-900">${isUrdu ? 'پروڈکشن فلور مانیٹرنگ' : 'Production Floor Monitoring'}</h3>
+                    <p class="text-xs text-slate-500">${isUrdu ? 'انر فارمے چھپائی، ٹائٹل لیمینیشن، اور بائنڈنگ اسمبلی کی تفصیلی ورکنگ' : 'Inner text printing, cover thermal lamination, and binding assembly tracking'}</p>
+                </div>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
@@ -606,7 +762,7 @@ function renderProductionFloor(specificStage = null) {
                 <div class="bg-slate-50 rounded-xl p-4 border border-slate-200">
                     <div class="flex items-center justify-between pb-3 border-b border-slate-200">
                         <div class="flex items-center gap-2">
-                            <span class="text-xl">📄</span>
+                            <span class="w-6 h-6 text-blue-600 flex items-center justify-center">${APN_ICONS.printing}</span>
                             <h4 class="font-bold text-slate-800 text-sm">${s.t('dept_inner_title')}</h4>
                         </div>
                         <span class="px-2 py-0.5 bg-blue-100 text-blue-800 text-xs font-bold rounded">${isUrdu ? 'مشین روم 1' : 'Machine 1'}</span>
@@ -638,7 +794,7 @@ function renderProductionFloor(specificStage = null) {
                 <div class="bg-slate-50 rounded-xl p-4 border border-slate-200">
                     <div class="flex items-center justify-between pb-3 border-b border-slate-200">
                         <div class="flex items-center gap-2">
-                            <span class="text-xl">🎨</span>
+                            <span class="w-6 h-6 text-pink-600 flex items-center justify-center">${APN_ICONS.outer}</span>
                             <h4 class="font-bold text-slate-800 text-sm">${s.t('dept_outer_title')}</h4>
                         </div>
                         <span class="px-2 py-0.5 bg-purple-100 text-purple-800 text-xs font-bold rounded">${isUrdu ? 'مشین روم 2' : 'Machine 2'}</span>
@@ -670,7 +826,7 @@ function renderProductionFloor(specificStage = null) {
                 <div class="bg-slate-50 rounded-xl p-4 border border-slate-200">
                     <div class="flex items-center justify-between pb-3 border-b border-slate-200">
                         <div class="flex items-center gap-2">
-                            <span class="text-xl">✂️</span>
+                            <span class="w-6 h-6 text-teal-600 flex items-center justify-center">${APN_ICONS.binding}</span>
                             <h4 class="font-bold text-slate-800 text-sm">${s.t('dept_binding_title')}</h4>
                         </div>
                         <span class="px-2 py-0.5 bg-amber-100 text-amber-800 text-xs font-bold rounded">${isUrdu ? 'بائنڈنگ فلور' : 'Floor 1'}</span>
@@ -724,9 +880,14 @@ function renderWarehouse() {
     return `
         <div class="bg-white rounded-xl border border-slate-200 p-6 shadow-xs">
             <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-slate-100">
-                <div>
-                    <h3 class="text-base font-bold text-slate-900">${s.t('dept_warehouse_title')}</h3>
-                    <p class="text-xs text-slate-500">${s.t('dept_warehouse_sub')}</p>
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 border border-emerald-200/80 flex items-center justify-center shrink-0 shadow-xs">
+                        ${APN_ICONS.warehouse}
+                    </div>
+                    <div>
+                        <h3 class="text-base font-bold text-slate-900">${s.t('dept_warehouse_title')}</h3>
+                        <p class="text-xs text-slate-500">${s.t('dept_warehouse_sub')}</p>
+                    </div>
                 </div>
                 <div class="text-xs font-bold text-slate-700 bg-slate-100 px-3 py-1.5 rounded-lg border border-slate-300">
                     ${isUrdu ? 'کل دستیاب کتب:' : 'Total Finished Stock:'} <span class="text-blue-700 font-extrabold">${fg.reduce((a,c) => a + c.quantity_on_hand, 0).toLocaleString()}</span> ${s.t('kpi_books_unit')}
@@ -788,9 +949,14 @@ function renderDamageReport() {
     return `
         <div class="bg-white rounded-xl border border-slate-200 p-6 shadow-xs">
             <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-slate-100">
-                <div>
-                    <h3 class="text-base font-bold text-slate-900">${s.t('dept_damage_title')}</h3>
-                    <p class="text-xs text-slate-500">${s.t('dept_damage_sub')}</p>
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-rose-50 text-rose-600 border border-rose-200/80 flex items-center justify-center shrink-0 shadow-xs">
+                        ${APN_ICONS.damage}
+                    </div>
+                    <div>
+                        <h3 class="text-base font-bold text-slate-900">${s.t('dept_damage_title')}</h3>
+                        <p class="text-xs text-slate-500">${s.t('dept_damage_sub')}</p>
+                    </div>
                 </div>
                 <div class="bg-rose-50 border border-rose-200 px-3 py-1.5 rounded-lg text-xs">
                     <span class="text-slate-600 font-medium">${isUrdu ? 'مجموعی مالی نقصان:' : 'Total Financial Loss:'}</span>
@@ -837,7 +1003,15 @@ function renderAdminView() {
 
     return `
         <div class="bg-white rounded-xl border border-slate-200 p-6 shadow-xs">
-            <h3 class="text-base font-bold text-slate-900 pb-3 border-b border-slate-100">${s.t('dept_admin_title')}</h3>
+            <div class="flex items-center gap-3 pb-4 border-b border-slate-100">
+                <div class="w-10 h-10 rounded-xl bg-slate-100 text-slate-700 border border-slate-300/80 flex items-center justify-center shrink-0 shadow-xs">
+                    ${APN_ICONS.admin}
+                </div>
+                <div>
+                    <h3 class="text-base font-bold text-slate-900">${s.t('dept_admin_title')}</h3>
+                    <p class="text-xs text-slate-500">${s.t('dept_admin_sub')}</p>
+                </div>
+            </div>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4 text-xs">
                 <div class="p-4 rounded-xl border border-slate-200 bg-slate-50">
                     <h4 class="font-bold text-slate-800 text-sm">${isUrdu ? 'ڈیٹا بیک اپ (Export Backup)' : 'Data Backup (Export)'}</h4>

@@ -1,28 +1,39 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Nastaliq+Urdu:wght@400;600;700&family=Noto+Sans+Arabic:wght@400;500;600;700&family=Amiri:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800&family=Noto+Nastaliq+Urdu:wght@400;600;700&family=Noto+Sans+Arabic:wght@400;500;600;700;800&family=Amiri:wght@700&display=swap');
 
 :root {
     --theme-header: #4885a6;
     --theme-header-hover: #3d7391;
     --theme-sidebar-bg: #ffffff;
-    --theme-sidebar-text: #455a64;
+    --theme-sidebar-text: #334155;
     --theme-sidebar-hover: #f1f5f9;
     --theme-sidebar-active: #0288d1;
     --theme-card-icon: #3a6b88;
     --theme-card-border: #e2e8f0;
     --theme-card-hover-border: #4885a6;
-    --theme-bg: #f4f7f9;
+    --theme-bg: #f8fafc;
 }
 
 body {
-    font-family: 'Noto Sans Arabic', 'Inter', system-ui, -apple-system, sans-serif;
+    font-family: 'Plus Jakarta Sans', 'Inter', system-ui, -apple-system, sans-serif;
     background-color: var(--theme-bg);
-    color: #263238;
+    color: #1e293b;
     margin: 0;
     padding: 0;
-    direction: ltr !important; /* Keep main structure always LTR so sidebar is always on the left */
+    direction: ltr !important;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
-/* Calligraphy & Brand */
+/* Urdu Typography with high readability */
+body.lang-ur {
+    font-family: 'Noto Sans Arabic', 'Plus Jakarta Sans', system-ui, sans-serif;
+}
+
+body.lang-ur .urdu-nastaliq {
+    font-family: 'Noto Nastaliq Urdu', serif;
+    line-height: 1.8;
+}
+
 .calligraphy-title {
     font-family: 'Amiri', 'Noto Nastaliq Urdu', serif;
     font-weight: 700;
@@ -39,45 +50,107 @@ body {
 .top-btn-red { background-color: #e53935; }
 .top-btn-red:hover { background-color: #d32f2f; }
 
-/* Department Cards matching screenshot */
+/* Department Cards - Ultra Professional Enterprise Design */
 .dept-card {
     background: #ffffff;
-    border: 1px solid #dce4ec;
-    border-radius: 12px;
-    padding: 22px 14px;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 20px 14px;
     text-align: center;
-    transition: all 0.2s ease-in-out;
+    transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
     cursor: pointer;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.04), 0 1px 2px -1px rgba(0, 0, 0, 0.03);
+    position: relative;
+    overflow: hidden;
+}
+
+.dept-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: transparent;
+    transition: background-color 0.25s ease;
 }
 
 .dept-card:hover {
-    border-color: #4885a6;
-    box-shadow: 0 4px 14px rgba(72, 133, 166, 0.15);
-    transform: translateY(-2px);
+    border-color: #cbd5e1;
+    box-shadow: 0 12px 28px -6px rgba(15, 23, 42, 0.12), 0 8px 10px -6px rgba(15, 23, 42, 0.06);
+    transform: translateY(-4px);
 }
 
-.dept-card-icon {
-    color: var(--theme-card-icon);
-    font-size: 32px;
-    line-height: 1;
-    margin-bottom: 12px;
+.dept-card:hover::before {
+    background: var(--card-accent, #4885a6);
+}
+
+.dept-card-icon-wrapper {
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
+    margin: 0 auto 12px auto;
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.8), 0 2px 4px rgba(0, 0, 0, 0.04);
+}
+
+.dept-card:hover .dept-card-icon-wrapper {
+    transform: scale(1.1) rotate(1deg);
+    box-shadow: 0 6px 16px -2px rgba(0, 0, 0, 0.12);
 }
 
 .dept-card-title {
-    font-size: 15px;
+    font-size: 14.5px;
     font-weight: 700;
-    color: #212529;
+    color: #0f172a;
     margin-bottom: 4px;
+    line-height: 1.4;
 }
 
 .dept-card-subtitle {
-    font-size: 11px;
-    color: #78909c;
+    font-size: 11.5px;
+    color: #64748b;
     font-weight: 500;
+    line-height: 1.45;
+}
+
+/* Language specific typography tuning */
+body.lang-ur .dept-card-title {
+    font-family: 'Noto Sans Arabic', 'Plus Jakarta Sans', system-ui, sans-serif;
+    font-size: 15.5px;
+    font-weight: 700;
+    line-height: 1.55;
+}
+
+body.lang-ur .dept-card-subtitle {
+    font-family: 'Noto Sans Arabic', system-ui, sans-serif;
+    font-size: 12px;
+    line-height: 1.5;
+    color: #64748b;
+}
+
+body.lang-ur .sidebar-link span {
+    font-family: 'Noto Sans Arabic', 'Plus Jakarta Sans', system-ui, sans-serif;
+    font-size: 12.5px;
+}
+
+body.lang-ur h1, body.lang-ur h2, body.lang-ur h3, body.lang-ur h4, body.lang-ur th, body.lang-ur button {
+    font-family: 'Noto Sans Arabic', 'Plus Jakarta Sans', system-ui, sans-serif;
+}
+
+body.lang-en .dept-card-title {
+    font-family: 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+}
+
+body.lang-en .sidebar-link span {
+    font-family: 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;
+    font-size: 12px;
 }
 
 /* Sidebar Menu Items */
@@ -85,42 +158,53 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 10px 14px;
-    font-size: 13px;
+    padding: 9px 12px;
+    font-size: 12.5px;
     font-weight: 600;
-    color: #455a64;
-    border-radius: 6px;
-    transition: background 0.15s ease, color 0.15s ease;
+    color: #475569;
+    border-radius: 8px;
+    transition: all 0.15s ease;
     cursor: pointer;
     border-left: 3px solid transparent;
 }
 
 .sidebar-link:hover {
     background-color: #f1f5f9;
-    color: #1e293b;
+    color: #0f172a;
 }
 
 .sidebar-link.active {
     color: #0288d1;
     background-color: #f0f9ff;
     border-left-color: #0288d1;
+    font-weight: 700;
 }
 
 /* Tab Header */
 .dashboard-tab {
     background: #ffffff;
-    border-top: 2px solid #4885a6;
-    border-left: 1px solid #dce4ec;
-    border-right: 1px solid #dce4ec;
+    border-top: 2.5px solid #4885a6;
+    border-left: 1px solid #e2e8f0;
+    border-right: 1px solid #e2e8f0;
     border-bottom: 1px solid #ffffff;
-    padding: 8px 18px;
+    padding: 8px 20px;
     font-size: 13px;
     font-weight: 700;
-    color: #37474f;
-    border-radius: 4px 4px 0 0;
+    color: #1e293b;
+    border-radius: 6px 6px 0 0;
     display: inline-flex;
     align-items: center;
     gap: 8px;
+}
+
+/* Pulse animation for low stock badge */
+.badge-pulse-red {
+    animation: pulseRed 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulseRed {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
 }
 
 /* Print Styles */
