@@ -405,6 +405,7 @@ class APNStore {
         this.isOnline = false;
         this.searchQuery = '';
         this.sidebarCollapsed = false;
+        this.mobileSidebarOpen = false;
         
         this.rawMaterials = [];
         this.books = [];
@@ -422,6 +423,11 @@ class APNStore {
         this.lang = newLang;
         localStorage.setItem('apn_lang', newLang);
         window.renderApp();
+    }
+
+    toggleMobileSidebar(openState) {
+        this.mobileSidebarOpen = typeof openState === 'boolean' ? openState : !this.mobileSidebarOpen;
+        if (window.renderApp) window.renderApp();
     }
 }
 

@@ -231,3 +231,62 @@ body.lang-en .sidebar-link span {
         display: none !important;
     }
 }
+
+/* Responsive adjustments for Mobile & Tablet screens */
+@media (max-width: 640px) {
+    .dept-card {
+        padding: 14px 8px;
+        border-radius: 12px;
+    }
+    .dept-card-icon-wrapper {
+        width: 44px;
+        height: 44px;
+        border-radius: 12px;
+        margin-bottom: 8px;
+    }
+    .dept-card-icon-wrapper svg {
+        width: 1.35rem;
+        height: 1.35rem;
+    }
+    .dept-card-title {
+        font-size: 12.5px;
+    }
+    body.lang-ur .dept-card-title {
+        font-size: 13.5px;
+    }
+    .dept-card-subtitle {
+        font-size: 10px;
+    }
+    body.lang-ur .dept-card-subtitle {
+        font-size: 10.5px;
+    }
+    .dashboard-tab {
+        padding: 6px 14px;
+        font-size: 12px;
+    }
+}
+
+/* Custom modern scrollbars */
+.scrollbar-none::-webkit-scrollbar {
+    display: none;
+}
+.scrollbar-none {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.overflow-x-auto::-webkit-scrollbar {
+    height: 5px;
+}
+.overflow-x-auto::-webkit-scrollbar-track {
+    background: #f1f5f9;
+    border-radius: 4px;
+}
+.overflow-x-auto::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 4px;
+}
+.overflow-x-auto::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+}
+

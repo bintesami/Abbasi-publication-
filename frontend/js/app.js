@@ -73,12 +73,17 @@ async function refreshData() {
 
 function switchTab(tabId) {
     window.apnStore.activeTab = tabId;
+    window.apnStore.mobileSidebarOpen = false;
     renderApp();
 }
 
 function toggleSidebar() {
     window.apnStore.sidebarCollapsed = !window.apnStore.sidebarCollapsed;
     renderApp();
+}
+
+function toggleMobileSidebar(openState) {
+    window.apnStore.toggleMobileSidebar(openState);
 }
 
 function setLang(langCode) {
@@ -98,42 +103,55 @@ function renderApp() {
     const isUrdu = s.lang === 'ur';
 
     root.innerHTML = `
+        <!-- Mobile Sidebar Backdrop Overlay (< md) -->
+        ${s.mobileSidebarOpen ? `
+            <div onclick="toggleMobileSidebar(false)" class="fixed inset-0 bg-slate-900/50 backdrop-blur-xs z-40 md:hidden transition-opacity"></div>
+        ` : ''}
+
         <!-- Top Header Bar (#4885a6 steel blue) -->
-        <header class="bg-[#4885a6] text-white shadow-sm sticky top-0 z-50 h-[52px] flex items-center justify-between px-4 select-none">
-            <!-- Left: Brand Title & Language Toggle Switch -->
-            <div class="flex items-center gap-3">
-                <div class="flex items-center gap-2">
+        <header class="bg-[#4885a6] text-white shadow-sm sticky top-0 z-40 h-[52px] flex items-center justify-between px-3 sm:px-4 select-none">
+            <!-- Left: Mobile Menu Toggle, Brand Title & Language Switcher -->
+            <div class="flex items-center gap-2 sm:gap-3 min-w-0">
+                <!-- Mobile Hamburger Button (< md) -->
+                <button onclick="toggleMobileSidebar()" class="md:hidden p-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-white focus:outline-none transition shrink-0" title="Menu">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+
+                <!-- Brand Title with Responsive Sizing & Ellipsis -->
+                <div class="flex items-center gap-1 sm:gap-2 min-w-0">
                     ${isUrdu ? `
-                        <span class="calligraphy-title text-xl font-bold tracking-wide text-white drop-shadow-xs">
+                        <span class="calligraphy-title text-base sm:text-lg md:text-xl font-bold tracking-wide text-white drop-shadow-xs truncate max-w-[135px] sm:max-w-[240px] md:max-w-none">
                             عباسی پبلیکیشن نیٹ ورک
                         </span>
                     ` : `
-                        <span class="font-extrabold tracking-wider text-base uppercase text-white font-sans drop-shadow-xs">
+                        <span class="font-extrabold tracking-wider text-xs sm:text-sm md:text-base uppercase text-white font-sans drop-shadow-xs truncate max-w-[130px] sm:max-w-[220px] md:max-w-none">
                             ABBASI PUBLICATION NETWORK
                         </span>
                     `}
                 </div>
 
                 <!-- Direct English / Urdu Switcher right next to title -->
-                <div class="flex items-center bg-[#366883] p-0.5 rounded-lg border border-white/20 text-xs font-bold shadow-inner">
-                    <button onclick="setLang('ur')" class="px-2.5 py-0.5 rounded-md transition ${isUrdu ? 'bg-white text-[#1b3240] shadow-xs' : 'text-blue-100 hover:text-white'}">
+                <div class="flex items-center bg-[#366883] p-0.5 rounded-lg border border-white/20 text-[11px] sm:text-xs font-bold shadow-inner shrink-0">
+                    <button onclick="setLang('ur')" class="px-2 sm:px-2.5 py-0.5 rounded-md transition ${isUrdu ? 'bg-white text-[#1b3240] shadow-xs' : 'text-blue-100 hover:text-white'}">
                         اردو
                     </button>
-                    <button onclick="setLang('en')" class="px-2.5 py-0.5 rounded-md transition ${!isUrdu ? 'bg-white text-[#1b3240] shadow-xs' : 'text-blue-100 hover:text-white'}">
+                    <button onclick="setLang('en')" class="px-2 sm:px-2.5 py-0.5 rounded-md transition ${!isUrdu ? 'bg-white text-[#1b3240] shadow-xs' : 'text-blue-100 hover:text-white'}">
                         English
                     </button>
                 </div>
                 
                 <!-- Square Refresh Button -->
-                <button onclick="handleReload()" title="${isUrdu ? 'ریفریش ڈیٹا' : 'Reload Data'}" class="w-8 h-8 rounded bg-[#5c9bbd] hover:bg-[#3d7a9c] flex items-center justify-center text-white transition text-sm shadow-xs">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <button onclick="handleReload()" title="${isUrdu ? 'ریفریش ڈیٹا' : 'Reload Data'}" class="w-7 h-7 sm:w-8 sm:h-8 rounded bg-[#5c9bbd] hover:bg-[#3d7a9c] flex items-center justify-center text-white transition text-xs sm:text-sm shadow-xs shrink-0">
+                    <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
                     </svg>
                 </button>
             </div>
 
             <!-- Right: Status & User Avatar -->
-            <div class="flex items-center gap-3">
+            <div class="flex items-center gap-2 sm:gap-3 shrink-0">
                 <!-- Status Badge -->
                 <div class="hidden sm:flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-semibold ${s.isOnline ? 'bg-emerald-600/30 text-emerald-100 border border-emerald-300/40' : 'bg-amber-600/30 text-amber-100 border border-amber-300/40'}">
                     <span class="w-2 h-2 rounded-full ${s.isOnline ? 'bg-emerald-300 animate-ping' : 'bg-amber-300'}"></span>
@@ -142,20 +160,69 @@ function renderApp() {
 
                 <!-- User Profile Avatar with dropdown arrow -->
                 <div class="flex items-center gap-1.5 cursor-pointer pl-1">
-                    <div class="w-8 h-8 rounded-full bg-[#1b3240] border-2 border-white/40 flex items-center justify-center text-white text-xs font-bold shadow-inner">
-                        <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+                    <div class="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-[#1b3240] border-2 border-white/40 flex items-center justify-center text-white text-xs font-bold shadow-inner">
+                        <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
                             <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path>
                         </svg>
                     </div>
-                    <span class="text-white/80 text-[10px]">▼</span>
+                    <span class="text-white/80 text-[10px] hidden sm:inline">▼</span>
                 </div>
             </div>
         </header>
 
+        <!-- Mobile Drawer Navigation (< md) -->
+        <aside class="fixed top-0 bottom-0 left-0 z-50 w-64 bg-white border-r border-slate-200 flex flex-col justify-between shadow-2xl md:hidden overflow-y-auto transition-transform duration-200 ease-in-out ${s.mobileSidebarOpen ? 'translate-x-0' : '-translate-x-full'}">
+            <div>
+                <!-- Mobile Drawer Header -->
+                <div class="p-3.5 bg-[#4885a6] text-white flex items-center justify-between shadow-xs">
+                    <div class="font-bold text-xs truncate">
+                        ${isUrdu ? 'عباسی پبلیکیشن نیٹ ورک' : 'Abbasi Publication'}
+                    </div>
+                    <button onclick="toggleMobileSidebar(false)" class="w-7 h-7 flex items-center justify-center rounded-md bg-white/10 hover:bg-white/20 text-white text-sm font-bold">
+                        ✕
+                    </button>
+                </div>
+
+                <!-- 4 Top Action Buttons -->
+                <div class="grid grid-cols-4 gap-0.5 p-1 bg-slate-100 border-b border-slate-200">
+                    <button onclick="switchTab('raw_materials')" title="${s.t('btn_tt_stats')}" class="h-8 top-btn-green text-white flex items-center justify-center rounded-xs transition shadow-xs">
+                        ${APN_ICONS.top_chart}
+                    </button>
+                    <button onclick="openAddBookModal()" title="${s.t('btn_tt_new_book')}" class="h-8 top-btn-blue text-white flex items-center justify-center rounded-xs transition shadow-xs">
+                        ${APN_ICONS.top_plus}
+                    </button>
+                    <button onclick="switchTab('work_orders')" title="${s.t('btn_tt_jobs')}" class="h-8 top-btn-orange text-white flex items-center justify-center rounded-xs transition shadow-xs">
+                        ${APN_ICONS.top_jobs}
+                    </button>
+                    <button onclick="showLowStockModal()" title="${s.t('btn_tt_alerts')}" class="h-8 top-btn-red text-white flex items-center justify-center rounded-xs transition shadow-xs">
+                        ${APN_ICONS.top_bell}
+                    </button>
+                </div>
+
+                <!-- Navigation List -->
+                <nav class="p-2 space-y-1">
+                    ${renderSidebarLink('dashboard', 'nav_dashboard', s.t('nav_dashboard'), false)}
+                    ${renderSidebarLink('raw_materials', 'nav_raw_materials', s.t('nav_raw_materials'), true)}
+                    ${renderSidebarLink('books', 'nav_books', s.t('nav_books'), true)}
+                    ${renderSidebarLink('work_orders', 'nav_work_orders', s.t('nav_work_orders'), true)}
+                    ${renderSidebarLink('printing', 'nav_printing', s.t('nav_printing'), true)}
+                    ${renderSidebarLink('outer', 'nav_outer', s.t('nav_outer'), true)}
+                    ${renderSidebarLink('binding', 'nav_binding', s.t('nav_binding'), true)}
+                    ${renderSidebarLink('warehouse', 'nav_warehouse', s.t('nav_warehouse'), true)}
+                    ${renderSidebarLink('damage', 'nav_damage', s.t('nav_damage'), true)}
+                    ${renderSidebarLink('admin', 'nav_admin', s.t('nav_reports'), false)}
+                </nav>
+            </div>
+            
+            <div class="p-3 border-t border-slate-100 text-center text-[11px] text-slate-400">
+                APN ERP v1.0 • Mobile Mode
+            </div>
+        </aside>
+
         <!-- Main Shell Container: Sidebar ALWAYS on the LEFT -->
         <div class="flex min-h-[calc(100vh-52px)]">
-            <!-- Left Sidebar (Permanent Left Position) -->
-            <aside class="${isCollapsed ? 'w-16' : 'w-60'} bg-white border-r border-slate-200 flex flex-col justify-between transition-all duration-200 shrink-0 select-none shadow-xs">
+            <!-- Desktop Left Sidebar (Permanent Left Position, hidden on < md) -->
+            <aside class="${isCollapsed ? 'w-16' : 'w-60'} bg-white border-r border-slate-200 hidden md:flex flex-col justify-between transition-all duration-200 shrink-0 select-none shadow-xs">
                 <div>
                     <!-- Top 4 Color Buttons row matching user screenshot -->
                     <div class="grid grid-cols-4 gap-0.5 p-1 bg-slate-100 border-b border-slate-200">
@@ -196,10 +263,10 @@ function renderApp() {
                 </div>
             </aside>
 
-            <!-- Main Content Area (on the Right) -->
-            <main class="flex-1 bg-[#f4f7f9] p-4 sm:p-6 overflow-y-auto">
+            <!-- Main Content Area (on the Right of Sidebar) -->
+            <main class="flex-1 bg-[#f4f7f9] p-3 sm:p-5 md:p-6 overflow-y-auto w-full min-w-0">
                 <!-- Tab Header -->
-                <div class="flex items-center gap-1 border-b border-slate-200 mb-6 pb-0 select-none">
+                <div class="flex items-center gap-1 border-b border-slate-200 mb-4 sm:mb-6 pb-0 select-none overflow-x-auto whitespace-nowrap scrollbar-none">
                     <div class="dashboard-tab cursor-pointer" onclick="switchTab('dashboard')">
                         <span>Dashboard</span>
                     </div>
@@ -357,50 +424,50 @@ function renderDepartmentGrid() {
 
     return `
         <!-- Top 4 KPI Metrics Cards -->
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6">
-            <div class="bg-white p-3.5 rounded-xl border border-slate-200 shadow-xs flex items-center justify-between">
-                <div>
-                    <p class="text-[11px] font-bold text-slate-500 uppercase">${s.t('kpi_total_finished')}</p>
-                    <h4 class="text-xl font-extrabold text-slate-900 mt-0.5">${(m.total_finished_books || 0).toLocaleString()} <span class="text-xs font-normal text-slate-500">${s.t('kpi_books_unit')}</span></h4>
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-3 mb-5 sm:mb-6">
+            <div class="bg-white p-2.5 sm:p-3.5 rounded-xl border border-slate-200 shadow-xs flex items-center justify-between">
+                <div class="min-w-0 pr-1">
+                    <p class="text-[10px] sm:text-[11px] font-bold text-slate-500 uppercase truncate">${s.t('kpi_total_finished')}</p>
+                    <h4 class="text-base sm:text-xl font-extrabold text-slate-900 mt-0.5 truncate">${(m.total_finished_books || 0).toLocaleString()} <span class="text-[10px] sm:text-xs font-normal text-slate-500">${s.t('kpi_books_unit')}</span></h4>
                 </div>
-                <div class="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 border border-blue-200/80 flex items-center justify-center shadow-xs">
+                <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-blue-50 text-blue-600 border border-blue-200/80 flex items-center justify-center shrink-0 shadow-xs">
                     ${APN_ICONS.kpi_books}
                 </div>
             </div>
 
-            <div class="bg-white p-3.5 rounded-xl border border-slate-200 shadow-xs flex items-center justify-between">
-                <div>
-                    <p class="text-[11px] font-bold text-slate-500 uppercase">${s.t('kpi_active_jobs')}</p>
-                    <h4 class="text-xl font-extrabold text-slate-900 mt-0.5">${m.active_jobs_count || 0} <span class="text-xs font-normal text-slate-500">${s.t('kpi_jobs_unit')}</span></h4>
+            <div class="bg-white p-2.5 sm:p-3.5 rounded-xl border border-slate-200 shadow-xs flex items-center justify-between">
+                <div class="min-w-0 pr-1">
+                    <p class="text-[10px] sm:text-[11px] font-bold text-slate-500 uppercase truncate">${s.t('kpi_active_jobs')}</p>
+                    <h4 class="text-base sm:text-xl font-extrabold text-slate-900 mt-0.5 truncate">${m.active_jobs_count || 0} <span class="text-[10px] sm:text-xs font-normal text-slate-500">${s.t('kpi_jobs_unit')}</span></h4>
                 </div>
-                <div class="w-10 h-10 rounded-xl bg-amber-50 text-amber-600 border border-amber-200/80 flex items-center justify-center shadow-xs">
+                <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-amber-50 text-amber-600 border border-amber-200/80 flex items-center justify-center shrink-0 shadow-xs">
                     ${APN_ICONS.kpi_jobs}
                 </div>
             </div>
 
-            <div class="bg-white p-3.5 rounded-xl border border-slate-200 shadow-xs flex items-center justify-between">
-                <div>
-                    <p class="text-[11px] font-bold text-slate-500 uppercase">${s.t('kpi_low_stock')}</p>
-                    <h4 class="text-xl font-extrabold ${(m.low_stock_count || 0) > 0 ? 'text-red-600' : 'text-slate-900'} mt-0.5">${m.low_stock_count || 0} <span class="text-xs font-normal text-slate-500">${s.t('kpi_alerts_unit')}</span></h4>
+            <div class="bg-white p-2.5 sm:p-3.5 rounded-xl border border-slate-200 shadow-xs flex items-center justify-between">
+                <div class="min-w-0 pr-1">
+                    <p class="text-[10px] sm:text-[11px] font-bold text-slate-500 uppercase truncate">${s.t('kpi_low_stock')}</p>
+                    <h4 class="text-base sm:text-xl font-extrabold ${(m.low_stock_count || 0) > 0 ? 'text-red-600' : 'text-slate-900'} mt-0.5 truncate">${m.low_stock_count || 0} <span class="text-[10px] sm:text-xs font-normal text-slate-500">${s.t('kpi_alerts_unit')}</span></h4>
                 </div>
-                <div class="w-10 h-10 rounded-xl bg-red-50 text-red-600 border border-red-200/80 flex items-center justify-center shadow-xs ${(m.low_stock_count || 0) > 0 ? 'badge-pulse-red' : ''}">
+                <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-red-50 text-red-600 border border-red-200/80 flex items-center justify-center shrink-0 shadow-xs ${(m.low_stock_count || 0) > 0 ? 'badge-pulse-red' : ''}">
                     ${APN_ICONS.kpi_alerts}
                 </div>
             </div>
 
-            <div class="bg-white p-3.5 rounded-xl border border-slate-200 shadow-xs flex items-center justify-between">
-                <div>
-                    <p class="text-[11px] font-bold text-slate-500 uppercase">${s.t('kpi_damage_loss')}</p>
-                    <h4 class="text-xl font-extrabold text-slate-900 mt-0.5">${(m.total_financial_loss || 0).toLocaleString()} <span class="text-xs font-normal text-slate-500">${s.t('kpi_pkr')}</span></h4>
+            <div class="bg-white p-2.5 sm:p-3.5 rounded-xl border border-slate-200 shadow-xs flex items-center justify-between">
+                <div class="min-w-0 pr-1">
+                    <p class="text-[10px] sm:text-[11px] font-bold text-slate-500 uppercase truncate">${s.t('kpi_damage_loss')}</p>
+                    <h4 class="text-base sm:text-xl font-extrabold text-slate-900 mt-0.5 truncate">${(m.total_financial_loss || 0).toLocaleString()} <span class="text-[10px] sm:text-xs font-normal text-slate-500">${s.t('kpi_pkr')}</span></h4>
                 </div>
-                <div class="w-10 h-10 rounded-xl bg-rose-50 text-rose-600 border border-rose-200/80 flex items-center justify-center shadow-xs">
+                <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-rose-50 text-rose-600 border border-rose-200/80 flex items-center justify-center shrink-0 shadow-xs">
                     ${APN_ICONS.kpi_loss}
                 </div>
             </div>
         </div>
 
         <!-- 9 Department Cards Grid (Clean Responsive Layout) -->
-        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 mb-8">
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2.5 sm:gap-4 mb-6 sm:mb-8">
             ${departments.map(d => `
                 <div onclick="switchTab('${d.id}')" class="dept-card group text-center" style="--card-accent: ${d.accent};">
                     <div class="dept-card-icon-wrapper ${d.wrapperClass}">
@@ -410,20 +477,20 @@ function renderDepartmentGrid() {
                     <div class="dept-card-subtitle">${d.sub}</div>
                     <div class="mt-3 pt-2 border-t border-slate-100 flex justify-between items-center text-[10px] text-slate-400">
                         <span class="font-medium">${s.t('th_status')}</span>
-                        <span class="font-bold px-2 py-0.5 rounded-md text-[11px] ${d.badgeClass}">${d.count}</span>
+                        <span class="font-bold px-1.5 sm:px-2 py-0.5 rounded-md text-[10px] sm:text-[11px] ${d.badgeClass}">${d.count}</span>
                     </div>
                 </div>
             `).join('')}
         </div>
 
         <!-- Active Production Jobs Tracker -->
-        <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-xs mb-6">
-            <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+        <div class="bg-white rounded-xl border border-slate-200 p-4 sm:p-5 shadow-xs mb-6">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-100">
                 <div>
                     <h3 class="text-sm font-bold text-slate-900">${s.t('pipeline_title')}</h3>
                     <p class="text-xs text-slate-500">${s.t('pipeline_desc')}</p>
                 </div>
-                <button onclick="openNewWorkOrderModal()" class="px-3.5 py-1.5 bg-[#4885a6] hover:bg-[#3b7596] text-white text-xs font-bold rounded-lg shadow-xs transition">
+                <button onclick="openNewWorkOrderModal()" class="px-3.5 py-1.5 bg-[#4885a6] hover:bg-[#3b7596] text-white text-xs font-bold rounded-lg shadow-xs transition self-start sm:self-auto">
                     ${s.t('btn_new_job')}
                 </button>
             </div>
@@ -435,14 +502,14 @@ function renderDepartmentGrid() {
                     const bindPct = Math.min(100, Math.round((wo.binding_assembled_qty / (wo.target_quantity || 1)) * 100));
 
                     return `
-                        <div class="py-3 px-2 hover:bg-slate-50/70 rounded-lg transition">
+                        <div class="py-3 px-1 sm:px-2 hover:bg-slate-50/70 rounded-lg transition">
                             <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-2">
-                                <div class="flex items-center gap-2">
-                                    <span class="font-mono text-xs font-bold bg-slate-100 text-slate-700 px-2 py-0.5 rounded border border-slate-300">${wo.work_order_no}</span>
+                                <div class="flex items-center gap-1.5 sm:gap-2 flex-wrap">
+                                    <span class="font-mono text-[11px] sm:text-xs font-bold bg-slate-100 text-slate-700 px-2 py-0.5 rounded border border-slate-300 shrink-0">${wo.work_order_no}</span>
                                     <h4 class="font-bold text-slate-800 text-xs">${wo.book_title || wo.book_article_id}</h4>
-                                    <span class="text-[10px] px-2 py-0.5 rounded font-semibold ${getStatusBadge(wo.status)}">${s.t('status_' + wo.status)}</span>
+                                    <span class="text-[10px] px-2 py-0.5 rounded font-semibold shrink-0 ${getStatusBadge(wo.status)}">${s.t('status_' + wo.status)}</span>
                                 </div>
-                                <div class="flex items-center gap-2">
+                                <div class="flex items-center gap-1.5 sm:gap-2 shrink-0">
                                     <button onclick="openJobCardPrintModal('${wo.work_order_no}')" class="px-2.5 py-1 text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 rounded border border-slate-300">
                                         ${s.t('btn_print_job')}
                                     </button>
@@ -452,8 +519,8 @@ function renderDepartmentGrid() {
                                 </div>
                             </div>
 
-                            <!-- 4 Stages Progress Bar -->
-                            <div class="grid grid-cols-2 md:grid-cols-4 gap-2 text-xs">
+                            <!-- 4 Stages Progress Bar (Responsive 1-col on mobile, 2-col on sm, 4-col on md) -->
+                            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-2 text-xs">
                                 <div class="p-2 rounded bg-slate-50 border border-slate-200">
                                     <span class="text-[11px] font-bold text-slate-600 block">${s.t('stage_store_out')}</span>
                                     <span class="text-[11px] text-emerald-700 font-bold">${s.t('stage_material_done')}</span>
@@ -518,7 +585,7 @@ function renderRawMaterials() {
     const isUrdu = s.lang === 'ur';
 
     return `
-        <div class="bg-white rounded-xl border border-slate-200 p-6 shadow-xs">
+        <div class="bg-white rounded-xl border border-slate-200 p-3 sm:p-5 md:p-6 shadow-xs">
             <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-slate-100">
                 <div class="flex items-center gap-3">
                     <div class="w-10 h-10 rounded-xl bg-sky-50 text-sky-600 border border-sky-200/80 flex items-center justify-center shrink-0 shadow-xs">
@@ -539,8 +606,8 @@ function renderRawMaterials() {
                 </div>
             </div>
 
-            <div class="overflow-x-auto mt-4">
-                <table class="w-full text-xs">
+            <div class="overflow-x-auto -mx-3 sm:mx-0 px-3 sm:px-0 mt-4">
+                <table class="w-full min-w-[640px] text-xs">
                     <thead>
                         <tr class="bg-slate-50 text-slate-600 border-b border-slate-200 ${isUrdu ? 'text-right' : 'text-left'}">
                             <th class="py-3 px-3">${s.t('th_item_name')}</th>
@@ -597,7 +664,7 @@ function renderBooks() {
     const isUrdu = s.lang === 'ur';
 
     return `
-        <div class="bg-white rounded-xl border border-slate-200 p-6 shadow-xs">
+        <div class="bg-white rounded-xl border border-slate-200 p-3 sm:p-5 md:p-6 shadow-xs">
             <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-slate-100">
                 <div class="flex items-center gap-3">
                     <div class="w-10 h-10 rounded-xl bg-violet-50 text-violet-600 border border-violet-200/80 flex items-center justify-center shrink-0 shadow-xs">
@@ -667,7 +734,7 @@ function renderWorkOrders() {
     const isUrdu = s.lang === 'ur';
 
     return `
-        <div class="bg-white rounded-xl border border-slate-200 p-6 shadow-xs">
+        <div class="bg-white rounded-xl border border-slate-200 p-3 sm:p-5 md:p-6 shadow-xs">
             <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-slate-100">
                 <div class="flex items-center gap-3">
                     <div class="w-10 h-10 rounded-xl bg-amber-50 text-amber-600 border border-amber-200/80 flex items-center justify-center shrink-0 shadow-xs">
@@ -683,8 +750,8 @@ function renderWorkOrders() {
                 </button>
             </div>
 
-            <div class="overflow-x-auto mt-4">
-                <table class="w-full text-xs">
+            <div class="overflow-x-auto -mx-3 sm:mx-0 px-3 sm:px-0 mt-4">
+                <table class="w-full min-w-[640px] text-xs">
                     <thead>
                         <tr class="bg-slate-50 text-slate-600 border-b border-slate-200 ${isUrdu ? 'text-right' : 'text-left'}">
                             <th class="py-3 px-3">${s.t('th_wo_code')}</th>
@@ -749,7 +816,7 @@ function renderProductionFloor(specificStage = null) {
     const isUrdu = s.lang === 'ur';
 
     return `
-        <div class="bg-white rounded-xl border border-slate-200 p-6 shadow-xs">
+        <div class="bg-white rounded-xl border border-slate-200 p-3 sm:p-5 md:p-6 shadow-xs">
             <div class="pb-4 border-b border-slate-100 flex items-center justify-between">
                 <div>
                     <h3 class="text-base font-bold text-slate-900">${isUrdu ? 'پروڈکشن فلور مانیٹرنگ' : 'Production Floor Monitoring'}</h3>
@@ -757,7 +824,7 @@ function renderProductionFloor(specificStage = null) {
                 </div>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 mt-4 sm:mt-6">
                 <!-- Inner Section -->
                 <div class="bg-slate-50 rounded-xl p-4 border border-slate-200">
                     <div class="flex items-center justify-between pb-3 border-b border-slate-200">
@@ -878,7 +945,7 @@ function renderWarehouse() {
     const isUrdu = s.lang === 'ur';
 
     return `
-        <div class="bg-white rounded-xl border border-slate-200 p-6 shadow-xs">
+        <div class="bg-white rounded-xl border border-slate-200 p-3 sm:p-5 md:p-6 shadow-xs">
             <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-slate-100">
                 <div class="flex items-center gap-3">
                     <div class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 border border-emerald-200/80 flex items-center justify-center shrink-0 shadow-xs">
@@ -894,8 +961,8 @@ function renderWarehouse() {
                 </div>
             </div>
 
-            <div class="overflow-x-auto mt-4">
-                <table class="w-full text-xs">
+            <div class="overflow-x-auto -mx-3 sm:mx-0 px-3 sm:px-0 mt-4">
+                <table class="w-full min-w-[640px] text-xs">
                     <thead>
                         <tr class="bg-slate-50 text-slate-600 border-b border-slate-200 ${isUrdu ? 'text-right' : 'text-left'}">
                             <th class="py-3 px-3">${s.t('th_wh_book')}</th>
@@ -947,7 +1014,7 @@ function renderDamageReport() {
     const isUrdu = s.lang === 'ur';
 
     return `
-        <div class="bg-white rounded-xl border border-slate-200 p-6 shadow-xs">
+        <div class="bg-white rounded-xl border border-slate-200 p-3 sm:p-5 md:p-6 shadow-xs">
             <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-slate-100">
                 <div class="flex items-center gap-3">
                     <div class="w-10 h-10 rounded-xl bg-rose-50 text-rose-600 border border-rose-200/80 flex items-center justify-center shrink-0 shadow-xs">
@@ -964,8 +1031,8 @@ function renderDamageReport() {
                 </div>
             </div>
 
-            <div class="overflow-x-auto mt-4">
-                <table class="w-full text-xs">
+            <div class="overflow-x-auto -mx-3 sm:mx-0 px-3 sm:px-0 mt-4">
+                <table class="w-full min-w-[640px] text-xs">
                     <thead>
                         <tr class="bg-slate-50 text-slate-600 border-b border-slate-200 ${isUrdu ? 'text-right' : 'text-left'}">
                             <th class="py-3 px-3">${s.t('th_dmg_wo')}</th>
@@ -1002,7 +1069,7 @@ function renderAdminView() {
     const isUrdu = s.lang === 'ur';
 
     return `
-        <div class="bg-white rounded-xl border border-slate-200 p-6 shadow-xs">
+        <div class="bg-white rounded-xl border border-slate-200 p-3 sm:p-5 md:p-6 shadow-xs">
             <div class="flex items-center gap-3 pb-4 border-b border-slate-100">
                 <div class="w-10 h-10 rounded-xl bg-slate-100 text-slate-700 border border-slate-300/80 flex items-center justify-center shrink-0 shadow-xs">
                     ${APN_ICONS.admin}
@@ -1097,14 +1164,14 @@ function openNewWorkOrderModal(preselectedArticle = '') {
 
     const modal = document.getElementById('modalContainer');
     modal.innerHTML = `
-        <div class="fixed inset-0 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4 z-50">
-            <div class="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl border border-slate-200">
-                <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+        <div class="fixed inset-0 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-3 sm:p-4 z-50 overflow-y-auto">
+            <div class="bg-white rounded-2xl max-w-lg w-full max-h-[90vh] flex flex-col p-4 sm:p-6 shadow-2xl border border-slate-200 my-auto">
+                <div class="flex items-center justify-between pb-3 border-b border-slate-100 shrink-0">
                     <h3 class="text-base font-bold text-slate-900">${s.t('modal_new_wo_title')}</h3>
                     <button onclick="closeModal()" class="text-slate-400 hover:text-slate-600 text-lg font-bold">✕</button>
                 </div>
 
-                <form id="newWoForm" onsubmit="handleCreateWorkOrder(event)" class="space-y-4 mt-4 text-xs ${isUrdu ? 'text-right' : 'text-left'}">
+                <form id="newWoForm" onsubmit="handleCreateWorkOrder(event)" class="space-y-4 mt-4 text-xs ${isUrdu ? 'text-right' : 'text-left'} overflow-y-auto pr-1 flex-1">
                     <div>
                         <label class="block font-bold text-slate-700 mb-1">${s.t('modal_select_book')}</label>
                         <select id="woBookSelect" required class="w-full bg-slate-50 border border-slate-300 rounded-lg p-2.5 font-bold text-slate-800">
@@ -1137,7 +1204,7 @@ function openNewWorkOrderModal(preselectedArticle = '') {
                         <textarea id="woNotes" rows="2" placeholder="..." class="w-full bg-slate-50 border border-slate-300 rounded-lg p-2.5"></textarea>
                     </div>
 
-                    <div class="flex items-center justify-end gap-2 pt-3 border-t border-slate-100">
+                    <div class="flex items-center justify-end gap-2 pt-3 border-t border-slate-100 shrink-0">
                         <button type="button" onclick="closeModal()" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-lg">${s.t('btn_cancel')}</button>
                         <button type="submit" class="px-5 py-2 bg-[#4885a6] hover:bg-[#3b7596] text-white font-bold rounded-lg shadow">${s.t('btn_save')}</button>
                     </div>
@@ -1182,101 +1249,105 @@ function openJobCardPrintModal(workOrderNo) {
 
     const modal = document.getElementById('modalContainer');
     modal.innerHTML = `
-        <div class="fixed inset-0 bg-slate-900/70 backdrop-blur-xs flex items-center justify-center p-4 z-50 overflow-y-auto">
-            <div class="bg-white rounded-2xl max-w-2xl w-full p-8 shadow-2xl border border-slate-200">
-                <div class="flex items-center justify-between pb-3 border-b border-slate-200 no-print">
+        <div class="fixed inset-0 bg-slate-900/70 backdrop-blur-xs flex items-center justify-center p-3 sm:p-4 z-50 overflow-y-auto">
+            <div class="bg-white rounded-2xl max-w-2xl w-full max-h-[92vh] flex flex-col p-4 sm:p-6 shadow-2xl border border-slate-200 my-auto overflow-hidden">
+                <div class="flex items-center justify-between pb-3 border-b border-slate-200 no-print shrink-0">
                     <span class="text-xs font-bold text-slate-500">${s.t('jc_preview_title')}</span>
                     <div class="flex items-center gap-2">
-                        <button onclick="window.print()" class="px-4 py-1.5 bg-[#4885a6] hover:bg-[#3b7596] text-white font-bold text-xs rounded-lg shadow flex items-center gap-1.5">
+                        <button onclick="window.print()" class="px-3 sm:px-4 py-1.5 bg-[#4885a6] hover:bg-[#3b7596] text-white font-bold text-xs rounded-lg shadow flex items-center gap-1.5">
                             <span>🖨️</span> <span>${s.t('jc_btn_print')}</span>
                         </button>
                         <button onclick="closeModal()" class="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs rounded-lg">${s.t('jc_btn_close')}</button>
                     </div>
                 </div>
 
-                <!-- Printable Area -->
-                <div id="printableJobCardArea" class="mt-4 border-2 border-slate-800 p-6 rounded-xl ${isUrdu ? 'text-right' : 'text-left'}">
-                    <div class="flex justify-between items-start border-b-2 border-slate-800 pb-4">
-                        <div class="text-left">
-                            ${barcodeSvg}
-                            <p class="font-mono text-[11px] text-slate-500 mt-1">APN PRODUCTION ROUTING TICKET</p>
+                <!-- Printable Area with responsive scrolling -->
+                <div class="overflow-y-auto flex-1 mt-4 pr-1">
+                    <div id="printableJobCardArea" class="border-2 border-slate-800 p-4 sm:p-6 rounded-xl ${isUrdu ? 'text-right' : 'text-left'}">
+                        <div class="flex flex-col sm:flex-row justify-between items-start border-b-2 border-slate-800 pb-4 gap-3">
+                            <div class="text-left">
+                                ${barcodeSvg}
+                                <p class="font-mono text-[11px] text-slate-500 mt-1">APN PRODUCTION ROUTING TICKET</p>
+                            </div>
+                            <div class="${isUrdu ? 'text-right' : 'text-left'}">
+                                <h2 class="text-xl font-extrabold text-slate-900 ${isUrdu ? 'calligraphy-title' : 'font-sans'}">${s.t('jc_header_title')}</h2>
+                                <p class="text-xs font-bold text-[#4885a6]">${s.t('jc_header_sub')}</p>
+                                <p class="font-mono text-sm font-extrabold text-slate-900 mt-1">${wo.work_order_no}</p>
+                            </div>
                         </div>
-                        <div class="${isUrdu ? 'text-right' : 'text-left'}">
-                            <h2 class="text-xl font-extrabold text-slate-900 ${isUrdu ? 'calligraphy-title' : 'font-sans'}">${s.t('jc_header_title')}</h2>
-                            <p class="text-xs font-bold text-[#4885a6]">${s.t('jc_header_sub')}</p>
-                            <p class="font-mono text-sm font-extrabold text-slate-900 mt-1">${wo.work_order_no}</p>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 my-4 text-xs">
+                            <div class="bg-slate-50 p-3 rounded-lg border border-slate-200">
+                                <p class="text-slate-500">${s.t('jc_book_label')}</p>
+                                <h4 class="text-sm font-extrabold text-slate-900 mt-0.5">${wo.book_title || (book && book.title)}</h4>
+                                <p class="text-slate-500 mt-2">${s.t('jc_code_label')} <b class="text-slate-800 font-mono">${wo.book_article_id}</b></p>
+                                <p class="text-slate-500">${s.t('jc_pages_label')} <b class="text-slate-800">${book ? book.page_count : '-'} (${book ? book.forms_count : '-'} ${isUrdu ? 'فارمے' : 'Forms'})</b></p>
+                            </div>
+
+                            <div class="bg-slate-50 p-3 rounded-lg border border-slate-200">
+                                <p class="text-slate-500">${s.t('jc_target_label')}</p>
+                                <h4 class="text-sm font-extrabold text-[#4885a6] mt-0.5">${wo.target_quantity.toLocaleString()} ${s.t('kpi_books_unit')}</h4>
+                                <p class="text-slate-500 mt-2">${s.t('jc_start_label')} <b class="text-slate-800">${new Date(wo.start_date).toLocaleDateString(isUrdu ? 'ur-PK' : 'en-US')}</b></p>
+                                <p class="text-slate-500">${s.t('jc_due_label')} <b class="text-slate-800">${wo.target_delivery_date ? new Date(wo.target_delivery_date).toLocaleDateString(isUrdu ? 'ur-PK' : 'en-US') : '-'}</b></p>
+                            </div>
                         </div>
+
+                        <!-- Routing Checklist Table -->
+                        <div class="overflow-x-auto">
+                            <table class="w-full min-w-[480px] text-xs border border-slate-300 text-center">
+                                <thead class="bg-slate-100 font-bold border-b border-slate-300">
+                                    <tr>
+                                        <th class="p-2 border-r">${s.t('jc_table_stage')}</th>
+                                        <th class="p-2 border-r">${s.t('jc_table_desc')}</th>
+                                        <th class="p-2 border-r">${s.t('jc_table_printed')}</th>
+                                        <th class="p-2 border-r">${s.t('jc_table_dmg')}</th>
+                                        <th class="p-2">${s.t('jc_table_sign')}</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-slate-200">
+                                    <tr>
+                                        <td class="p-2 font-bold border-r ${isUrdu ? 'text-right' : 'text-left'}">${s.t('jc_stage1')}</td>
+                                        <td class="p-2 border-r ${isUrdu ? 'text-right' : 'text-left'}">${s.t('jc_stage1_desc')}</td>
+                                        <td class="p-2 border-r">${isUrdu ? 'ایشو شدہ' : 'Issued'}</td>
+                                        <td class="p-2 border-r">-</td>
+                                        <td class="p-2 text-slate-400">______________</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold border-r ${isUrdu ? 'text-right' : 'text-left'}">${s.t('jc_stage2')}</td>
+                                        <td class="p-2 border-r ${isUrdu ? 'text-right' : 'text-left'}">${book ? book.inner_paper_spec : 'Paper'}</td>
+                                        <td class="p-2 border-r font-bold">${wo.inner_printed_sheets || '_______'}</td>
+                                        <td class="p-2 border-r text-rose-600">${wo.inner_damage_sheets || '___'}</td>
+                                        <td class="p-2 text-slate-400">______________</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold border-r ${isUrdu ? 'text-right' : 'text-left'}">${s.t('jc_stage3')}</td>
+                                        <td class="p-2 border-r ${isUrdu ? 'text-right' : 'text-left'}">${book ? book.outer_card_spec : 'Art Card'}</td>
+                                        <td class="p-2 border-r font-bold">${wo.outer_printed_covers || '_______'}</td>
+                                        <td class="p-2 border-r text-rose-600">${wo.outer_damage_covers || '___'}</td>
+                                        <td class="p-2 text-slate-400">______________</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold border-r ${isUrdu ? 'text-right' : 'text-left'}">${s.t('jc_stage4')}</td>
+                                        <td class="p-2 border-r ${isUrdu ? 'text-right' : 'text-left'}">${s.t('jc_stage4_desc')}</td>
+                                        <td class="p-2 border-r font-bold">${wo.binding_assembled_qty || '_______'}</td>
+                                        <td class="p-2 border-r text-rose-600">${wo.binding_damage_qty || '___'}</td>
+                                        <td class="p-2 text-slate-400">______________</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold border-r ${isUrdu ? 'text-right' : 'text-left'}">${s.t('jc_stage5')}</td>
+                                        <td class="p-2 border-r ${isUrdu ? 'text-right' : 'text-left'}">${s.t('jc_stage5_desc')}</td>
+                                        <td class="p-2 border-r font-bold">${wo.actual_finished_quantity || '_______'}</td>
+                                        <td class="p-2 border-r text-rose-600">${wo.total_damage_quantity || '___'}</td>
+                                        <td class="p-2 text-slate-400">______________</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <p class="text-[10px] text-slate-400 text-center mt-6">
+                            ${s.t('jc_footer_note')}
+                        </p>
                     </div>
-
-                    <div class="grid grid-cols-2 gap-4 my-4 text-xs">
-                        <div class="bg-slate-50 p-3 rounded-lg border border-slate-200">
-                            <p class="text-slate-500">${s.t('jc_book_label')}</p>
-                            <h4 class="text-sm font-extrabold text-slate-900 mt-0.5">${wo.book_title || (book && book.title)}</h4>
-                            <p class="text-slate-500 mt-2">${s.t('jc_code_label')} <b class="text-slate-800 font-mono">${wo.book_article_id}</b></p>
-                            <p class="text-slate-500">${s.t('jc_pages_label')} <b class="text-slate-800">${book ? book.page_count : '-'} (${book ? book.forms_count : '-'} ${isUrdu ? 'فارمے' : 'Forms'})</b></p>
-                        </div>
-
-                        <div class="bg-slate-50 p-3 rounded-lg border border-slate-200">
-                            <p class="text-slate-500">${s.t('jc_target_label')}</p>
-                            <h4 class="text-sm font-extrabold text-[#4885a6] mt-0.5">${wo.target_quantity.toLocaleString()} ${s.t('kpi_books_unit')}</h4>
-                            <p class="text-slate-500 mt-2">${s.t('jc_start_label')} <b class="text-slate-800">${new Date(wo.start_date).toLocaleDateString(isUrdu ? 'ur-PK' : 'en-US')}</b></p>
-                            <p class="text-slate-500">${s.t('jc_due_label')} <b class="text-slate-800">${wo.target_delivery_date ? new Date(wo.target_delivery_date).toLocaleDateString(isUrdu ? 'ur-PK' : 'en-US') : '-'}</b></p>
-                        </div>
-                    </div>
-
-                    <!-- Routing Checklist Table -->
-                    <table class="w-full text-xs border border-slate-300 text-center">
-                        <thead class="bg-slate-100 font-bold border-b border-slate-300">
-                            <tr>
-                                <th class="p-2 border-r">${s.t('jc_table_stage')}</th>
-                                <th class="p-2 border-r">${s.t('jc_table_desc')}</th>
-                                <th class="p-2 border-r">${s.t('jc_table_printed')}</th>
-                                <th class="p-2 border-r">${s.t('jc_table_dmg')}</th>
-                                <th class="p-2">${s.t('jc_table_sign')}</th>
-                            </tr>
-                        </thead>
-                        <tbody class="divide-y divide-slate-200">
-                            <tr>
-                                <td class="p-2 font-bold border-r ${isUrdu ? 'text-right' : 'text-left'}">${s.t('jc_stage1')}</td>
-                                <td class="p-2 border-r ${isUrdu ? 'text-right' : 'text-left'}">${s.t('jc_stage1_desc')}</td>
-                                <td class="p-2 border-r">${isUrdu ? 'ایشو شدہ' : 'Issued'}</td>
-                                <td class="p-2 border-r">-</td>
-                                <td class="p-2 text-slate-400">______________</td>
-                            </tr>
-                            <tr>
-                                <td class="p-2 font-bold border-r ${isUrdu ? 'text-right' : 'text-left'}">${s.t('jc_stage2')}</td>
-                                <td class="p-2 border-r ${isUrdu ? 'text-right' : 'text-left'}">${book ? book.inner_paper_spec : 'Paper'}</td>
-                                <td class="p-2 border-r font-bold">${wo.inner_printed_sheets || '_______'}</td>
-                                <td class="p-2 border-r text-rose-600">${wo.inner_damage_sheets || '___'}</td>
-                                <td class="p-2 text-slate-400">______________</td>
-                            </tr>
-                            <tr>
-                                <td class="p-2 font-bold border-r ${isUrdu ? 'text-right' : 'text-left'}">${s.t('jc_stage3')}</td>
-                                <td class="p-2 border-r ${isUrdu ? 'text-right' : 'text-left'}">${book ? book.outer_card_spec : 'Art Card'}</td>
-                                <td class="p-2 border-r font-bold">${wo.outer_printed_covers || '_______'}</td>
-                                <td class="p-2 border-r text-rose-600">${wo.outer_damage_covers || '___'}</td>
-                                <td class="p-2 text-slate-400">______________</td>
-                            </tr>
-                            <tr>
-                                <td class="p-2 font-bold border-r ${isUrdu ? 'text-right' : 'text-left'}">${s.t('jc_stage4')}</td>
-                                <td class="p-2 border-r ${isUrdu ? 'text-right' : 'text-left'}">${s.t('jc_stage4_desc')}</td>
-                                <td class="p-2 border-r font-bold">${wo.binding_assembled_qty || '_______'}</td>
-                                <td class="p-2 border-r text-rose-600">${wo.binding_damage_qty || '___'}</td>
-                                <td class="p-2 text-slate-400">______________</td>
-                            </tr>
-                            <tr>
-                                <td class="p-2 font-bold border-r ${isUrdu ? 'text-right' : 'text-left'}">${s.t('jc_stage5')}</td>
-                                <td class="p-2 border-r ${isUrdu ? 'text-right' : 'text-left'}">${s.t('jc_stage5_desc')}</td>
-                                <td class="p-2 border-r font-bold">${wo.actual_finished_quantity || '_______'}</td>
-                                <td class="p-2 border-r text-rose-600">${wo.total_damage_quantity || '___'}</td>
-                                <td class="p-2 text-slate-400">______________</td>
-                            </tr>
-                        </tbody>
-                    </table>
-
-                    <p class="text-[10px] text-slate-400 text-center mt-6">
-                        ${s.t('jc_footer_note')}
-                    </p>
                 </div>
             </div>
         </div>
@@ -1292,9 +1363,9 @@ function openProgressUpdateModal(workOrderNo, preselectedStage = 'INNER_PRINT') 
 
     const modal = document.getElementById('modalContainer');
     modal.innerHTML = `
-        <div class="fixed inset-0 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4 z-50">
-            <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl border border-slate-200">
-                <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+        <div class="fixed inset-0 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-3 sm:p-4 z-50 overflow-y-auto">
+            <div class="bg-white rounded-2xl max-w-md w-full max-h-[90vh] flex flex-col p-4 sm:p-6 shadow-2xl border border-slate-200 my-auto">
+                <div class="flex items-center justify-between pb-3 border-b border-slate-100 shrink-0">
                     <div>
                         <h3 class="text-base font-bold text-slate-900">${s.t('modal_log_title')}</h3>
                         <p class="text-xs text-[#4885a6] font-mono font-bold">${wo.work_order_no} - ${wo.book_title}</p>
@@ -1302,7 +1373,7 @@ function openProgressUpdateModal(workOrderNo, preselectedStage = 'INNER_PRINT') 
                     <button onclick="closeModal()" class="text-slate-400 hover:text-slate-600 text-lg font-bold">✕</button>
                 </div>
 
-                <form onsubmit="handleUpdateProgress(event, '${wo.work_order_no}')" class="space-y-4 mt-4 text-xs ${isUrdu ? 'text-right' : 'text-left'}">
+                <form onsubmit="handleUpdateProgress(event, '${wo.work_order_no}')" class="space-y-4 mt-4 text-xs ${isUrdu ? 'text-right' : 'text-left'} overflow-y-auto pr-1 flex-1">
                     <div>
                         <label class="block font-bold text-slate-700 mb-1">${s.t('th_dmg_stage')}</label>
                         <select id="progStage" class="w-full bg-slate-50 border border-slate-300 rounded-lg p-2.5 font-bold">
@@ -1333,7 +1404,7 @@ function openProgressUpdateModal(workOrderNo, preselectedStage = 'INNER_PRINT') 
                         <input type="text" id="progNotes" placeholder="..." class="w-full bg-slate-50 border border-slate-300 rounded-lg p-2.5">
                     </div>
 
-                    <div class="flex items-center justify-end gap-2 pt-3 border-t border-slate-100">
+                    <div class="flex items-center justify-end gap-2 pt-3 border-t border-slate-100 shrink-0">
                         <button type="button" onclick="closeModal()" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-lg">${s.t('btn_cancel')}</button>
                         <button type="submit" class="px-5 py-2 bg-[#4885a6] hover:bg-[#3b7596] text-white font-bold rounded-lg shadow">${s.t('btn_save')}</button>
                     </div>
@@ -1393,14 +1464,14 @@ function openAddMaterialModal() {
 
     const modal = document.getElementById('modalContainer');
     modal.innerHTML = `
-        <div class="fixed inset-0 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4 z-50">
-            <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl border border-slate-200">
-                <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+        <div class="fixed inset-0 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-3 sm:p-4 z-50 overflow-y-auto">
+            <div class="bg-white rounded-2xl max-w-md w-full max-h-[90vh] flex flex-col p-4 sm:p-6 shadow-2xl border border-slate-200 my-auto">
+                <div class="flex items-center justify-between pb-3 border-b border-slate-100 shrink-0">
                     <h3 class="text-base font-bold text-slate-900">${s.t('modal_add_mat_title')}</h3>
                     <button onclick="closeModal()" class="text-slate-400 hover:text-slate-600 text-lg font-bold">✕</button>
                 </div>
 
-                <form onsubmit="handleAddMaterial(event)" class="space-y-4 mt-4 text-xs ${isUrdu ? 'text-right' : 'text-left'}">
+                <form onsubmit="handleAddMaterial(event)" class="space-y-4 mt-4 text-xs ${isUrdu ? 'text-right' : 'text-left'} overflow-y-auto pr-1 flex-1">
                     <div>
                         <label class="block font-bold text-slate-700 mb-1">${s.t('modal_mat_name')}</label>
                         <input type="text" id="matName" required placeholder="e.g. 75 GSM Offset Paper" class="w-full bg-slate-50 border border-slate-300 rounded-lg p-2.5 font-bold">
@@ -1454,7 +1525,7 @@ function openAddMaterialModal() {
                         </div>
                     </div>
 
-                    <div class="flex items-center justify-end gap-2 pt-3 border-t border-slate-100">
+                    <div class="flex items-center justify-end gap-2 pt-3 border-t border-slate-100 shrink-0">
                         <button type="button" onclick="closeModal()" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-lg">${s.t('btn_cancel')}</button>
                         <button type="submit" class="px-5 py-2 bg-[#4885a6] hover:bg-[#3b7596] text-white font-bold rounded-lg shadow">${s.t('btn_save')}</button>
                     </div>
@@ -1493,14 +1564,14 @@ function openStockInwardModal(materialId = null) {
 
     const modal = document.getElementById('modalContainer');
     modal.innerHTML = `
-        <div class="fixed inset-0 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4 z-50">
-            <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl border border-slate-200">
-                <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+        <div class="fixed inset-0 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-3 sm:p-4 z-50 overflow-y-auto">
+            <div class="bg-white rounded-2xl max-w-md w-full max-h-[90vh] flex flex-col p-4 sm:p-6 shadow-2xl border border-slate-200 my-auto">
+                <div class="flex items-center justify-between pb-3 border-b border-slate-100 shrink-0">
                     <h3 class="text-base font-bold text-slate-900">${s.t('modal_inward_title')}</h3>
                     <button onclick="closeModal()" class="text-slate-400 hover:text-slate-600 text-lg font-bold">✕</button>
                 </div>
 
-                <form onsubmit="handleStockInward(event)" class="space-y-4 mt-4 text-xs ${isUrdu ? 'text-right' : 'text-left'}">
+                <form onsubmit="handleStockInward(event)" class="space-y-4 mt-4 text-xs ${isUrdu ? 'text-right' : 'text-left'} overflow-y-auto pr-1 flex-1">
                     <div>
                         <label class="block font-bold text-slate-700 mb-1">${s.t('th_item_name')}</label>
                         <select id="inwardMatSelect" required class="w-full bg-slate-50 border border-slate-300 rounded-lg p-2.5 font-bold">
@@ -1523,7 +1594,7 @@ function openStockInwardModal(materialId = null) {
                         </div>
                     </div>
 
-                    <div class="flex items-center justify-end gap-2 pt-3 border-t border-slate-100">
+                    <div class="flex items-center justify-end gap-2 pt-3 border-t border-slate-100 shrink-0">
                         <button type="button" onclick="closeModal()" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-lg">${s.t('btn_cancel')}</button>
                         <button type="submit" class="px-5 py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-lg shadow">${s.t('btn_save')}</button>
                     </div>
@@ -1559,14 +1630,14 @@ function openAddBookModal() {
 
     const modal = document.getElementById('modalContainer');
     modal.innerHTML = `
-        <div class="fixed inset-0 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4 z-50">
-            <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl border border-slate-200">
-                <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+        <div class="fixed inset-0 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-3 sm:p-4 z-50 overflow-y-auto">
+            <div class="bg-white rounded-2xl max-w-md w-full max-h-[90vh] flex flex-col p-4 sm:p-6 shadow-2xl border border-slate-200 my-auto">
+                <div class="flex items-center justify-between pb-3 border-b border-slate-100 shrink-0">
                     <h3 class="text-base font-bold text-slate-900">${s.t('modal_add_book_title')}</h3>
                     <button onclick="closeModal()" class="text-slate-400 hover:text-slate-600 text-lg font-bold">✕</button>
                 </div>
 
-                <form onsubmit="handleAddBook(event)" class="space-y-4 mt-4 text-xs ${isUrdu ? 'text-right' : 'text-left'}">
+                <form onsubmit="handleAddBook(event)" class="space-y-4 mt-4 text-xs ${isUrdu ? 'text-right' : 'text-left'} overflow-y-auto pr-1 flex-1">
                     <div class="grid grid-cols-2 gap-3">
                         <div>
                             <label class="block font-bold text-slate-700 mb-1">${s.t('modal_book_code')}</label>
@@ -1614,7 +1685,7 @@ function openAddBookModal() {
                         <input type="number" id="bkCost" value="95" class="w-full bg-slate-50 border border-slate-300 rounded-lg p-2.5 font-bold">
                     </div>
 
-                    <div class="flex items-center justify-end gap-2 pt-3 border-t border-slate-100">
+                    <div class="flex items-center justify-end gap-2 pt-3 border-t border-slate-100 shrink-0">
                         <button type="button" onclick="closeModal()" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-lg">${s.t('btn_cancel')}</button>
                         <button type="submit" class="px-5 py-2 bg-[#4885a6] hover:bg-[#3b7596] text-white font-bold rounded-lg shadow">${s.t('btn_save')}</button>
                     </div>
@@ -1656,8 +1727,8 @@ function openRelocateModal(fgId, currRack, currShelf) {
 
     const modal = document.getElementById('modalContainer');
     modal.innerHTML = `
-        <div class="fixed inset-0 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4 z-50">
-            <div class="bg-white rounded-2xl max-w-xs w-full p-6 shadow-2xl border border-slate-200 ${isUrdu ? 'text-right' : 'text-left'}">
+        <div class="fixed inset-0 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-3 sm:p-4 z-50 overflow-y-auto">
+            <div class="bg-white rounded-2xl max-w-xs w-full p-4 sm:p-6 shadow-2xl border border-slate-200 ${isUrdu ? 'text-right' : 'text-left'} my-auto">
                 <h3 class="text-base font-bold text-slate-900 pb-2 border-b">${s.t('modal_relocate_title')}</h3>
                 <div class="space-y-3 mt-4 text-xs">
                     <div>
@@ -1702,6 +1773,7 @@ function closeModal() {
 // Global Exports
 window.switchTab = switchTab;
 window.toggleSidebar = toggleSidebar;
+window.toggleMobileSidebar = toggleMobileSidebar;
 window.handleReload = handleReload;
 window.setLang = setLang;
 window.showLowStockModal = showLowStockModal;
