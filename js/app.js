@@ -1,5 +1,5 @@
 // UI Renderer and Application Controller
-// Abbasi Publication Network (APN) - Theme Matched to User Design
+// Abbasi Publication Network (APN) - Permanent Left Sidebar & Exact Theme
 
 async function initApp() {
     APN_API.seedLocalMockData();
@@ -36,17 +36,18 @@ function renderApp() {
     if (!root) return;
 
     const isCollapsed = s.sidebarCollapsed;
+    const isUrdu = s.lang === 'ur';
 
     root.innerHTML = `
-        <!-- Top Header Bar (Exact match to screenshot: #4885a6 steel blue) -->
-        <header class="bg-[#4885a6] text-white shadow-sm sticky top-0 z-50 h-[50px] flex items-center justify-between px-4">
+        <!-- Top Header Bar (#4885a6 steel blue) -->
+        <header class="bg-[#4885a6] text-white shadow-sm sticky top-0 z-50 h-[50px] flex items-center justify-between px-4 select-none">
             <!-- Left: Calligraphy Brand & Refresh Button -->
             <div class="flex items-center gap-3">
                 <div class="flex items-center gap-2">
-                    <span class="calligraphy-title text-2xl font-bold tracking-wide text-white drop-shadow-xs">
-                        دار النشر عباسی
+                    <span class="calligraphy-title text-xl font-bold tracking-wide text-white drop-shadow-xs">
+                        عباسی پبلیکیشن نیٹ ورک
                     </span>
-                    <span class="hidden md:inline text-[11px] font-semibold text-blue-100/90 pl-1 border-l border-white/20 ml-1">
+                    <span class="hidden md:inline text-[11px] font-semibold text-blue-100/90 pl-2 border-l border-white/25 ml-1">
                         Abbasi Publication Network
                     </span>
                 </div>
@@ -59,16 +60,16 @@ function renderApp() {
                 </button>
             </div>
 
-            <!-- Right: Globe & User Avatar -->
+            <!-- Right: Status, Globe & User Avatar -->
             <div class="flex items-center gap-3">
                 <!-- Status Badge -->
                 <div class="hidden sm:flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-semibold ${s.isOnline ? 'bg-emerald-600/30 text-emerald-100 border border-emerald-300/40' : 'bg-amber-600/30 text-amber-100 border border-amber-300/40'}">
                     <span class="w-2 h-2 rounded-full ${s.isOnline ? 'bg-emerald-300 animate-ping' : 'bg-amber-300'}"></span>
-                    <span>${s.isOnline ? 'لائیو کنیکٹڈ' : 'لوکل موڈ'}</span>
+                    <span>${s.isOnline ? s.t('backend_connected') : s.t('backend_offline')}</span>
                 </div>
 
                 <!-- Globe / Language Switcher -->
-                <button onclick="toggleLanguage()" title="زبان تبدیل کریں" class="w-8 h-8 rounded-full hover:bg-white/10 flex items-center justify-center text-white transition text-base">
+                <button onclick="toggleLanguage()" title="زبان تبدیل کریں / Switch Language" class="w-8 h-8 rounded-full hover:bg-white/10 flex items-center justify-center text-white transition text-base">
                     🌐
                 </button>
 
@@ -84,9 +85,9 @@ function renderApp() {
             </div>
         </header>
 
-        <!-- Main Layout with Sidebar and Content -->
+        <!-- Main Shell Container: Sidebar ALWAYS on the LEFT -->
         <div class="flex min-h-[calc(100vh-50px)]">
-            <!-- Sidebar -->
+            <!-- Left Sidebar (Permanent Left Position) -->
             <aside class="${isCollapsed ? 'w-16' : 'w-60'} bg-white border-r border-slate-200 flex flex-col justify-between transition-all duration-200 shrink-0 select-none shadow-xs">
                 <div>
                     <!-- Top 4 Color Buttons row matching user screenshot -->
@@ -128,10 +129,10 @@ function renderApp() {
                 </div>
             </aside>
 
-            <!-- Main Content Area -->
+            <!-- Main Content Area (on the Right) -->
             <main class="flex-1 bg-[#f4f7f9] p-4 sm:p-6 overflow-y-auto">
                 <!-- Tab Header matching screenshot -->
-                <div class="flex items-center gap-1 border-b border-slate-200 mb-6 pb-0">
+                <div class="flex items-center gap-1 border-b border-slate-200 mb-6 pb-0 select-none">
                     <div class="dashboard-tab cursor-pointer" onclick="switchTab('dashboard')">
                         <span>Dashboard</span>
                     </div>
@@ -144,7 +145,9 @@ function renderApp() {
                 </div>
 
                 <!-- Active Content View -->
-                ${s.activeTab === 'dashboard' ? renderDepartmentGrid() : renderDepartmentDetails(s.activeTab)}
+                <div class="${isUrdu ? 'text-right' : 'text-left'}">
+                    ${s.activeTab === 'dashboard' ? renderDepartmentGrid() : renderDepartmentDetails(s.activeTab)}
+                </div>
             </main>
         </div>
 
@@ -184,7 +187,6 @@ function getTabTitle(tabId) {
 }
 
 // ==================== DASHBOARD DEPARTMENT CARDS GRID ====================
-// Exactly reproduces the 2-row department card layout from the screenshot
 
 function renderDepartmentGrid() {
     const s = window.apnStore;
@@ -203,12 +205,12 @@ function renderDepartmentGrid() {
     ];
 
     return `
-        <!-- Top 4 Quick Metric Cards -->
+        <!-- Top 4 KPI Metrics Cards -->
         <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6">
             <div class="bg-white p-3.5 rounded-xl border border-slate-200 shadow-xs flex items-center justify-between">
                 <div>
                     <p class="text-[11px] font-bold text-slate-500 uppercase">${s.t('kpi_total_finished')}</p>
-                    <h4 class="text-xl font-extrabold text-slate-900 mt-0.5">${(m.total_finished_books || 0).toLocaleString()} <span class="text-xs font-normal text-slate-500">کتب</span></h4>
+                    <h4 class="text-xl font-extrabold text-slate-900 mt-0.5">${(m.total_finished_books || 0).toLocaleString()} <span class="text-xs font-normal text-slate-500">${s.t('kpi_books_unit')}</span></h4>
                 </div>
                 <div class="w-10 h-10 rounded-lg bg-blue-50 text-blue-700 flex items-center justify-center text-xl font-bold">
                     📚
@@ -218,7 +220,7 @@ function renderDepartmentGrid() {
             <div class="bg-white p-3.5 rounded-xl border border-slate-200 shadow-xs flex items-center justify-between">
                 <div>
                     <p class="text-[11px] font-bold text-slate-500 uppercase">${s.t('kpi_active_jobs')}</p>
-                    <h4 class="text-xl font-extrabold text-slate-900 mt-0.5">${m.active_jobs_count || 0} <span class="text-xs font-normal text-slate-500">آرڈرز</span></h4>
+                    <h4 class="text-xl font-extrabold text-slate-900 mt-0.5">${m.active_jobs_count || 0} <span class="text-xs font-normal text-slate-500">${s.t('kpi_jobs_unit')}</span></h4>
                 </div>
                 <div class="w-10 h-10 rounded-lg bg-amber-50 text-amber-700 flex items-center justify-center text-xl font-bold">
                     ⚙️
@@ -228,7 +230,7 @@ function renderDepartmentGrid() {
             <div class="bg-white p-3.5 rounded-xl border border-slate-200 shadow-xs flex items-center justify-between">
                 <div>
                     <p class="text-[11px] font-bold text-slate-500 uppercase">${s.t('kpi_low_stock')}</p>
-                    <h4 class="text-xl font-extrabold ${(m.low_stock_count || 0) > 0 ? 'text-red-600' : 'text-slate-900'} mt-0.5">${m.low_stock_count || 0} <span class="text-xs font-normal text-slate-500">الرٹس</span></h4>
+                    <h4 class="text-xl font-extrabold ${(m.low_stock_count || 0) > 0 ? 'text-red-600' : 'text-slate-900'} mt-0.5">${m.low_stock_count || 0} <span class="text-xs font-normal text-slate-500">${s.t('kpi_alerts_unit')}</span></h4>
                 </div>
                 <div class="w-10 h-10 rounded-lg bg-red-50 text-red-600 flex items-center justify-center text-xl font-bold ${(m.low_stock_count || 0) > 0 ? 'badge-pulse-red' : ''}">
                     🚨
@@ -246,7 +248,7 @@ function renderDepartmentGrid() {
             </div>
         </div>
 
-        <!-- Department Cards Grid matching User Screenshot (2 rows of clean rounded cards) -->
+        <!-- 9 Department Cards Grid (Clean 2-Row Layout, No Flipped Parentheses) -->
         <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 mb-8">
             ${departments.map(d => `
                 <div onclick="switchTab('${d.id}')" class="dept-card">
@@ -263,12 +265,12 @@ function renderDepartmentGrid() {
             `).join('')}
         </div>
 
-        <!-- Live Production Flow & Active Job List -->
+        <!-- Active Production Jobs Tracker -->
         <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-xs mb-6">
             <div class="flex items-center justify-between pb-3 border-b border-slate-100">
                 <div>
-                    <h3 class="text-sm font-bold text-slate-900">لائیو پروڈکشن پائپ لائن (Active Job Cards Tracker)</h3>
-                    <p class="text-xs text-slate-500">خام مال کے اخراج سے لے کر انر و آؤٹر پرنٹنگ، بائنڈنگ، اور فنش گڈز گودام تک کی لائیو پیش رفت</p>
+                    <h3 class="text-sm font-bold text-slate-900">لائیو پروڈکشن پائپ لائن (Active Jobs Tracker)</h3>
+                    <p class="text-xs text-slate-500">خام مال کے اخراج سے لے کر انر و آؤٹر پرنٹنگ، بائنڈنگ، اور فنش گڈز گودام تک کی پیش رفت</p>
                 </div>
                 <button onclick="openNewWorkOrderModal()" class="px-3.5 py-1.5 bg-[#4885a6] hover:bg-[#3b7596] text-white text-xs font-bold rounded-lg shadow-xs transition">
                     ${s.t('btn_new_job')}
@@ -381,11 +383,11 @@ function renderRawMaterials() {
             </div>
 
             <div class="overflow-x-auto mt-4">
-                <table class="w-full text-xs text-right">
+                <table class="w-full text-xs">
                     <thead>
                         <tr class="bg-slate-50 text-slate-600 border-b border-slate-200">
                             <th class="py-3 px-3">آئٹم کا نام</th>
-                            <th class="py-3 px-3">شعبہ (Category)</th>
+                            <th class="py-3 px-3">شعبہ</th>
                             <th class="py-3 px-3">سائز و GSM</th>
                             <th class="py-3 px-3">موجودہ اسٹاک</th>
                             <th class="py-3 px-3">کم از کم حد</th>
@@ -511,7 +513,7 @@ function renderWorkOrders() {
             </div>
 
             <div class="overflow-x-auto mt-4">
-                <table class="w-full text-xs text-right">
+                <table class="w-full text-xs">
                     <thead>
                         <tr class="bg-slate-50 text-slate-600 border-b border-slate-200">
                             <th class="py-3 px-3">جاب ٹریکنگ کوڈ</th>
@@ -569,7 +571,7 @@ function renderWorkOrders() {
     `;
 }
 
-// 4. Floor View (Printing, Outer, Binding)
+// 4. Floor View
 function renderProductionFloor(specificStage = null) {
     const s = window.apnStore;
     const activeOrders = s.workOrders.filter(o => o.status !== 'COMPLETED');
@@ -713,7 +715,7 @@ function renderWarehouse() {
             </div>
 
             <div class="overflow-x-auto mt-4">
-                <table class="w-full text-xs text-right">
+                <table class="w-full text-xs">
                     <thead>
                         <tr class="bg-slate-50 text-slate-600 border-b border-slate-200">
                             <th class="py-3 px-3">کتاب کا کوڈ و نام</th>
@@ -777,11 +779,11 @@ function renderDamageReport() {
             </div>
 
             <div class="overflow-x-auto mt-4">
-                <table class="w-full text-xs text-right">
+                <table class="w-full text-xs">
                     <thead>
                         <tr class="bg-slate-50 text-slate-600 border-b border-slate-200">
                             <th class="py-3 px-3">ورک آرڈر نمبر</th>
-                            <th class="py-3 px-3">شعبہ (Stage)</th>
+                            <th class="py-3 px-3">شعبہ</th>
                             <th class="py-3 px-3">خراب شدہ آئٹم</th>
                             <th class="py-3 px-3">تعداد / وزن</th>
                             <th class="py-3 px-3">نقص کی وجہ</th>
@@ -932,7 +934,7 @@ function openNewWorkOrderModal(preselectedArticle = '') {
                     </div>
 
                     <div class="p-3 bg-blue-50 rounded-xl border border-blue-200 text-[11px] text-blue-900 leading-relaxed">
-                        💡 <b>بل آف مٹیریل (BOM) خودکار کٹوتی:</b> ورک آرڈر بنتے ہی درکار انر پیپر، کور کارڈ اور سیاہی اسٹور سے خودکار طور پر خارج (Deduct) ہو جائے گی۔
+                        💡 <b>بل آف مٹیریل (BOM) خودکار کٹوتی:</b> ورک آرڈر بنتے ہی درکار انر پیپر، کور کارڈ اور سیاہی اسٹور سے خودکار طور پر خارج ہو جائے گی۔
                     </div>
 
                     <div>
@@ -1004,7 +1006,7 @@ function openJobCardPrintModal(workOrderNo) {
                             <p class="font-mono text-[11px] text-slate-500 mt-1">APN PRODUCTION ROUTING TICKET</p>
                         </div>
                         <div class="text-right">
-                            <h2 class="text-xl font-extrabold text-slate-900 calligraphy-title">دار النشر عباسی (APN)</h2>
+                            <h2 class="text-xl font-extrabold text-slate-900 calligraphy-title">عباسی پبلیکیشن نیٹ ورک (APN)</h2>
                             <p class="text-xs font-bold text-[#4885a6]">پروڈکشن جاب کارڈ و کوالٹی روٹنگ شیٹ</p>
                             <p class="font-mono text-sm font-extrabold text-slate-900 mt-1">${wo.work_order_no}</p>
                         </div>

@@ -3,7 +3,6 @@
 :root {
     --theme-header: #4885a6;
     --theme-header-hover: #3d7391;
-    --theme-header-dark: #376a85;
     --theme-sidebar-bg: #ffffff;
     --theme-sidebar-text: #455a64;
     --theme-sidebar-hover: #f1f5f9;
@@ -15,18 +14,15 @@
 }
 
 body {
-    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-family: 'Noto Sans Arabic', 'Inter', system-ui, -apple-system, sans-serif;
     background-color: var(--theme-bg);
     color: #263238;
     margin: 0;
     padding: 0;
+    direction: ltr !important; /* Keep main structure always LTR so sidebar is always on the left */
 }
 
-/* Urdu Typography */
-body.lang-ur {
-    font-family: 'Noto Sans Arabic', 'Noto Nastaliq Urdu', system-ui, sans-serif;
-}
-
+/* Calligraphy & Brand */
 .calligraphy-title {
     font-family: 'Amiri', 'Noto Nastaliq Urdu', serif;
     font-weight: 700;
@@ -48,7 +44,7 @@ body.lang-ur {
     background: #ffffff;
     border: 1px solid #dce4ec;
     border-radius: 12px;
-    padding: 24px 16px;
+    padding: 22px 14px;
     text-align: center;
     transition: all 0.2s ease-in-out;
     cursor: pointer;
@@ -57,13 +53,8 @@ body.lang-ur {
 
 .dept-card:hover {
     border-color: #4885a6;
-    box-shadow: 0 4px 12px rgba(72, 133, 166, 0.12);
+    box-shadow: 0 4px 14px rgba(72, 133, 166, 0.15);
     transform: translateY(-2px);
-}
-
-.dept-card.active {
-    border-color: #4885a6;
-    box-shadow: 0 0 0 2px rgba(72, 133, 166, 0.2);
 }
 
 .dept-card-icon {

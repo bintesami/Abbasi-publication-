@@ -3,37 +3,38 @@
 
 const translations = {
     ur: {
-        app_title: "دار النشر عباسی",
-        app_subtitle: "عباسی پبلیکیشن نیٹ ورک - پروڈکشن، اسٹور و گودام ERP",
+        app_title: "عباسی پبلیکیشن نیٹ ورک",
+        app_subtitle: "پروڈکشن، اسٹور و گودام ERP",
         nav_dashboard: "Dashboard",
         nav_raw_materials: "Raw Material Store",
         nav_books: "Book Master & BOM",
         nav_work_orders: "Work Orders",
-        nav_printing: "Printing Floor",
+        nav_printing: "Inner Printing",
+        nav_outer: "Cover & Lamination",
         nav_binding: "Binding Unit",
         nav_warehouse: "Finished Warehouse",
         nav_damage: "Damage & Loss",
         nav_reports: "Reports & Ledger",
         nav_settings: "Settings",
 
-        // Department Card Titles & Subtitles
-        dept_raw_title: "خام مال اسٹور (Raw Materials)",
+        // Department Card Titles & Subtitles (Clean Urdu, no flipped parentheses)
+        dept_raw_title: "خام مال اسٹور",
         dept_raw_sub: "کاغذ، کارڈ، سیاہی اور سامان",
-        dept_book_title: "کتب ماسٹر و BOM (Books)",
+        dept_book_title: "کتب ماسٹر و BOM",
         dept_book_sub: "صفحات، فارمے، لاگت اور فارمولا",
-        dept_wo_title: "ورک آرڈرز (Work Orders)",
+        dept_wo_title: "ورک آرڈرز و جابز",
         dept_wo_sub: "جاب کارڈز، بارکوڈ اور اخراج",
-        dept_inner_title: "انر پرنٹنگ (Inner Printing)",
+        dept_inner_title: "انر پرنٹنگ فلور",
         dept_inner_sub: "متن کے فارمے اور شیٹس",
-        dept_outer_title: "کور و لیمینیشن (Cover & Lam)",
+        dept_outer_title: "کور و لیمینیشن",
         dept_outer_sub: "ٹائٹل کارڈ اور تھرمل فلم",
-        dept_binding_title: "بائنڈنگ فلور (Binding Unit)",
-        dept_binding_sub: "فولڈنگ، گلو، کٹنگ اور اسمبلی",
-        dept_warehouse_title: "فنش گڈز گودام (Warehouse)",
-        dept_warehouse_sub: "ریک، شیلف اور تیار اسٹاک",
-        dept_damage_title: "ڈیمیج و ویسٹیج (Damage & Loss)",
+        dept_binding_title: "بائنڈنگ و اسمبلی",
+        dept_binding_sub: "فولڈنگ، گلو، کٹنگ اور ملاپ",
+        dept_warehouse_title: "فنش گڈز گودام",
+        dept_warehouse_sub: "ریک، شیلف اور تیار کتب",
+        dept_damage_title: "ڈیمیج و ویسٹیج لاگ",
         dept_damage_sub: "نقصان لاگ اور مالی تخمینہ",
-        dept_admin_title: "ایڈمن و رپورٹس (Admin)",
+        dept_admin_title: "ایڈمن و کنٹرول",
         dept_admin_sub: "لیجر، سمری اور کنٹرول",
 
         // KPI
@@ -43,8 +44,8 @@ const translations = {
         kpi_damage_loss: "کل ڈیمیج و نقصان",
         kpi_books_unit: "کتب",
         kpi_jobs_unit: "آرڈرز",
-        kpi_alerts_unit: "آئٹمز",
-        kpi_pkr: "روپے",
+        kpi_alerts_unit: "الرٹس",
+        kpi_pkr: "PKR",
 
         // Actions
         btn_new_job: "+ نیا ورک آرڈر بنائیں",
@@ -76,17 +77,18 @@ const translations = {
 
         low_stock_urgent_title: "کم اسٹاک انتباہ! فوری خریداری درکار ہے",
         low_stock_msg: "درج ذیل خام مال کی مقدار مقررہ حد سے کم ہو گئی ہے۔ پریس پروڈکشن متاثر ہونے سے بچانے کے لیے فوری خریداری کریں۔",
-        backend_connected: "لائیو کنیکٹڈ (FastAPI)",
-        backend_offline: "لوکل اسٹوریج موڈ"
+        backend_connected: "لائیو کنیکٹڈ",
+        backend_offline: "لوکل موڈ"
     },
     en: {
-        app_title: "Dar-un-Nashr Abbasi",
-        app_subtitle: "Abbasi Publication Network - ERP System",
+        app_title: "Abbasi Publication Network",
+        app_subtitle: "Production, Inventory & Warehouse ERP",
         nav_dashboard: "Dashboard",
         nav_raw_materials: "Raw Material Store",
         nav_books: "Book Master & BOM",
         nav_work_orders: "Work Orders",
-        nav_printing: "Printing Floor",
+        nav_printing: "Inner Printing",
+        nav_outer: "Cover & Lamination",
         nav_binding: "Binding Unit",
         nav_warehouse: "Finished Warehouse",
         nav_damage: "Damage & Loss",
@@ -99,7 +101,7 @@ const translations = {
         dept_book_title: "Book Master & BOM",
         dept_book_sub: "Articles, Pages, Forms & Costing",
         dept_wo_title: "Work Orders",
-        dept_wo_sub: "Job Cards, Barcode & Requisitions",
+        dept_wo_sub: "Job Cards, Barcodes & Requisitions",
         dept_inner_title: "Inner Printing",
         dept_inner_sub: "Text Forms & Sheet Monitoring",
         dept_outer_title: "Cover & Lamination",
@@ -153,8 +155,8 @@ const translations = {
 
         low_stock_urgent_title: "Low Stock Warning! Reorder Needed",
         low_stock_msg: "The following raw materials are below minimum threshold. Please order immediately to avoid line stoppage.",
-        backend_connected: "Live Connected (FastAPI)",
-        backend_offline: "Local Storage Mode"
+        backend_connected: "Live Connected",
+        backend_offline: "Local Storage"
     }
 };
 
@@ -181,7 +183,6 @@ class APNStore {
     setLanguage(newLang) {
         this.lang = newLang;
         localStorage.setItem('apn_lang', newLang);
-        document.body.className = newLang === 'ur' ? 'lang-ur' : 'lang-en';
         window.renderApp();
     }
 }
