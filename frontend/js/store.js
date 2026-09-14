@@ -3,17 +3,40 @@
 
 const translations = {
     ur: {
-        app_title: "عباسی پبلیکیشن نیٹ ورک",
-        app_subtitle: "اسٹاک، پروڈکشن اور گودام مینجمنٹ سسٹم",
-        nav_dashboard: "ڈیش بورڈ",
-        nav_raw_materials: "خام مال اسٹور",
-        nav_books: "کتب ماسٹر و BOM",
-        nav_work_orders: "ورک آرڈرز",
-        nav_floor: "پروڈکشن فلور",
-        nav_warehouse: "فنش گڈز ویئر ہاؤس",
-        nav_damage: "ڈیمیج و ویسٹیج رپورٹ",
+        app_title: "دار النشر عباسی",
+        app_subtitle: "عباسی پبلیکیشن نیٹ ورک - پروڈکشن، اسٹور و گودام ERP",
+        nav_dashboard: "Dashboard",
+        nav_raw_materials: "Raw Material Store",
+        nav_books: "Book Master & BOM",
+        nav_work_orders: "Work Orders",
+        nav_printing: "Printing Floor",
+        nav_binding: "Binding Unit",
+        nav_warehouse: "Finished Warehouse",
+        nav_damage: "Damage & Loss",
+        nav_reports: "Reports & Ledger",
+        nav_settings: "Settings",
 
-        // KPI Cards
+        // Department Card Titles & Subtitles
+        dept_raw_title: "خام مال اسٹور (Raw Materials)",
+        dept_raw_sub: "کاغذ، کارڈ، سیاہی اور سامان",
+        dept_book_title: "کتب ماسٹر و BOM (Books)",
+        dept_book_sub: "صفحات، فارمے، لاگت اور فارمولا",
+        dept_wo_title: "ورک آرڈرز (Work Orders)",
+        dept_wo_sub: "جاب کارڈز، بارکوڈ اور اخراج",
+        dept_inner_title: "انر پرنٹنگ (Inner Printing)",
+        dept_inner_sub: "متن کے فارمے اور شیٹس",
+        dept_outer_title: "کور و لیمینیشن (Cover & Lam)",
+        dept_outer_sub: "ٹائٹل کارڈ اور تھرمل فلم",
+        dept_binding_title: "بائنڈنگ فلور (Binding Unit)",
+        dept_binding_sub: "فولڈنگ، گلو، کٹنگ اور اسمبلی",
+        dept_warehouse_title: "فنش گڈز گودام (Warehouse)",
+        dept_warehouse_sub: "ریک، شیلف اور تیار اسٹاک",
+        dept_damage_title: "ڈیمیج و ویسٹیج (Damage & Loss)",
+        dept_damage_sub: "نقصان لاگ اور مالی تخمینہ",
+        dept_admin_title: "ایڈمن و رپورٹس (Admin)",
+        dept_admin_sub: "لیجر، سمری اور کنٹرول",
+
+        // KPI
         kpi_total_finished: "کل تیار کتب (اسٹاک)",
         kpi_active_jobs: "زیرِ تکمیل جابز",
         kpi_low_stock: "کم اسٹاک الرٹس",
@@ -23,7 +46,7 @@ const translations = {
         kpi_alerts_unit: "آئٹمز",
         kpi_pkr: "روپے",
 
-        // Actions & Buttons
+        // Actions
         btn_new_job: "+ نیا ورک آرڈر بنائیں",
         btn_add_material: "+ نیا خام مال درج کریں",
         btn_stock_inward: "اسٹاک انٹری / خریداری",
@@ -33,26 +56,15 @@ const translations = {
         btn_print_job: "جاب کارڈ پرنٹ کریں",
         btn_update_progress: "اسٹیٹس اپڈیٹ کریں",
         btn_relocate: "ریک/شیلف تبدیل کریں",
-        btn_filter: "فلٹر کریں",
 
         // Pipeline Stages
         stage_store_out: "خام مال اخراج (BOM)",
         stage_inner_print: "انر پرنٹنگ (فارمے)",
         stage_outer_print: "ٹائٹل / کور پرنٹنگ",
-        stage_binding: "بائنڈنگ اسمبلی (دونوں کا ملاپ)",
+        stage_binding: "بائنڈنگ اسمبلی (ملاپ)",
         stage_warehouse: "ویئر ہاؤس داخلہ",
 
-        // Table Headers
-        th_wo_no: "ورک آرڈر / جاب نمبر",
-        th_book: "کتاب کا نام",
-        th_target: "ہدف تعداد",
-        th_inner_status: "انر پرنٹنگ",
-        th_outer_status: "کور پرنٹنگ",
-        th_binding_status: "بائنڈنگ",
-        th_overall_status: "مجموعی اسٹیٹس",
-        th_actions: "ایکشن",
-
-        // Status Labels
+        // Status
         status_PLANNED: "منصوبہ بندی شدہ",
         status_MATERIAL_ISSUED: "خام مال ایشو ہو گیا",
         status_IN_PRINTING: "پرنٹنگ جاری ہے",
@@ -62,25 +74,46 @@ const translations = {
         status_IN_PROGRESS: "جاری ہے",
         status_READY_FOR_BINDING: "بائنڈنگ کے لیے تیار",
 
-        // Alerts
         low_stock_urgent_title: "کم اسٹاک انتباہ! فوری خریداری درکار ہے",
         low_stock_msg: "درج ذیل خام مال کی مقدار مقررہ حد سے کم ہو گئی ہے۔ پریس پروڈکشن متاثر ہونے سے بچانے کے لیے فوری خریداری کریں۔",
-        search_placeholder: "کتاب کا نام، جاب نمبر، یا آرٹیکل کوڈ لکھیں...",
-        backend_connected: "آن لائن موڈ (FastAPI جڑا ہوا ہے)",
-        backend_offline: "لوکل موڈ (آف لائن اسٹوریج)"
+        backend_connected: "لائیو کنیکٹڈ (FastAPI)",
+        backend_offline: "لوکل اسٹوریج موڈ"
     },
     en: {
-        app_title: "Abbasi Publication Network (APN)",
-        app_subtitle: "Production, Inventory & Warehouse ERP",
+        app_title: "Dar-un-Nashr Abbasi",
+        app_subtitle: "Abbasi Publication Network - ERP System",
         nav_dashboard: "Dashboard",
         nav_raw_materials: "Raw Material Store",
         nav_books: "Book Master & BOM",
         nav_work_orders: "Work Orders",
-        nav_floor: "Production Floor",
+        nav_printing: "Printing Floor",
+        nav_binding: "Binding Unit",
         nav_warehouse: "Finished Warehouse",
-        nav_damage: "Wastage & Damage",
+        nav_damage: "Damage & Loss",
+        nav_reports: "Reports & Ledger",
+        nav_settings: "Settings",
 
-        // KPI Cards
+        // Department Card Titles & Subtitles
+        dept_raw_title: "Raw Material Store",
+        dept_raw_sub: "Paper, Card, Inks & Supplies",
+        dept_book_title: "Book Master & BOM",
+        dept_book_sub: "Articles, Pages, Forms & Costing",
+        dept_wo_title: "Work Orders",
+        dept_wo_sub: "Job Cards, Barcode & Requisitions",
+        dept_inner_title: "Inner Printing",
+        dept_inner_sub: "Text Forms & Sheet Monitoring",
+        dept_outer_title: "Cover & Lamination",
+        dept_outer_sub: "Title Cards & Thermal Film",
+        dept_binding_title: "Binding Unit",
+        dept_binding_sub: "Folding, Gluing, Trimming & Merging",
+        dept_warehouse_title: "Finished Warehouse",
+        dept_warehouse_sub: "Rack, Shelf & Delivery Inventory",
+        dept_damage_title: "Damage & Wastage",
+        dept_damage_sub: "Wastage Log & Financial Impact",
+        dept_admin_title: "Admin & Reports",
+        dept_admin_sub: "Ledger, Analytics & Controls",
+
+        // KPI
         kpi_total_finished: "Total Finished Stock",
         kpi_active_jobs: "Active Work Orders",
         kpi_low_stock: "Low Stock Alerts",
@@ -90,7 +123,7 @@ const translations = {
         kpi_alerts_unit: "Alerts",
         kpi_pkr: "PKR",
 
-        // Actions & Buttons
+        // Actions
         btn_new_job: "+ New Work Order",
         btn_add_material: "+ Add Raw Material",
         btn_stock_inward: "Stock Inward (GRN)",
@@ -100,7 +133,6 @@ const translations = {
         btn_print_job: "Print Job Card",
         btn_update_progress: "Update Progress",
         btn_relocate: "Relocate Shelf",
-        btn_filter: "Filter",
 
         // Pipeline Stages
         stage_store_out: "Material Issued (BOM)",
@@ -109,17 +141,7 @@ const translations = {
         stage_binding: "Binding & Merging",
         stage_warehouse: "Warehouse Transfer",
 
-        // Table Headers
-        th_wo_no: "Job Tracking #",
-        th_book: "Book Title",
-        th_target: "Target Qty",
-        th_inner_status: "Inner Printing",
-        th_outer_status: "Outer Printing",
-        th_binding_status: "Binding",
-        th_overall_status: "Status",
-        th_actions: "Actions",
-
-        // Status Labels
+        // Status
         status_PLANNED: "Planned",
         status_MATERIAL_ISSUED: "Material Issued",
         status_IN_PRINTING: "In Printing",
@@ -129,12 +151,10 @@ const translations = {
         status_IN_PROGRESS: "In Progress",
         status_READY_FOR_BINDING: "Ready for Binding",
 
-        // Alerts
         low_stock_urgent_title: "Low Stock Warning! Reorder Needed",
-        low_stock_msg: "The following raw materials are below the minimum threshold. Please order immediately to prevent line stoppages.",
-        search_placeholder: "Search book name, job #, or article code...",
-        backend_connected: "Live Mode (FastAPI Connected)",
-        backend_offline: "Offline Mode (Local Storage)"
+        low_stock_msg: "The following raw materials are below minimum threshold. Please order immediately to avoid line stoppage.",
+        backend_connected: "Live Connected (FastAPI)",
+        backend_offline: "Local Storage Mode"
     }
 };
 
@@ -144,6 +164,7 @@ class APNStore {
         this.activeTab = 'dashboard';
         this.isOnline = false;
         this.searchQuery = '';
+        this.sidebarCollapsed = false;
         
         this.rawMaterials = [];
         this.books = [];
@@ -161,8 +182,6 @@ class APNStore {
         this.lang = newLang;
         localStorage.setItem('apn_lang', newLang);
         document.body.className = newLang === 'ur' ? 'lang-ur' : 'lang-en';
-        document.documentElement.setAttribute('dir', newLang === 'ur' ? 'rtl' : 'ltr');
-        document.documentElement.setAttribute('lang', newLang);
         window.renderApp();
     }
 }

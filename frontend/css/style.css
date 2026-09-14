@@ -1,80 +1,138 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Nastaliq+Urdu:wght@400;600;700&family=Noto+Sans+Arabic:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Nastaliq+Urdu:wght@400;600;700&family=Noto+Sans+Arabic:wght@400;500;600;700&family=Amiri:wght@700&display=swap');
 
 :root {
-    --apn-primary: #1e3a8a;
-    --apn-primary-light: #3b82f6;
-    --apn-secondary: #0d9488;
-    --apn-danger: #dc2626;
-    --apn-warning: #f59e0b;
-    --apn-success: #10b981;
-    --apn-bg: #f8fafc;
-    --apn-card-bg: #ffffff;
-    --apn-border: #e2e8f0;
+    --theme-header: #4885a6;
+    --theme-header-hover: #3d7391;
+    --theme-header-dark: #376a85;
+    --theme-sidebar-bg: #ffffff;
+    --theme-sidebar-text: #455a64;
+    --theme-sidebar-hover: #f1f5f9;
+    --theme-sidebar-active: #0288d1;
+    --theme-card-icon: #3a6b88;
+    --theme-card-border: #e2e8f0;
+    --theme-card-hover-border: #4885a6;
+    --theme-bg: #f4f7f9;
 }
 
 body {
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
-    background-color: var(--apn-bg);
-    color: #1e293b;
+    background-color: var(--theme-bg);
+    color: #263238;
     margin: 0;
     padding: 0;
 }
 
-/* Urdu Typography Styles */
+/* Urdu Typography */
 body.lang-ur {
     font-family: 'Noto Sans Arabic', 'Noto Nastaliq Urdu', system-ui, sans-serif;
-    direction: rtl;
-    text-align: right;
 }
 
-body.lang-ur .urdu-nastaliq {
-    font-family: 'Noto Nastaliq Urdu', serif;
-    line-height: 1.9;
+.calligraphy-title {
+    font-family: 'Amiri', 'Noto Nastaliq Urdu', serif;
+    font-weight: 700;
+    letter-spacing: 0.5px;
 }
 
-/* Custom Scrollbar */
-::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
-}
-::-webkit-scrollbar-track {
-    background: #f1f5f9;
-}
-::-webkit-scrollbar-thumb {
-    background: #cbd5e1;
-    border-radius: 4px;
-}
-::-webkit-scrollbar-thumb:hover {
-    background: #94a3b8;
+/* Top 4 Buttons */
+.top-btn-green { background-color: #8bc34a; }
+.top-btn-green:hover { background-color: #7cb342; }
+.top-btn-blue { background-color: #03a9f4; }
+.top-btn-blue:hover { background-color: #039be5; }
+.top-btn-orange { background-color: #ff9800; }
+.top-btn-orange:hover { background-color: #f57c00; }
+.top-btn-red { background-color: #e53935; }
+.top-btn-red:hover { background-color: #d32f2f; }
+
+/* Department Cards matching screenshot */
+.dept-card {
+    background: #ffffff;
+    border: 1px solid #dce4ec;
+    border-radius: 12px;
+    padding: 24px 16px;
+    text-align: center;
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.02);
 }
 
-/* Badge and Pulse Animations */
-.badge-pulse-red {
-    animation: pulseRed 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+.dept-card:hover {
+    border-color: #4885a6;
+    box-shadow: 0 4px 12px rgba(72, 133, 166, 0.12);
+    transform: translateY(-2px);
 }
 
-@keyframes pulseRed {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.5; }
+.dept-card.active {
+    border-color: #4885a6;
+    box-shadow: 0 0 0 2px rgba(72, 133, 166, 0.2);
 }
 
-/* Pipeline Progress Indicators */
-.pipeline-step {
-    position: relative;
-    transition: all 0.3s ease;
+.dept-card-icon {
+    color: var(--theme-card-icon);
+    font-size: 32px;
+    line-height: 1;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.pipeline-step.active {
-    border-color: #3b82f6;
-    background-color: #eff6ff;
+.dept-card-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: #212529;
+    margin-bottom: 4px;
 }
 
-.pipeline-step.completed {
-    border-color: #10b981;
-    background-color: #ecfdf5;
+.dept-card-subtitle {
+    font-size: 11px;
+    color: #78909c;
+    font-weight: 500;
 }
 
-/* Print Specific Styles */
+/* Sidebar Menu Items */
+.sidebar-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 14px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #455a64;
+    border-radius: 6px;
+    transition: background 0.15s ease, color 0.15s ease;
+    cursor: pointer;
+    border-left: 3px solid transparent;
+}
+
+.sidebar-link:hover {
+    background-color: #f1f5f9;
+    color: #1e293b;
+}
+
+.sidebar-link.active {
+    color: #0288d1;
+    background-color: #f0f9ff;
+    border-left-color: #0288d1;
+}
+
+/* Tab Header */
+.dashboard-tab {
+    background: #ffffff;
+    border-top: 2px solid #4885a6;
+    border-left: 1px solid #dce4ec;
+    border-right: 1px solid #dce4ec;
+    border-bottom: 1px solid #ffffff;
+    padding: 8px 18px;
+    font-size: 13px;
+    font-weight: 700;
+    color: #37474f;
+    border-radius: 4px 4px 0 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Print Styles */
 @media print {
     body * {
         visibility: hidden;
