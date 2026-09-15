@@ -151,3 +151,125 @@ class DamageWastageRecord(Base):
     recorded_at = Column(DateTime, default=datetime.datetime.utcnow)
 
     work_order = relationship("WorkOrder", back_populates="damage_records")
+
+
+# ==================== HR (HUMAN RESOURCES) MODULE ====================
+
+class Employee(Base):
+    __tablename__ = "employees"
+
+    id = Column(Integer, primary_key=True, index=True, autoincrement=True)
+    emp_code = Column(String(50), unique=True, index=True, nullable=False) # e.g. EMP-001
+    full_name = Column(String(150), nullable=False) # e.g. محمد وسیم
+    father_name = Column(String(150), nullable=True)
+    cnic = Column(String(30), nullable=True)
+    phone = Column(String(30), nullable=True)
+    department = Column(String(100), nullable=False) # Printing, Binding, Warehouse, Store, Pre-Press, Accounts, Admin
+    designation = Column(String(100), nullable=False) # Offset Machine Master, Binding Specialist, etc.
+    salary_type = Column(String(30), default="MONTHLY") # MONTHLY, DAILY, PIECE_RATE
+    basic_salary = Column(Float, default=0.0)
+    joining_date = Column(DateTime, default=datetime.datetime.utcnow)
+    status = Column(String(30), default="ACTIVE") # ACTIVE, ON_LEAVE, RESIGNED, TERMINATED
+    address = Column(Text, nullable=True)
+    created_at = Column(DateTime, default=datetime.datetime.utcnow)
+
+    attendances = relationship("Attendance", back_populates="employee", cascade="all, delete-orphan")
+    payrolls = relationship("Payroll", back_populates="employee", cascade="all, delete-orphan")
+
+
+class Attendance(Base):
+    __tablename__ = "attendances"
+
+    id = Column(Integer, primary_key=True, index=True, autoincrement=True)
+    employee_id = Column(Integer, ForeignKey("employees.id"), nullable=False)
+    date = Column(String(20), nullable=False) # YYYY-MM-DD
+    status = Column(String(20), default="PRESENT") # PRESENT, ABSENT, LEAVE, HALF_DAY
+    check_in = Column(String(20), nullable=True)
+    check_out = Column(String(20), nullable=True)
+    overtime_hours = Column(Float, default=0.0)
+    notes = Column(Text, nullable=True)
+
+    employee = relationship("Employee", back_populates="attendances")
+
+
+class Payroll(Base):
+    __tablename__ = "payrolls"
+
+    id = Column(Integer, primary_key=True, index=True, autoincrement=True)
+    employee_id = Column(Integer, ForeignKey("employees.id"), nullable=False)
+    month_year = Column(String(30), nullable=False) # e.g. "2026-08"
+    basic_salary = Column(Float, default=0.0)
+    overtime_amount = Column(Float, default=0.0)
+    allowance = Column(Float, default=0.0)
+    deductions = Column(Float, default=0.0)
+    advance_deduction = Column(Float, default=0.0)
+    net_salary = Column(Float, default=0.0)
+    payment_status = Column(String(20), default="PENDING") # PENDING, PAID, PARTIAL
+    payment_date = Column(DateTime, nullable=True)
+    payment_method = Column(String(30), default="CASH") # CASH, BANK_TRANSFER, CHEQUE
+    created_at = Column(DateTime, default=datetime.datetime.utcnow)
+
+    employee = relationship("Employee", back_populates="payrolls")
+
+
+# ==================== FINANCE & CHART OF ACCOUNTS (COA) MODULE ====================
+
+class Account(Base):
+    __tablename__ = "accounts"
+
+    id = Column(Integer, primary_key=True, index=True, autoincrement=True)
+    account_code = Column(String(20), unique=True, index=True, nullable=False) # e.g. 1010, 2010, 4010
+    account_name_en = Column(String(150), nullable=False) # Cash in Hand
+    account_name_ur = Column(String(150), nullable=False) # نقدی کھاتہ (پیٹی کیش)
+    account_type = Column(String(30), nullable=False) # ASSET, LIABILITY, EQUITY, REVENUE, EXPENSE
+    subcategory = Column(String(100), nullable=True) # Current Assets, Cost of Production, Operating Expense
+    opening_balance = Column(Float, default=0.0)
+    current_balance = Column(Float, default=0.0)
+    is_active = Column(Integer, default=1)
+    created_at = Column(DateTime, default=datetime.datetime.utcnow)
+
+    entries = relationship("JournalEntry", back_populates="account")
+
+
+class JournalVoucher(Base):
+    __tablename__ = "journal_vouchers"
+
+    id = Column(Integer, primary_key=True, index=True, autoincrement=True)
+    voucher_no = Column(String(50), unique=True, index=True, nullable=False) # CPV-2026-0001, JV-2026-0001
+    voucher_type = Column(String(20), nullable=False) # CPV, CRV, BPV, BRV, JV
+    voucher_date = Column(DateTime, default=datetime.datetime.utcnow)
+    description = Column(Text, nullable=True)
+    total_amount = Column(Float, default=0.0)
+    created_by = Column(String(100), default="Admin")
+
+    entries = relationship("JournalEntry", back_populates="voucher", cascade="all, delete-orphan")
+
+
+class JournalEntry(Base):
+    __tablename__ = "journal_entries"
+
+    id = Column(Integer, primary_key=True, index=True, autoincrement=True)
+    voucher_id = Column(Integer, ForeignKey("journal_vouchers.id"), nullable=False)
+    account_id = Column(Integer, ForeignKey("accounts.id"), nullable=False)
+    debit = Column(Float, default=0.0)
+    credit = Column(Float, default=0.0)
+    narration = Column(String(255), nullable=True)
+
+    voucher = relationship("JournalVoucher", back_populates="entries")
+    account = relationship("Account", back_populates="entries")
+
+
+# ==================== USERS & PERMISSIONS MODULE ====================
+
+class UserAccount(Base):
+    __tablename__ = "users"
+
+    id = Column(Integer, primary_key=True, index=True, autoincrement=True)
+    username = Column(String(50), unique=True, index=True, nullable=False)
+    full_name = Column(String(150), nullable=False)
+    role = Column(String(50), default="CUSTOM") # ADMIN, STORE, FLOOR, WAREHOUSE, ACCOUNTS, HR, VIEWER, CUSTOM
+    password_hash = Column(String(255), default="1234")
+    permissions = Column(Text, nullable=False, default="[]") # JSON encoded list of module keys
+    is_active = Column(Integer, default=1)
+    created_at = Column(DateTime, default=datetime.datetime.utcnow)
+

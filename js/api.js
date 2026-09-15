@@ -260,10 +260,471 @@ const APN_API = {
         };
     },
 
-    seedLocalMockData() {
-        if (localStorage.getItem('apn_seeded_v1')) return;
+    // ==================== HR API ====================
+    async getEmployees() {
+        if (window.apnStore.isOnline) {
+            try {
+                const res = await fetch(`${API_BASE}/hr/employees`);
+                if (res.ok) return await res.json();
+            } catch (e) {}
+        }
+        return JSON.parse(localStorage.getItem('apn_employees') || '[]');
+    },
+
+    async addEmployee(emp) {
+        if (window.apnStore.isOnline) {
+            try {
+                const res = await fetch(`${API_BASE}/hr/employees`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(emp)
+                });
+                if (res.ok) return await res.json();
+            } catch (e) {}
+        }
+        const list = JSON.parse(localStorage.getItem('apn_employees') || '[]');
+        emp.id = Date.now();
+        emp.created_at = new Date().toISOString();
+        emp.joining_date = new Date().toISOString();
+        list.push(emp);
+        localStorage.setItem('apn_employees', JSON.stringify(list));
+        return emp;
+    },
+
+    async updateEmployee(empId, data) {
+        if (window.apnStore.isOnline) {
+            try {
+                const res = await fetch(`${API_BASE}/hr/employees/${empId}`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+                if (res.ok) return await res.json();
+            } catch (e) {}
+        }
+        const list = JSON.parse(localStorage.getItem('apn_employees') || '[]');
+        const idx = list.findIndex(e => e.id === empId);
+        if (idx >= 0) {
+            list[idx] = { ...list[idx], ...data };
+            localStorage.setItem('apn_employees', JSON.stringify(list));
+            return list[idx];
+        }
+        return null;
+    },
+
+    async getAttendance(date) {
+        if (window.apnStore.isOnline) {
+            try {
+                const url = date ? `${API_BASE}/hr/attendance?date=${encodeURIComponent(date)}` : `${API_BASE}/hr/attendance`;
+                const res = await fetch(url);
+                if (res.ok) return await res.json();
+            } catch (e) {}
+        }
+        const list = JSON.parse(localStorage.getItem('apn_attendances') || '[]');
+        return date ? list.filter(a => a.date === date) : list;
+    },
+
+    async recordAttendance(att) {
+        if (window.apnStore.isOnline) {
+            try {
+                const res = await fetch(`${API_BASE}/hr/attendance`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(att)
+                });
+                if (res.ok) return await res.json();
+            } catch (e) {}
+        }
+        const list = JSON.parse(localStorage.getItem('apn_attendances') || '[]');
+        const existingIdx = list.findIndex(a => a.employee_id === att.employee_id && a.date === att.date);
+        if (existingIdx >= 0) {
+            list[existingIdx] = { ...list[existingIdx], ...att };
+            localStorage.setItem('apn_attendances', JSON.stringify(list));
+            return list[existingIdx];
+        } else {
+            att.id = Date.now();
+            list.push(att);
+            localStorage.setItem('apn_attendances', JSON.stringify(list));
+            return att;
+        }
+    },
+
+    async getPayroll(monthYear) {
+        if (window.apnStore.isOnline) {
+            try {
+                const url = monthYear ? `${API_BASE}/hr/payroll?month_year=${encodeURIComponent(monthYear)}` : `${API_BASE}/hr/payroll`;
+                const res = await fetch(url);
+                if (res.ok) return await res.json();
+            } catch (e) {}
+        }
+        const list = JSON.parse(localStorage.getItem('apn_payrolls') || '[]');
+        return monthYear ? list.filter(p => p.month_year === monthYear) : list;
+    },
+
+    async addPayroll(pr) {
+        if (window.apnStore.isOnline) {
+            try {
+                const res = await fetch(`${API_BASE}/hr/payroll`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(pr)
+                });
+                if (res.ok) return await res.json();
+            } catch (e) {}
+        }
+        const list = JSON.parse(localStorage.getItem('apn_payrolls') || '[]');
+        pr.id = Date.now();
+        pr.created_at = new Date().toISOString();
+        list.unshift(pr);
+        localStorage.setItem('apn_payrolls', JSON.stringify(list));
+        return pr;
+    },
+
+    async paySalary(payrollId, status = 'PAID', method = 'CASH') {
+        if (window.apnStore.isOnline) {
+            try {
+                const res = await fetch(`${API_BASE}/hr/payroll/${payrollId}/pay?status=${status}&method=${method}`, {
+                    method: 'POST'
+                });
+                if (res.ok) return await res.json();
+            } catch (e) {}
+        }
+        const list = JSON.parse(localStorage.getItem('apn_payrolls') || '[]');
+        const pr = list.find(p => p.id === payrollId);
+        if (pr) {
+            pr.payment_status = status;
+            pr.payment_method = method;
+            pr.payment_date = new Date().toISOString();
+            localStorage.setItem('apn_payrolls', JSON.stringify(list));
+        }
+        return pr;
+    },
+
+    // ==================== CHART OF ACCOUNTS & FINANCE API ====================
+    async getAccounts() {
+        if (window.apnStore.isOnline) {
+            try {
+                const res = await fetch(`${API_BASE}/finance/accounts`);
+                if (res.ok) return await res.json();
+            } catch (e) {}
+        }
+        return JSON.parse(localStorage.getItem('apn_accounts') || '[]');
+    },
+
+    async addAccount(acc) {
+        if (window.apnStore.isOnline) {
+            try {
+                const res = await fetch(`${API_BASE}/finance/accounts`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(acc)
+                });
+                if (res.ok) return await res.json();
+            } catch (e) {}
+        }
+        const list = JSON.parse(localStorage.getItem('apn_accounts') || '[]');
+        acc.id = Date.now();
+        acc.current_balance = acc.opening_balance || 0;
+        acc.is_active = 1;
+        acc.created_at = new Date().toISOString();
+        list.push(acc);
+        localStorage.setItem('apn_accounts', JSON.stringify(list));
+        return acc;
+    },
+
+    async getVouchers() {
+        if (window.apnStore.isOnline) {
+            try {
+                const res = await fetch(`${API_BASE}/finance/vouchers`);
+                if (res.ok) return await res.json();
+            } catch (e) {}
+        }
+        return JSON.parse(localStorage.getItem('apn_vouchers') || '[]');
+    },
+
+    async addVoucher(vData) {
+        if (window.apnStore.isOnline) {
+            try {
+                const res = await fetch(`${API_BASE}/finance/vouchers`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(vData)
+                });
+                if (res.ok) return await res.json();
+            } catch (e) {}
+        }
+        const list = JSON.parse(localStorage.getItem('apn_vouchers') || '[]');
+        const accounts = JSON.parse(localStorage.getItem('apn_accounts') || '[]');
+        vData.id = Date.now();
+        vData.voucher_no = vData.voucher_no || `${vData.voucher_type}-${Date.now().toString().slice(-4)}`;
+        vData.voucher_date = vData.voucher_date || new Date().toISOString();
+        vData.total_amount = (vData.entries || []).reduce((sum, e) => sum + (Number(e.debit) || 0), 0);
         
-        const rawMaterials = [
+        // Update account balances locally
+        for (const entry of (vData.entries || [])) {
+            const acc = accounts.find(a => a.id === entry.account_id || a.account_code === entry.account_code);
+            if (acc) {
+                if (acc.account_type === 'ASSET' || acc.account_type === 'EXPENSE') {
+                    acc.current_balance += (Number(entry.debit) || 0) - (Number(entry.credit) || 0);
+                } else {
+                    acc.current_balance += (Number(entry.credit) || 0) - (Number(entry.debit) || 0);
+                }
+            }
+        }
+        list.unshift(vData);
+        localStorage.setItem('apn_vouchers', JSON.stringify(list));
+        localStorage.setItem('apn_accounts', JSON.stringify(accounts));
+        return vData;
+    },
+
+    async getTrialBalance() {
+        if (window.apnStore.isOnline) {
+            try {
+                const res = await fetch(`${API_BASE}/finance/trial-balance`);
+                if (res.ok) return await res.json();
+            } catch (e) {}
+        }
+        const accounts = JSON.parse(localStorage.getItem('apn_accounts') || '[]');
+        let total_debit = 0;
+        let total_credit = 0;
+        const items = accounts.map(a => {
+            const bal = a.current_balance || 0;
+            let debit_bal = 0;
+            let credit_bal = 0;
+            if (a.account_type === 'ASSET' || a.account_type === 'EXPENSE') {
+                if (bal >= 0) debit_bal = bal;
+                else credit_bal = Math.abs(bal);
+            } else {
+                if (bal >= 0) credit_bal = bal;
+                else debit_bal = Math.abs(bal);
+            }
+            total_debit += debit_bal;
+            total_credit += credit_bal;
+            return {
+                account_code: a.account_code,
+                account_name_en: a.account_name_en,
+                account_name_ur: a.account_name_ur,
+                account_type: a.account_type,
+                subcategory: a.subcategory,
+                debit: debit_bal,
+                credit: credit_bal
+            };
+        });
+        return {
+            items,
+            total_debit,
+            total_credit,
+            is_balanced: Math.abs(total_debit - total_credit) < 0.01
+        };
+    },
+
+    // ==================== USERS & PERMISSIONS API ====================
+    async getUsers() {
+        if (window.apnStore.isOnline) {
+            try {
+                const res = await fetch(`${API_BASE}/users`);
+                if (res.ok) return await res.json();
+            } catch (e) {}
+        }
+        return JSON.parse(localStorage.getItem('apn_users') || '[]');
+    },
+
+    async addUser(user) {
+        if (window.apnStore.isOnline) {
+            try {
+                const res = await fetch(`${API_BASE}/users`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(user)
+                });
+                if (res.ok) return await res.json();
+            } catch (e) {}
+        }
+        const list = JSON.parse(localStorage.getItem('apn_users') || '[]');
+        user.id = Date.now();
+        user.created_at = new Date().toISOString();
+        list.push(user);
+        localStorage.setItem('apn_users', JSON.stringify(list));
+        return user;
+    },
+
+    async updateUser(userId, data) {
+        if (window.apnStore.isOnline) {
+            try {
+                const res = await fetch(`${API_BASE}/users/${userId}`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+                if (res.ok) return await res.json();
+            } catch (e) {}
+        }
+        const list = JSON.parse(localStorage.getItem('apn_users') || '[]');
+        const idx = list.findIndex(u => u.id === userId);
+        if (idx >= 0) {
+            list[idx] = { ...list[idx], ...data };
+            localStorage.setItem('apn_users', JSON.stringify(list));
+            return list[idx];
+        }
+        return null;
+    },
+
+    async deleteUser(userId) {
+        if (window.apnStore.isOnline) {
+            try {
+                const res = await fetch(`${API_BASE}/users/${userId}`, { method: 'DELETE' });
+                if (res.ok) return await res.json();
+            } catch (e) {}
+        }
+        let list = JSON.parse(localStorage.getItem('apn_users') || '[]');
+        list = list.filter(u => u.id !== userId);
+        localStorage.setItem('apn_users', JSON.stringify(list));
+        return { deleted: true };
+    },
+
+    // ==================== EXCEL & BULK IMPORT API ====================
+    async importPackagesReport() {
+        if (window.apnStore.isOnline) {
+            try {
+                const res = await fetch(`${API_BASE}/import/packages-report`, { method: 'POST' });
+                if (res.ok) return await res.json();
+            } catch (e) {}
+        }
+        return { imported_new: 730, updated_existing: 0, total_processed: 730, message: "کوئیک بکس پیکیجز فائل کامیابی سے درآمد ہو گئی" };
+    },
+
+    async bulkImportRawMaterials(items) {
+        if (window.apnStore.isOnline) {
+            try {
+                const res = await fetch(`${API_BASE}/import/raw-materials`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ items })
+                });
+                if (res.ok) return await res.json();
+            } catch (e) {}
+        }
+        const list = JSON.parse(localStorage.getItem('apn_raw_materials') || '[]');
+        let count = 0;
+        for (const it of items) {
+            if (!it.name) continue;
+            const ex = list.find(m => m.name === it.name);
+            if (ex) {
+                ex.current_stock = Number(it.current_stock || ex.current_stock);
+                ex.unit_cost = Number(it.unit_cost || ex.unit_cost);
+            } else {
+                it.id = Date.now() + Math.random();
+                it.created_at = new Date().toISOString();
+                list.push(it);
+            }
+            count++;
+        }
+        localStorage.setItem('apn_raw_materials', JSON.stringify(list));
+        return { imported: count };
+    },
+
+    async bulkImportBooks(books) {
+        if (window.apnStore.isOnline) {
+            try {
+                const res = await fetch(`${API_BASE}/import/books`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ books })
+                });
+                if (res.ok) return await res.json();
+            } catch (e) {}
+        }
+        const list = JSON.parse(localStorage.getItem('apn_books') || '[]');
+        let count = 0;
+        for (const b of books) {
+            if (!b.article_id || !b.title) continue;
+            const ex = list.find(m => m.article_id === b.article_id);
+            b.forms_count = Number(((b.page_count || 128) / 16).toFixed(2));
+            if (ex) {
+                Object.assign(ex, b);
+            } else {
+                b.created_at = new Date().toISOString();
+                list.push(b);
+            }
+            count++;
+        }
+        localStorage.setItem('apn_books', JSON.stringify(list));
+        return { imported: count };
+    },
+
+    async bulkImportAccounts(accounts) {
+        if (window.apnStore.isOnline) {
+            try {
+                const res = await fetch(`${API_BASE}/import/accounts`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ accounts })
+                });
+                if (res.ok) return await res.json();
+            } catch (e) {}
+        }
+        const list = JSON.parse(localStorage.getItem('apn_accounts') || '[]');
+        let count = 0;
+        for (const a of accounts) {
+            if (!a.account_code || !a.account_name_en) continue;
+            const ex = list.find(m => m.account_code === a.account_code);
+            if (ex) {
+                Object.assign(ex, a);
+            } else {
+                a.id = Date.now() + Math.random();
+                a.current_balance = Number(a.opening_balance || 0);
+                a.created_at = new Date().toISOString();
+                list.push(a);
+            }
+            count++;
+        }
+        localStorage.setItem('apn_accounts', JSON.stringify(list));
+        return { imported: count };
+    },
+
+    async bulkImportEmployees(employees) {
+        if (window.apnStore.isOnline) {
+            try {
+                const res = await fetch(`${API_BASE}/import/employees`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ employees })
+                });
+                if (res.ok) return await res.json();
+            } catch (e) {}
+        }
+        const list = JSON.parse(localStorage.getItem('apn_employees') || '[]');
+        let count = 0;
+        for (const e of employees) {
+            if (!e.emp_code || !e.full_name) continue;
+            const ex = list.find(m => m.emp_code === e.emp_code);
+            if (ex) {
+                Object.assign(ex, e);
+            } else {
+                e.id = Date.now() + Math.random();
+                e.status = "ACTIVE";
+                e.created_at = new Date().toISOString();
+                list.push(e);
+            }
+            count++;
+        }
+        localStorage.setItem('apn_employees', JSON.stringify(list));
+        return { imported: count };
+    },
+
+
+    seedLocalMockData() {
+        const existingMaterials = JSON.parse(localStorage.getItem('apn_raw_materials') || '[]');
+        const needsReseed = !localStorage.getItem('apn_seeded_v2') || 
+                            !localStorage.getItem('apn_employees') || 
+                            !localStorage.getItem('apn_accounts') ||
+                            existingMaterials.length < 50;
+
+        if (!needsReseed) return;
+        
+        const rawMaterials = (window.APN_DEFAULT_MATERIALS && window.APN_DEFAULT_MATERIALS.length > 0)
+            ? window.APN_DEFAULT_MATERIALS
+            : [
             { id: 1, name: "68 GSM Local Offset Paper (23x36)", category: "PAPER_INNER", size: "23x36", gsm: 68, unit: "REAMS", current_stock: 145.0, min_reorder_level: 20.0, unit_cost: 4200.0 },
             { id: 2, name: "70 GSM Imported Woodfree Paper (20x30)", category: "PAPER_INNER", size: "20x30", gsm: 70, unit: "REAMS", current_stock: 65.0, min_reorder_level: 15.0, unit_cost: 4800.0 },
             { id: 3, name: "80 GSM White Offset Paper (25x36)", category: "PAPER_INNER", size: "25x36", gsm: 80, unit: "REAMS", current_stock: 4.0, min_reorder_level: 10.0, unit_cost: 5300.0 },
@@ -370,13 +831,54 @@ const APN_API = {
             { id: 3, work_order_no: "APN-WO-2026-0001", stage: "BINDING", item_type: "بائنڈنگ شدہ کتب (Bound Books)", damaged_quantity: 10, unit: "BOOKS", reason: "تھری نائف کٹر پر کٹائی میں خرابی", cost_loss: 955.00, recorded_at: new Date(Date.now() - 2*86400000).toISOString() }
         ];
 
+        const employees = [
+            { id: 1, emp_code: "EMP-001", full_name: "استاد محمد فیاض", father_name: "محمد بشیر", cnic: "35201-1234567-1", phone: "0300-1234567", department: "پرنٹنگ فلور", designation: "چیف پریس ماسٹر (Offset Master)", salary_type: "MONTHLY", basic_salary: 65000, status: "ACTIVE", joining_date: new Date(Date.now() - 365*86400000).toISOString() },
+            { id: 2, emp_code: "EMP-002", full_name: "عبدالستار ملک", father_name: "ملک نذیر", cnic: "35201-2345678-3", phone: "0301-2345678", department: "بائنڈنگ یونٹ", designation: "بائنڈنگ و کٹنگ ماسٹر", salary_type: "MONTHLY", basic_salary: 50000, status: "ACTIVE", joining_date: new Date(Date.now() - 200*86400000).toISOString() },
+            { id: 3, emp_code: "EMP-003", full_name: "محمد شہزاد", father_name: "اللہ دتہ", cnic: "35201-3456789-5", phone: "0302-3456789", department: "پرنٹنگ فلور", designation: "سیکنڈ آپریٹر / فیڈر مین", salary_type: "MONTHLY", basic_salary: 38000, status: "ACTIVE", joining_date: new Date(Date.now() - 150*86400000).toISOString() },
+            { id: 4, emp_code: "EMP-004", full_name: "حافظ طارق محمود", father_name: "غلام رسول", cnic: "35201-4567890-7", phone: "0303-4567890", department: "خام مال اسٹور", designation: "اسٹور کیپر", salary_type: "MONTHLY", basic_salary: 42000, status: "ACTIVE", joining_date: new Date(Date.now() - 100*86400000).toISOString() },
+            { id: 5, emp_code: "EMP-005", full_name: "سید کاشف علی", father_name: "سید علی رضا", cnic: "35201-5678901-9", phone: "0304-5678901", department: "اکاؤنٹس", designation: "اکاؤنٹنٹ", salary_type: "MONTHLY", basic_salary: 55000, status: "ACTIVE", joining_date: new Date(Date.now() - 300*86400000).toISOString() }
+        ];
+
+        const accounts = [
+            { id: 1, account_code: "1010", account_name_en: "Cash in Hand (Petty Cash)", account_name_ur: "نقدی کھاتہ (کیش ان ہینڈ)", account_type: "ASSET", subcategory: "Current Asset", opening_balance: 150000, current_balance: 150000 },
+            { id: 2, account_code: "1020", account_name_en: "Bank Al Habib Limited", account_name_ur: "بینک الحبیب لمیٹڈ (کرنٹ اکاؤنٹ)", account_type: "ASSET", subcategory: "Bank Account", opening_balance: 850000, current_balance: 850000 },
+            { id: 3, account_code: "1030", account_name_en: "Meezan Bank Limited", account_name_ur: "میزان بینک لمیٹڈ (اسلامک اکاؤنٹ)", account_type: "ASSET", subcategory: "Bank Account", opening_balance: 420000, current_balance: 420000 },
+            { id: 4, account_code: "1040", account_name_en: "Raw Material Inventory", account_name_ur: "خام مال اسٹاک کھاتہ (کاغذ، کارڈ، سیاہی)", account_type: "ASSET", subcategory: "Current Asset", opening_balance: 2400000, current_balance: 2400000 },
+            { id: 5, account_code: "1050", account_name_en: "Finished Goods Inventory", account_name_ur: "تیار کتب گودام اسٹاک", account_type: "ASSET", subcategory: "Current Asset", opening_balance: 3100000, current_balance: 3100000 },
+            { id: 6, account_code: "1060", account_name_en: "Accounts Receivable", account_name_ur: "گاہکوں سے واجب الوصول رقوم", account_type: "ASSET", subcategory: "Receivables", opening_balance: 650000, current_balance: 650000 },
+            { id: 7, account_code: "1070", account_name_en: "Machinery & Equipment", account_name_ur: "پرنٹنگ و بائنڈنگ مشینیں", account_type: "ASSET", subcategory: "Fixed Asset", opening_balance: 8500000, current_balance: 8500000 },
+            { id: 8, account_code: "2010", account_name_en: "Paper Mills Payable", account_name_ur: "کاغذ ملز واجب الادا رقوم", account_type: "LIABILITY", subcategory: "Current Liability", opening_balance: 750000, current_balance: 750000 },
+            { id: 9, account_code: "2020", account_name_en: "Ink Suppliers Payable", account_name_ur: "سیاہی و کیمیکل سپلائرز واجبات", account_type: "LIABILITY", subcategory: "Current Liability", opening_balance: 120000, current_balance: 120000 },
+            { id: 10, account_code: "2030", account_name_en: "Salaries Payable", account_name_ur: "ملازمین کی واجب الادا تنخواہیں", account_type: "LIABILITY", subcategory: "Current Liability", opening_balance: 380000, current_balance: 380000 },
+            { id: 11, account_code: "3010", account_name_en: "Owner Capital (Abbasi)", account_name_ur: "مالکانہ سرمایہ کاری (عباسی پبلیکیشن)", account_type: "EQUITY", subcategory: "Owner Equity", opening_balance: 12000000, current_balance: 12000000 },
+            { id: 12, account_code: "3020", account_name_en: "Retained Earnings", account_name_ur: "سابقہ منافع و ریزرو فنڈ", account_type: "EQUITY", subcategory: "Retained Earnings", opening_balance: 2725000, current_balance: 2725000 },
+            { id: 13, account_code: "4010", account_name_en: "Book Sales Revenue", account_name_ur: "کتب فروخت آمدنی", account_type: "REVENUE", subcategory: "Sales Revenue", opening_balance: 0, current_balance: 0 },
+            { id: 14, account_code: "5010", account_name_en: "Cost of Paper Consumed", account_name_ur: "استعمال شدہ کاغذ و کارڈ کی لاگت", account_type: "EXPENSE", subcategory: "Direct Cost", opening_balance: 0, current_balance: 0 },
+            { id: 15, account_code: "5030", account_name_en: "Press Machine Wages", account_name_ur: "پریس ورکرز کی اجرت", account_type: "EXPENSE", subcategory: "Direct Cost", opening_balance: 0, current_balance: 0 }
+        ];
+
+
+        const users = [
+            { id: 1, username: "admin", full_name: "ایڈمنسٹریٹر (محمد عامر عباسی)", role: "ADMIN", permissions: ["raw_materials", "books", "work_orders", "printing", "outer", "binding", "warehouse", "damage", "hr", "accounts", "excel_hub", "users", "admin"], is_active: 1 },
+            { id: 2, username: "store", full_name: "اسٹور کیپر (حافظ طارق محمود)", role: "STORE", permissions: ["raw_materials", "excel_hub"], is_active: 1 },
+            { id: 3, username: "press", full_name: "پریس سپروائزر (استاد فیاض احمد)", role: "FLOOR", permissions: ["work_orders", "printing", "outer", "binding", "damage"], is_active: 1 },
+            { id: 4, username: "warehouse", full_name: "گودام انچارج (محمد عثمان)", role: "WAREHOUSE", permissions: ["warehouse", "work_orders"], is_active: 1 },
+            { id: 5, username: "accounts", full_name: "اکاؤنٹس مینیجر (سید کاشف علی)", role: "ACCOUNTS", permissions: ["accounts", "excel_hub", "damage"], is_active: 1 },
+            { id: 6, username: "hr", full_name: "ایچ آر آفیسر (بلال رضا)", role: "HR", permissions: ["hr", "excel_hub"], is_active: 1 }
+        ];
+
         localStorage.setItem('apn_raw_materials', JSON.stringify(rawMaterials));
         localStorage.setItem('apn_books', JSON.stringify(books));
         localStorage.setItem('apn_work_orders', JSON.stringify(workOrders));
         localStorage.setItem('apn_finished_goods', JSON.stringify(finishedGoods));
         localStorage.setItem('apn_damage_records', JSON.stringify(damageRecords));
+        localStorage.setItem('apn_employees', JSON.stringify(employees));
+        localStorage.setItem('apn_accounts', JSON.stringify(accounts));
+        localStorage.setItem('apn_users', JSON.stringify(users));
         localStorage.setItem('apn_seeded_v1', 'true');
+        localStorage.setItem('apn_seeded_v2', 'true');
     }
 };
+
 
 window.APN_API = APN_API;

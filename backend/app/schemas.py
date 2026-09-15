@@ -145,3 +145,149 @@ class DamageWastageOut(DamageWastageCreate):
     recorded_at: datetime
     class Config:
         from_attributes = True
+
+# ==================== HR SCHEMAS ====================
+
+class EmployeeBase(BaseModel):
+    emp_code: str
+    full_name: str
+    father_name: Optional[str] = None
+    cnic: Optional[str] = None
+    phone: Optional[str] = None
+    department: str
+    designation: str
+    salary_type: str = "MONTHLY"
+    basic_salary: float = 0.0
+    status: str = "ACTIVE"
+    address: Optional[str] = None
+
+class EmployeeCreate(EmployeeBase):
+    pass
+
+class EmployeeOut(EmployeeBase):
+    id: int
+    joining_date: datetime
+    created_at: datetime
+    class Config:
+        from_attributes = True
+
+class AttendanceCreate(BaseModel):
+    employee_id: int
+    date: str
+    status: str = "PRESENT"
+    check_in: Optional[str] = None
+    check_out: Optional[str] = None
+    overtime_hours: float = 0.0
+    notes: Optional[str] = None
+
+class AttendanceOut(AttendanceCreate):
+    id: int
+    employee_name: Optional[str] = None
+    class Config:
+        from_attributes = True
+
+class PayrollCreate(BaseModel):
+    employee_id: int
+    month_year: str
+    basic_salary: float
+    overtime_amount: float = 0.0
+    allowance: float = 0.0
+    deductions: float = 0.0
+    advance_deduction: float = 0.0
+    net_salary: float
+    payment_status: str = "PENDING"
+    payment_method: str = "CASH"
+
+class PayrollOut(PayrollCreate):
+    id: int
+    employee_name: Optional[str] = None
+    emp_code: Optional[str] = None
+    designation: Optional[str] = None
+    payment_date: Optional[datetime] = None
+    created_at: datetime
+    class Config:
+        from_attributes = True
+
+# ==================== CHART OF ACCOUNTS & FINANCE SCHEMAS ====================
+
+class AccountBase(BaseModel):
+    account_code: str
+    account_name_en: str
+    account_name_ur: str
+    account_type: str # ASSET, LIABILITY, EQUITY, REVENUE, EXPENSE
+    subcategory: Optional[str] = None
+    opening_balance: float = 0.0
+
+class AccountCreate(AccountBase):
+    pass
+
+class AccountOut(AccountBase):
+    id: int
+    current_balance: float
+    is_active: int
+    created_at: datetime
+    class Config:
+        from_attributes = True
+
+class JournalEntryCreate(BaseModel):
+    account_id: int
+    debit: float = 0.0
+    credit: float = 0.0
+    narration: Optional[str] = None
+
+class JournalEntryOut(JournalEntryCreate):
+    id: int
+    account_code: Optional[str] = None
+    account_name_ur: Optional[str] = None
+    class Config:
+        from_attributes = True
+
+class JournalVoucherCreate(BaseModel):
+    voucher_no: Optional[str] = None
+    voucher_type: str # CPV, CRV, BPV, BRV, JV
+    voucher_date: Optional[datetime] = None
+    description: Optional[str] = None
+    created_by: Optional[str] = "Admin"
+    entries: List[JournalEntryCreate]
+
+class JournalVoucherOut(BaseModel):
+    id: int
+    voucher_no: str
+    voucher_type: str
+    voucher_date: datetime
+    description: Optional[str] = None
+    total_amount: float
+    created_by: str
+    entries: List[JournalEntryOut] = []
+    class Config:
+        from_attributes = True
+
+# ==================== USERS & PERMISSIONS SCHEMAS ====================
+
+class UserBase(BaseModel):
+    username: str
+    full_name: str
+    role: str = "CUSTOM"
+    permissions: List[str] = []
+    is_active: int = 1
+
+class UserCreate(UserBase):
+    password: str = "1234"
+
+class UserUpdate(BaseModel):
+    full_name: Optional[str] = None
+    role: Optional[str] = None
+    permissions: Optional[List[str]] = None
+    password: Optional[str] = None
+    is_active: Optional[int] = None
+
+class UserOut(UserBase):
+    id: int
+    created_at: datetime
+    class Config:
+        from_attributes = True
+
+class UserLogin(BaseModel):
+    username: str
+    password: str
+

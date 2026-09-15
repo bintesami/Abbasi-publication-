@@ -30,6 +30,18 @@ const APN_ICONS = {
     // 9. Admin & Reports: Analytical Trends & Control Hub
     admin: `<svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/><circle cx="19" cy="9" r="2" fill="currentColor"/></svg>`,
 
+    // 10. HR & Payroll
+    hr: `<svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>`,
+
+    // 11. Chart of Accounts & Finance
+    accounts: `<svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/><line x1="12" x2="12" y1="15" y2="15"/><line x1="8" x2="8" y1="15" y2="15"/><line x1="16" x2="16" y1="15" y2="15"/></svg>`,
+
+    // 12. Excel Bulk Hub
+    excel_hub: `<svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><path d="m8 13 4 4"/><path d="m12 13-4 4"/></svg>`,
+
+    // 13. Users & Limitations
+    users: `<svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>`,
+
     // Sidebar Small Icons (w-4 h-4)
     nav_dashboard: `<svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></svg>`,
     nav_raw_materials: `<svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg>`,
@@ -40,7 +52,12 @@ const APN_ICONS = {
     nav_binding: `<svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="3"/><path d="M8.12 8.12 12 12"/><path d="M20 4 8.12 15.88"/><circle cx="6" cy="18" r="3"/></svg>`,
     nav_warehouse: `<svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21V9.5a1.5 1.5 0 0 1 .65-1.24l7.5-5a1.5 1.5 0 0 1 1.7 0l7.5 5A1.5 1.5 0 0 1 21 9.5V21"/><path d="M3 21h18"/></svg>`,
     nav_damage: `<svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg>`,
+    nav_hr: `<svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/></svg>`,
+    nav_accounts: `<svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>`,
+    nav_excel_hub: `<svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><path d="m8 13 4 4"/><path d="m12 13-4 4"/></svg>`,
+    nav_users: `<svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>`,
     nav_admin: `<svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>`,
+
 
     // Top 4 Color Action Buttons
     top_chart: `<svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg>`,
@@ -69,7 +86,12 @@ async function refreshData() {
     window.apnStore.finishedGoods = await APN_API.getFinishedGoods();
     window.apnStore.damageRecords = await APN_API.getDamageRecords();
     window.apnStore.dashboardMetrics = await APN_API.getDashboardMetrics();
+    window.apnStore.employees = await APN_API.getEmployees();
+    window.apnStore.accounts = await APN_API.getAccounts();
+    window.apnStore.users = await APN_API.getUsers();
+    window.apnStore.vouchers = await APN_API.getVouchers();
 }
+
 
 function switchTab(tabId) {
     window.apnStore.activeTab = tabId;
@@ -158,14 +180,16 @@ function renderApp() {
                     <span>${s.isOnline ? s.t('backend_connected') : s.t('backend_offline')}</span>
                 </div>
 
-                <!-- User Profile Avatar with dropdown arrow -->
-                <div class="flex items-center gap-1.5 cursor-pointer pl-1">
-                    <div class="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-[#1b3240] border-2 border-white/40 flex items-center justify-center text-white text-xs font-bold shadow-inner">
-                        <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path>
-                        </svg>
+                <!-- User Profile Switcher Trigger -->
+                <div onclick="openUserSwitcherModal()" class="flex items-center gap-1.5 cursor-pointer pl-1 bg-[#3a6b86] hover:bg-[#2d566e] px-2.5 py-1 rounded-lg transition border border-white/20 shadow-xs" title="${isUrdu ? 'تبدیل صارف / سوئچ یوزر' : 'Switch User'}">
+                    <div class="w-6 h-6 rounded-full bg-[#1b3240] border border-white/40 flex items-center justify-center text-white text-[10px] font-bold">
+                        ${(s.currentUser?.username || 'U')[0].toUpperCase()}
                     </div>
-                    <span class="text-white/80 text-[10px] hidden sm:inline">▼</span>
+                    <div class="hidden sm:flex flex-col text-left leading-tight">
+                        <span class="text-white text-[11px] font-bold truncate max-w-[120px]">${s.currentUser?.full_name || 'Admin'}</span>
+                        <span class="text-blue-200 text-[9px] uppercase font-semibold">${s.currentUser?.role || 'ADMIN'}</span>
+                    </div>
+                    <span class="text-white/80 text-[10px]">▼</span>
                 </div>
             </div>
         </header>
@@ -202,20 +226,24 @@ function renderApp() {
                 <!-- Navigation List -->
                 <nav class="p-2 space-y-1">
                     ${renderSidebarLink('dashboard', 'nav_dashboard', s.t('nav_dashboard'), false)}
-                    ${renderSidebarLink('raw_materials', 'nav_raw_materials', s.t('nav_raw_materials'), true)}
-                    ${renderSidebarLink('books', 'nav_books', s.t('nav_books'), true)}
-                    ${renderSidebarLink('work_orders', 'nav_work_orders', s.t('nav_work_orders'), true)}
-                    ${renderSidebarLink('printing', 'nav_printing', s.t('nav_printing'), true)}
-                    ${renderSidebarLink('outer', 'nav_outer', s.t('nav_outer'), true)}
-                    ${renderSidebarLink('binding', 'nav_binding', s.t('nav_binding'), true)}
-                    ${renderSidebarLink('warehouse', 'nav_warehouse', s.t('nav_warehouse'), true)}
-                    ${renderSidebarLink('damage', 'nav_damage', s.t('nav_damage'), true)}
-                    ${renderSidebarLink('admin', 'nav_admin', s.t('nav_reports'), false)}
+                    ${s.hasPermission('raw_materials') ? renderSidebarLink('raw_materials', 'nav_raw_materials', s.t('nav_raw_materials'), true) : ''}
+                    ${s.hasPermission('books') ? renderSidebarLink('books', 'nav_books', s.t('nav_books'), true) : ''}
+                    ${s.hasPermission('work_orders') ? renderSidebarLink('work_orders', 'nav_work_orders', s.t('nav_work_orders'), true) : ''}
+                    ${s.hasPermission('printing') ? renderSidebarLink('printing', 'nav_printing', s.t('nav_printing'), true) : ''}
+                    ${s.hasPermission('outer') ? renderSidebarLink('outer', 'nav_outer', s.t('nav_outer'), true) : ''}
+                    ${s.hasPermission('binding') ? renderSidebarLink('binding', 'nav_binding', s.t('nav_binding'), true) : ''}
+                    ${s.hasPermission('warehouse') ? renderSidebarLink('warehouse', 'nav_warehouse', s.t('nav_warehouse'), true) : ''}
+                    ${s.hasPermission('damage') ? renderSidebarLink('damage', 'nav_damage', s.t('nav_damage'), true) : ''}
+                    ${s.hasPermission('hr') ? renderSidebarLink('hr', 'nav_hr', s.t('nav_hr'), true) : ''}
+                    ${s.hasPermission('accounts') ? renderSidebarLink('accounts', 'nav_accounts', s.t('nav_accounts'), true) : ''}
+                    ${s.hasPermission('excel_hub') ? renderSidebarLink('excel_hub', 'nav_excel_hub', s.t('nav_excel_hub'), true) : ''}
+                    ${s.hasPermission('users') ? renderSidebarLink('users', 'nav_users', s.t('nav_users'), true) : ''}
+                    ${s.hasPermission('admin') ? renderSidebarLink('admin', 'nav_admin', s.t('nav_reports'), false) : ''}
                 </nav>
             </div>
             
             <div class="p-3 border-t border-slate-100 text-center text-[11px] text-slate-400">
-                APN ERP v1.0 • Mobile Mode
+                APN ERP v1.0 • User: ${s.currentUser?.username || 'Admin'}
             </div>
         </aside>
 
@@ -243,17 +271,22 @@ function renderApp() {
                     <!-- Sidebar Navigation List -->
                     <nav class="p-2 space-y-1">
                         ${renderSidebarLink('dashboard', 'nav_dashboard', s.t('nav_dashboard'), false)}
-                        ${renderSidebarLink('raw_materials', 'nav_raw_materials', s.t('nav_raw_materials'), true)}
-                        ${renderSidebarLink('books', 'nav_books', s.t('nav_books'), true)}
-                        ${renderSidebarLink('work_orders', 'nav_work_orders', s.t('nav_work_orders'), true)}
-                        ${renderSidebarLink('printing', 'nav_printing', s.t('nav_printing'), true)}
-                        ${renderSidebarLink('outer', 'nav_outer', s.t('nav_outer'), true)}
-                        ${renderSidebarLink('binding', 'nav_binding', s.t('nav_binding'), true)}
-                        ${renderSidebarLink('warehouse', 'nav_warehouse', s.t('nav_warehouse'), true)}
-                        ${renderSidebarLink('damage', 'nav_damage', s.t('nav_damage'), true)}
-                        ${renderSidebarLink('admin', 'nav_admin', s.t('nav_reports'), false)}
+                        ${s.hasPermission('raw_materials') ? renderSidebarLink('raw_materials', 'nav_raw_materials', s.t('nav_raw_materials'), true) : ''}
+                        ${s.hasPermission('books') ? renderSidebarLink('books', 'nav_books', s.t('nav_books'), true) : ''}
+                        ${s.hasPermission('work_orders') ? renderSidebarLink('work_orders', 'nav_work_orders', s.t('nav_work_orders'), true) : ''}
+                        ${s.hasPermission('printing') ? renderSidebarLink('printing', 'nav_printing', s.t('nav_printing'), true) : ''}
+                        ${s.hasPermission('outer') ? renderSidebarLink('outer', 'nav_outer', s.t('nav_outer'), true) : ''}
+                        ${s.hasPermission('binding') ? renderSidebarLink('binding', 'nav_binding', s.t('nav_binding'), true) : ''}
+                        ${s.hasPermission('warehouse') ? renderSidebarLink('warehouse', 'nav_warehouse', s.t('nav_warehouse'), true) : ''}
+                        ${s.hasPermission('damage') ? renderSidebarLink('damage', 'nav_damage', s.t('nav_damage'), true) : ''}
+                        ${s.hasPermission('hr') ? renderSidebarLink('hr', 'nav_hr', s.t('nav_hr'), true) : ''}
+                        ${s.hasPermission('accounts') ? renderSidebarLink('accounts', 'nav_accounts', s.t('nav_accounts'), true) : ''}
+                        ${s.hasPermission('excel_hub') ? renderSidebarLink('excel_hub', 'nav_excel_hub', s.t('nav_excel_hub'), true) : ''}
+                        ${s.hasPermission('users') ? renderSidebarLink('users', 'nav_users', s.t('nav_users'), true) : ''}
+                        ${s.hasPermission('admin') ? renderSidebarLink('admin', 'nav_admin', s.t('nav_reports'), false) : ''}
                     </nav>
                 </div>
+
 
                 <!-- Bottom Collapse Arrow Button -->
                 <div class="p-2 border-t border-slate-200 text-center">
@@ -317,10 +350,15 @@ function getTabTitle(tabId) {
         case 'binding': return s.t('nav_binding');
         case 'warehouse': return s.t('nav_warehouse');
         case 'damage': return s.t('nav_damage');
+        case 'hr': return s.t('nav_hr');
+        case 'accounts': return s.t('nav_accounts');
+        case 'excel_hub': return s.t('nav_excel_hub');
+        case 'users': return s.t('nav_users');
         case 'admin': return s.t('nav_reports');
         default: return s.t('nav_dashboard');
     }
 }
+
 
 // ==================== DASHBOARD DEPARTMENT CARDS GRID ====================
 
@@ -411,6 +449,46 @@ function renderDepartmentGrid() {
             count: `${m.total_damage_items || 0} ${isUrdu ? 'ویسٹیج' : 'Loss'}` 
         },
         { 
+            id: 'hr', 
+            icon: APN_ICONS.hr, 
+            accent: '#0891b2',
+            wrapperClass: 'bg-gradient-to-b from-cyan-50 to-cyan-100/70 text-cyan-600 border border-cyan-200/80',
+            badgeClass: 'bg-cyan-50 text-cyan-700 border border-cyan-200/70',
+            title: s.t('dept_hr_title'), 
+            sub: s.t('dept_hr_sub'), 
+            count: `${(s.employees || []).length} ${isUrdu ? 'ملازمین' : 'Staff'}` 
+        },
+        { 
+            id: 'accounts', 
+            icon: APN_ICONS.accounts, 
+            accent: '#059669',
+            wrapperClass: 'bg-gradient-to-b from-emerald-50 to-emerald-100/70 text-emerald-600 border border-emerald-200/80',
+            badgeClass: 'bg-emerald-50 text-emerald-700 border border-emerald-200/70',
+            title: s.t('dept_accounts_title'), 
+            sub: s.t('dept_accounts_sub'), 
+            count: `${(s.accounts || []).length} ${isUrdu ? 'کھاتہ جات' : 'Accounts'}` 
+        },
+        { 
+            id: 'excel_hub', 
+            icon: APN_ICONS.excel_hub, 
+            accent: '#15803d',
+            wrapperClass: 'bg-gradient-to-b from-green-50 to-green-100/70 text-green-700 border border-green-200/80',
+            badgeClass: 'bg-green-50 text-green-700 border border-green-200/70',
+            title: s.t('dept_excel_title'), 
+            sub: s.t('dept_excel_sub'), 
+            count: isUrdu ? 'اپلوڈ سینٹر' : 'Upload Hub' 
+        },
+        { 
+            id: 'users', 
+            icon: APN_ICONS.users, 
+            accent: '#6366f1',
+            wrapperClass: 'bg-gradient-to-b from-indigo-50 to-indigo-100/70 text-indigo-600 border border-indigo-200/80',
+            badgeClass: 'bg-indigo-50 text-indigo-700 border border-indigo-200/70',
+            title: s.t('dept_users_title'), 
+            sub: s.t('dept_users_sub'), 
+            count: `${(s.users || []).length} ${isUrdu ? 'صارفین' : 'Users'}` 
+        },
+        { 
             id: 'admin', 
             icon: APN_ICONS.admin, 
             accent: '#475569',
@@ -466,9 +544,9 @@ function renderDepartmentGrid() {
             </div>
         </div>
 
-        <!-- 9 Department Cards Grid (Clean Responsive Layout) -->
-        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2.5 sm:gap-4 mb-6 sm:mb-8">
-            ${departments.map(d => `
+        <!-- Department Cards Grid (Filtered by Active User Permissions) -->
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2.5 sm:gap-4 mb-6 sm:mb-8">
+            ${departments.filter(d => s.hasPermission(d.id)).map(d => `
                 <div onclick="switchTab('${d.id}')" class="dept-card group text-center" style="--card-accent: ${d.accent};">
                     <div class="dept-card-icon-wrapper ${d.wrapperClass}">
                         ${d.icon}
@@ -482,6 +560,7 @@ function renderDepartmentGrid() {
                 </div>
             `).join('')}
         </div>
+
 
         <!-- Active Production Jobs Tracker -->
         <div class="bg-white rounded-xl border border-slate-200 p-4 sm:p-5 shadow-xs mb-6">
@@ -564,6 +643,10 @@ function renderDepartmentGrid() {
 // ==================== DEPARTMENT DETAILED VIEWS ====================
 
 function renderDepartmentDetails(tabId) {
+    const s = window.apnStore;
+    if (tabId !== 'dashboard' && !s.hasPermission(tabId)) {
+        return renderAccessDenied(tabId);
+    }
     switch (tabId) {
         case 'raw_materials': return renderRawMaterials();
         case 'books': return renderBooks();
@@ -573,10 +656,15 @@ function renderDepartmentDetails(tabId) {
         case 'binding': return renderProductionFloor('binding');
         case 'warehouse': return renderWarehouse();
         case 'damage': return renderDamageReport();
+        case 'hr': return renderHR();
+        case 'accounts': return renderAccounts();
+        case 'excel_hub': return renderExcelHub();
+        case 'users': return renderUserPermissions();
         case 'admin': return renderAdminView();
         default: return renderDepartmentGrid();
     }
 }
+
 
 // 1. Raw Materials View
 function renderRawMaterials() {
@@ -1105,6 +1193,1476 @@ function renderAdminView() {
         </div>
     `;
 }
+
+// ==================== ACCESS RESTRICTED GUARD VIEW ====================
+
+function renderAccessDenied(tabId) {
+    const s = window.apnStore;
+    const isUrdu = s.lang === 'ur';
+
+    return `
+        <div class="bg-white rounded-xl border border-red-200 p-8 shadow-sm text-center max-w-2xl mx-auto my-12">
+            <div class="w-16 h-16 rounded-2xl bg-red-50 text-red-600 border border-red-200 flex items-center justify-center mx-auto mb-4">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+                </svg>
+            </div>
+            <h3 class="text-xl font-extrabold text-slate-800 mb-2">
+                ${isUrdu ? 'رسائی محدود ہے (Access Restricted)' : 'Access Restricted'}
+            </h3>
+            <p class="text-sm text-slate-600 mb-4 leading-relaxed">
+                ${isUrdu 
+                    ? `آپ کے موجودہ اکاؤنٹ <b>(${s.currentUser?.full_name || 'User'})</b> کو اس ماڈیول <b>(${getTabTitle(tabId)})</b> تک رسائی کی اجازت نہیں ہے۔` 
+                    : `Your current login <b>(${s.currentUser?.full_name || 'User'})</b> does not have permissions to access <b>(${getTabTitle(tabId)})</b>.`}
+            </p>
+            <div class="flex items-center justify-center gap-3 pt-2">
+                <button onclick="switchTab('dashboard')" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs rounded-lg transition">
+                    ← ${isUrdu ? 'ڈیش بورڈ پر جائیں' : 'Back to Dashboard'}
+                </button>
+                <button onclick="openUserSwitcherModal()" class="px-4 py-2 bg-[#4885a6] hover:bg-[#3d7391] text-white font-bold text-xs rounded-lg transition shadow-xs">
+                    👤 ${isUrdu ? 'صارف اکاؤنٹ تبدیل کریں' : 'Switch User'}
+                </button>
+            </div>
+        </div>
+    `;
+}
+
+// ==================== 10. HR & PAYROLL MODULE ====================
+
+function renderHR() {
+    const s = window.apnStore;
+    const isUrdu = s.lang === 'ur';
+    const subTab = s.hrSubTab || 'employees';
+
+    return `
+        <div class="bg-white rounded-xl border border-slate-200 p-4 sm:p-6 shadow-xs">
+            <!-- HR Header & Subtabs -->
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-slate-100">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-cyan-50 text-cyan-600 border border-cyan-200/80 flex items-center justify-center shrink-0 shadow-xs">
+                        ${APN_ICONS.hr}
+                    </div>
+                    <div>
+                        <h3 class="text-base font-bold text-slate-900">${s.t('dept_hr_title')}</h3>
+                        <p class="text-xs text-slate-500">${s.t('dept_hr_sub')}</p>
+                    </div>
+                </div>
+                
+                <!-- Subtab Switcher -->
+                <div class="flex items-center bg-slate-100 p-1 rounded-lg text-xs font-semibold self-start sm:self-auto gap-1">
+                    <button onclick="setHRSubTab('employees')" class="px-3 py-1.5 rounded-md transition ${subTab === 'employees' ? 'bg-white text-cyan-800 shadow-xs font-bold' : 'text-slate-600 hover:text-slate-900'}">
+                        👥 ${isUrdu ? 'ملازمین کا ریکارڈ' : 'Employees Master'}
+                    </button>
+                    <button onclick="setHRSubTab('attendance')" class="px-3 py-1.5 rounded-md transition ${subTab === 'attendance' ? 'bg-white text-cyan-800 shadow-xs font-bold' : 'text-slate-600 hover:text-slate-900'}">
+                        📅 ${isUrdu ? 'روزانہ حاضری' : 'Daily Attendance'}
+                    </button>
+                    <button onclick="setHRSubTab('payroll')" class="px-3 py-1.5 rounded-md transition ${subTab === 'payroll' ? 'bg-white text-cyan-800 shadow-xs font-bold' : 'text-slate-600 hover:text-slate-900'}">
+                        💵 ${isUrdu ? 'تنخواہیں و پرچیاں' : 'Payroll & Slips'}
+                    </button>
+                </div>
+            </div>
+
+            <!-- Subtab Content -->
+            <div class="mt-4">
+                ${subTab === 'employees' ? renderHREmployeesList() : ''}
+                ${subTab === 'attendance' ? renderHRAttendanceSheet() : ''}
+                ${subTab === 'payroll' ? renderHRPayrollSheet() : ''}
+            </div>
+        </div>
+    `;
+}
+
+function setHRSubTab(subTab) {
+    window.apnStore.hrSubTab = subTab;
+    renderApp();
+}
+
+function renderHREmployeesList() {
+    const s = window.apnStore;
+    const isUrdu = s.lang === 'ur';
+    const emps = s.employees || [];
+
+    return `
+        <div>
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
+                <div class="text-xs text-slate-500">
+                    ${isUrdu ? `کل رجسٹرڈ ملازمین: <b>${emps.length}</b>` : `Total Staff: <b>${emps.length}</b>`}
+                </div>
+                <button onclick="openAddEmployeeModal()" class="px-3 py-1.5 bg-[#4885a6] hover:bg-[#3b7596] text-white text-xs font-bold rounded-lg shadow-xs transition flex items-center gap-1.5 self-start sm:self-auto">
+                    <span>+</span>
+                    <span>${isUrdu ? 'نیا ملازم شامل کریں' : 'Add Employee'}</span>
+                </button>
+            </div>
+
+            <div class="overflow-x-auto border border-slate-200 rounded-lg">
+                <table class="w-full text-xs text-right border-collapse">
+                    <thead class="bg-slate-50 text-slate-700 font-bold border-b border-slate-200">
+                        <tr>
+                            <th class="p-2.5">کوڈ</th>
+                            <th class="p-2.5">نام ملازم</th>
+                            <th class="p-2.5">ولدیت</th>
+                            <th class="p-2.5">شعبہ (ڈیپارٹمنٹ)</th>
+                            <th class="p-2.5">عہدہ (Designation)</th>
+                            <th class="p-2.5">بنیادی تنخواہ (PKR)</th>
+                            <th class="p-2.5">فون نمبر</th>
+                            <th class="p-2.5">حالت</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-100">
+                        ${emps.length === 0 ? `
+                            <tr><td colspan="8" class="p-6 text-center text-slate-400">کوئی ملازم درج نہیں ہے۔ نیا ملازم شامل کریں۔</td></tr>
+                        ` : emps.map(e => `
+                            <tr class="hover:bg-slate-50/80 transition">
+                                <td class="p-2.5 font-mono font-bold text-slate-600">${e.emp_code}</td>
+                                <td class="p-2.5 font-bold text-slate-800">${e.full_name}</td>
+                                <td class="p-2.5 text-slate-500">${e.father_name || '—'}</td>
+                                <td class="p-2.5"><span class="px-2 py-0.5 bg-blue-50 text-blue-700 rounded font-semibold">${e.department}</span></td>
+                                <td class="p-2.5 text-slate-700">${e.designation}</td>
+                                <td class="p-2.5 font-mono font-bold text-slate-900">${(e.basic_salary || 0).toLocaleString()}</td>
+                                <td class="p-2.5 font-mono text-slate-600" dir="ltr">${e.phone || '—'}</td>
+                                <td class="p-2.5">
+                                    <span class="px-2 py-0.5 rounded text-[11px] font-semibold ${e.status === 'ACTIVE' ? 'bg-emerald-50 text-emerald-700' : 'bg-amber-50 text-amber-700'}">
+                                        ${e.status === 'ACTIVE' ? 'فعال' : e.status}
+                                    </span>
+                                </td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    `;
+}
+
+function renderHRAttendanceSheet() {
+    const s = window.apnStore;
+    const isUrdu = s.lang === 'ur';
+    const emps = s.employees || [];
+    const todayStr = new Date().toISOString().slice(0, 10);
+
+    return `
+        <div>
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4 p-3 bg-slate-50 border border-slate-200 rounded-lg">
+                <div class="flex items-center gap-3">
+                    <label class="text-xs font-bold text-slate-700">${isUrdu ? 'تاریخ حاضری:' : 'Attendance Date:'}</label>
+                    <input type="date" id="attDateInput" value="${todayStr}" class="p-1.5 text-xs bg-white border border-slate-300 rounded font-mono font-semibold" />
+                </div>
+                <div class="flex items-center gap-2">
+                    <button onclick="markAllPresent()" class="px-3 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold rounded shadow-xs transition">
+                        ✓ ${isUrdu ? 'سب کو حاضر مارک کریں' : 'Mark All Present'}
+                    </button>
+                    <button onclick="saveAttendanceSheet()" class="px-3.5 py-1.5 bg-[#4885a6] hover:bg-[#3b7596] text-white text-xs font-bold rounded shadow-xs transition">
+                        💾 ${isUrdu ? 'حاضری محفوظ کریں' : 'Save Attendance'}
+                    </button>
+                </div>
+            </div>
+
+            <div class="overflow-x-auto border border-slate-200 rounded-lg">
+                <table class="w-full text-xs text-right border-collapse">
+                    <thead class="bg-slate-50 text-slate-700 font-bold border-b border-slate-200">
+                        <tr>
+                            <th class="p-2.5">کوڈ</th>
+                            <th class="p-2.5">ملازم کا نام</th>
+                            <th class="p-2.5">شعبہ و عہدہ</th>
+                            <th class="p-2.5">حاضری کی حالت</th>
+                            <th class="p-2.5">اوور ٹائم (گھنٹے)</th>
+                            <th class="p-2.5">نوٹس / ریمارکس</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-100">
+                        ${emps.map(e => `
+                            <tr class="hover:bg-slate-50/80 transition" data-emp-id="${e.id}">
+                                <td class="p-2.5 font-mono font-bold text-slate-600">${e.emp_code}</td>
+                                <td class="p-2.5 font-bold text-slate-800">${e.full_name}</td>
+                                <td class="p-2.5 text-slate-600">${e.department} - ${e.designation}</td>
+                                <td class="p-2.5">
+                                    <select class="att-status-select p-1 border border-slate-300 rounded bg-white text-xs font-semibold">
+                                        <option value="PRESENT" selected>حاضر (Present)</option>
+                                        <option value="ABSENT">غیر حاضر (Absent)</option>
+                                        <option value="LEAVE">رخصت (Leave)</option>
+                                        <option value="HALF_DAY">ہاف ڈے (Half Day)</option>
+                                    </select>
+                                </td>
+                                <td class="p-2.5">
+                                    <input type="number" step="0.5" min="0" value="0" class="att-ot-input w-20 p-1 border border-slate-300 rounded text-center font-mono" />
+                                </td>
+                                <td class="p-2.5">
+                                    <input type="text" placeholder="اختیاری..." class="att-notes-input w-full p-1 border border-slate-200 rounded text-xs" />
+                                </td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    `;
+}
+
+function markAllPresent() {
+    document.querySelectorAll('.att-status-select').forEach(sel => sel.value = 'PRESENT');
+}
+
+async function saveAttendanceSheet() {
+    const s = window.apnStore;
+    const isUrdu = s.lang === 'ur';
+    const date = document.getElementById('attDateInput')?.value || new Date().toISOString().slice(0, 10);
+    const rows = document.querySelectorAll('tbody tr[data-emp-id]');
+    
+    for (const row of rows) {
+        const empId = parseInt(row.getAttribute('data-emp-id'));
+        const status = row.querySelector('.att-status-select')?.value || 'PRESENT';
+        const ot = parseFloat(row.querySelector('.att-ot-input')?.value || 0);
+        const notes = row.querySelector('.att-notes-input')?.value || '';
+
+        await APN_API.recordAttendance({
+            employee_id: empId,
+            date: date,
+            status: status,
+            overtime_hours: ot,
+            notes: notes
+        });
+    }
+
+    alert(isUrdu ? 'تاریخ ' + date + ' کی حاضری کامیابی سے محفوظ کر لی گئی ہے۔' : 'Attendance saved successfully for ' + date);
+    refreshData().then(() => renderApp());
+}
+
+function renderHRPayrollSheet() {
+    const s = window.apnStore;
+    const isUrdu = s.lang === 'ur';
+    const payrolls = s.payrolls || [];
+    const currentMonth = new Date().toISOString().slice(0, 7);
+
+    return `
+        <div>
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4 p-3 bg-slate-50 border border-slate-200 rounded-lg">
+                <div class="flex items-center gap-3">
+                    <label class="text-xs font-bold text-slate-700">${isUrdu ? 'تنخواہ کا مہینہ:' : 'Payroll Month:'}</label>
+                    <input type="month" id="payrollMonthInput" value="${currentMonth}" class="p-1.5 text-xs bg-white border border-slate-300 rounded font-mono font-semibold" />
+                </div>
+                <button onclick="generateMonthlyPayroll()" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold rounded shadow-xs transition flex items-center gap-1.5 self-start sm:self-auto">
+                    <span>⚡</span>
+                    <span>${isUrdu ? 'اس مہینے کی تنخواہیں جنریٹ کریں' : 'Generate Monthly Payroll'}</span>
+                </button>
+            </div>
+
+            <div class="overflow-x-auto border border-slate-200 rounded-lg">
+                <table class="w-full text-xs text-right border-collapse">
+                    <thead class="bg-slate-50 text-slate-700 font-bold border-b border-slate-200">
+                        <tr>
+                            <th class="p-2.5">ملازم</th>
+                            <th class="p-2.5">مہینہ</th>
+                            <th class="p-2.5">بنیادی تنخواہ</th>
+                            <th class="p-2.5">اوور ٹائم / الاؤنس</th>
+                            <th class="p-2.5">ایڈوانس / کٹوتی</th>
+                            <th class="p-2.5">خالص واجب الادا (Net)</th>
+                            <th class="p-2.5">حالت</th>
+                            <th class="p-2.5">ایکشن</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-100">
+                        ${payrolls.length === 0 ? `
+                            <tr><td colspan="8" class="p-6 text-center text-slate-400">کوئی تنخواہ سلپ موجود نہیں ہے۔ اوپر دیے گئے بٹن سے اس مہینے کی تنخواہیں جنریٹ کریں۔</td></tr>
+                        ` : payrolls.map(p => `
+                            <tr class="hover:bg-slate-50/80 transition">
+                                <td class="p-2.5">
+                                    <div class="font-bold text-slate-800">${p.employee_name || 'ملازم'}</div>
+                                    <div class="text-[10px] text-slate-400 font-mono">${p.emp_code || ''}</div>
+                                </td>
+                                <td class="p-2.5 font-mono text-slate-600">${p.month_year}</td>
+                                <td class="p-2.5 font-mono text-slate-800">${(p.basic_salary || 0).toLocaleString()}</td>
+                                <td class="p-2.5 font-mono text-emerald-700">+${((p.overtime_amount || 0) + (p.allowance || 0)).toLocaleString()}</td>
+                                <td class="p-2.5 font-mono text-rose-600">-${((p.advance_deduction || 0) + (p.deductions || 0)).toLocaleString()}</td>
+                                <td class="p-2.5 font-mono font-bold text-slate-900">${(p.net_salary || 0).toLocaleString()} PKR</td>
+                                <td class="p-2.5">
+                                    <span class="px-2 py-0.5 rounded text-[10px] font-semibold ${p.payment_status === 'PAID' ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-800'}">
+                                        ${p.payment_status === 'PAID' ? 'ادا شدہ (PAID)' : 'واجب الادا (PENDING)'}
+                                    </span>
+                                </td>
+                                <td class="p-2.5 flex items-center gap-1.5">
+                                    <button onclick="openSalarySlipModal(${p.id})" class="px-2.5 py-1 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded text-xs font-semibold">
+                                        📄 پرچی
+                                    </button>
+                                    ${p.payment_status !== 'PAID' ? `
+                                        <button onclick="markPayrollPaid(${p.id})" class="px-2.5 py-1 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 border border-emerald-300 rounded text-xs font-bold">
+                                            ✓ ادائیگی
+                                        </button>
+                                    ` : ''}
+                                </td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    `;
+}
+
+async function generateMonthlyPayroll() {
+    const s = window.apnStore;
+    const isUrdu = s.lang === 'ur';
+    const month = document.getElementById('payrollMonthInput')?.value || new Date().toISOString().slice(0, 7);
+    const emps = s.employees || [];
+
+    if (emps.length === 0) {
+        alert(isUrdu ? 'کوئی ملازم موجود نہیں ہے۔ پہلے ملازمین شامل کریں۔' : 'No employees found.');
+        return;
+    }
+
+    let count = 0;
+    for (const e of emps) {
+        if (e.status !== 'ACTIVE') continue;
+        const basic = e.basic_salary || 0;
+        const net = basic;
+
+        await APN_API.addPayroll({
+            employee_id: e.id,
+            employee_name: e.full_name,
+            emp_code: e.emp_code,
+            designation: e.designation,
+            month_year: month,
+            basic_salary: basic,
+            overtime_amount: 0,
+            allowance: 0,
+            deductions: 0,
+            advance_deduction: 0,
+            net_salary: net,
+            payment_status: 'PENDING',
+            payment_method: 'CASH'
+        });
+        count++;
+    }
+
+    alert(isUrdu ? `${count} ملازمین کی تنخواہیں برائے ${month} کامیابی سے تیار کر لی گئی ہیں۔` : `Generated payroll for ${count} staff.`);
+    refreshData().then(() => renderApp());
+}
+
+async function markPayrollPaid(payrollId) {
+    const isUrdu = window.apnStore.lang === 'ur';
+    await APN_API.paySalary(payrollId, 'PAID', 'CASH');
+    alert(isUrdu ? 'تنخواہ کی ادائیگی کا اندراج کامیابی سے ہو گیا۔' : 'Salary marked as paid.');
+    refreshData().then(() => renderApp());
+}
+
+function openSalarySlipModal(payrollId) {
+    const s = window.apnStore;
+    const p = (s.payrolls || []).find(x => x.id === payrollId);
+    if (!p) return;
+
+    const modal = document.getElementById('modalContainer');
+    modal.innerHTML = `
+        <div class="fixed inset-0 z-50 bg-black/50 backdrop-blur-xs flex items-center justify-center p-4">
+            <div class="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl border border-slate-200 text-right print:p-0 print:border-none">
+                <!-- Slip Header -->
+                <div class="text-center pb-4 border-b border-slate-200">
+                    <h2 class="text-lg font-extrabold text-slate-900">عباسی پبلیکیشن نیٹ ورک (APN)</h2>
+                    <p class="text-xs text-slate-500 font-semibold">تنخواہ سلپ / Salary Pay Slip</p>
+                    <span class="inline-block mt-1 px-2.5 py-0.5 bg-blue-50 text-blue-700 text-xs font-mono font-bold rounded-full">
+                        ماہ: ${p.month_year}
+                    </span>
+                </div>
+
+                <!-- Employee Info Grid -->
+                <div class="grid grid-cols-2 gap-2 text-xs my-4 p-3 bg-slate-50 rounded-xl">
+                    <div><b>نام ملازم:</b> ${p.employee_name || '—'}</div>
+                    <div><b>کوڈ:</b> <span class="font-mono">${p.emp_code || '—'}</span></div>
+                    <div><b>عہدہ:</b> ${p.designation || '—'}</div>
+                    <div><b>طریقہ ادائیگی:</b> ${p.payment_method || 'CASH'}</div>
+                </div>
+
+                <!-- Earnings and Deductions Table -->
+                <table class="w-full text-xs text-right border border-slate-200 rounded-lg overflow-hidden mb-4">
+                    <thead class="bg-slate-100 text-slate-700 font-bold">
+                        <tr><th class="p-2">تفصیلات</th><th class="p-2 text-left">رقم (PKR)</th></tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-100">
+                        <tr><td class="p-2">بنیادی تنخواہ (Basic)</td><td class="p-2 text-left font-mono">${(p.basic_salary || 0).toLocaleString()}</td></tr>
+                        <tr><td class="p-2">اوور ٹائم الاؤنس</td><td class="p-2 text-left font-mono text-emerald-700">+${(p.overtime_amount || 0).toLocaleString()}</td></tr>
+                        <tr><td class="p-2">پیشگی تنخواہ کٹوتی (Advance)</td><td class="p-2 text-left font-mono text-rose-600">-${(p.advance_deduction || 0).toLocaleString()}</td></tr>
+                        <tr class="bg-slate-50 font-extrabold text-sm"><td class="p-2.5">خالص تنخواہ (Net Payable)</td><td class="p-2.5 text-left font-mono text-blue-700">${(p.net_salary || 0).toLocaleString()} PKR</td></tr>
+                    </tbody>
+                </table>
+
+                <!-- Signatures -->
+                <div class="flex justify-between items-end pt-8 mt-6 border-t border-slate-200 text-xs text-slate-500">
+                    <div class="text-center"><div class="w-32 border-b border-slate-400 mb-1"></div>ملازم کے دستخط</div>
+                    <div class="text-center"><div class="w-32 border-b border-slate-400 mb-1"></div>اکاؤنٹس انچارج</div>
+                </div>
+
+                <!-- Modal Actions -->
+                <div class="flex justify-end gap-2 mt-6 pt-3 border-t border-slate-100 print:hidden">
+                    <button onclick="document.getElementById('modalContainer').innerHTML = ''" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold rounded-lg transition">بند کریں</button>
+                    <button onclick="window.print()" class="px-4 py-2 bg-[#4885a6] hover:bg-[#3d7391] text-white text-xs font-bold rounded-lg shadow-xs transition">🖨️ پرنٹ پرچی</button>
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+function openAddEmployeeModal() {
+    const isUrdu = window.apnStore.lang === 'ur';
+    const modal = document.getElementById('modalContainer');
+    modal.innerHTML = `
+        <div class="fixed inset-0 z-50 bg-black/50 backdrop-blur-xs flex items-center justify-center p-4">
+            <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl border border-slate-200 text-right">
+                <div class="flex justify-between items-center pb-3 border-b border-slate-100">
+                    <h3 class="text-base font-bold text-slate-800">${isUrdu ? 'نئے ملازم کا اندراج' : 'Register New Employee'}</h3>
+                    <button onclick="document.getElementById('modalContainer').innerHTML = ''" class="text-slate-400 hover:text-slate-600 font-bold">✕</button>
+                </div>
+
+                <form onsubmit="saveNewEmployee(event)" class="space-y-3 mt-4 text-xs">
+                    <div>
+                        <label class="block font-bold text-slate-700 mb-1">ملازم کوڈ (Emp Code) *</label>
+                        <input type="text" id="newEmpCode" required value="EMP-${String((window.apnStore.employees.length + 1)).padStart(3, '0')}" class="w-full p-2 border border-slate-300 rounded font-mono font-bold" />
+                    </div>
+                    <div>
+                        <label class="block font-bold text-slate-700 mb-1">ملازم کا مکمل نام *</label>
+                        <input type="text" id="newEmpName" required placeholder="مثلاً: محمد وقاص" class="w-full p-2 border border-slate-300 rounded font-bold" />
+                    </div>
+                    <div class="grid grid-cols-2 gap-2">
+                        <div>
+                            <label class="block font-bold text-slate-700 mb-1">ولدیت</label>
+                            <input type="text" id="newEmpFather" placeholder="والد کا نام" class="w-full p-2 border border-slate-300 rounded" />
+                        </div>
+                        <div>
+                            <label class="block font-bold text-slate-700 mb-1">فون نمبر</label>
+                            <input type="text" id="newEmpPhone" placeholder="0300-1234567" class="w-full p-2 border border-slate-300 rounded font-mono" />
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-2 gap-2">
+                        <div>
+                            <label class="block font-bold text-slate-700 mb-1">شعبہ (Department) *</label>
+                            <select id="newEmpDept" class="w-full p-2 border border-slate-300 rounded bg-white">
+                                <option value="پرنٹنگ فلور">پرنٹنگ فلور (Printing)</option>
+                                <option value="بائنڈنگ یونٹ">بائنڈنگ یونٹ (Binding)</option>
+                                <option value="خام مال اسٹور">خام مال اسٹور (Store)</option>
+                                <option value="فنش گڈز گودام">فنش گڈز گودام (Warehouse)</option>
+                                <option value="پری پریس و ڈیزائننگ">پری پریس و ڈیزائننگ</option>
+                                <option value="اکاؤنٹس و فنانس">اکاؤنٹس و فنانس</option>
+                                <option value="ایڈمنسٹریشن">ایڈمنسٹریشن</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block font-bold text-slate-700 mb-1">عہدہ (Designation) *</label>
+                            <input type="text" id="newEmpDesig" required placeholder="مثلاً: پریس ماسٹر" class="w-full p-2 border border-slate-300 rounded" />
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block font-bold text-slate-700 mb-1">ماہانہ بنیادی تنخواہ (PKR) *</label>
+                        <input type="number" id="newEmpSalary" required min="0" value="40000" class="w-full p-2 border border-slate-300 rounded font-mono font-bold" />
+                    </div>
+
+                    <div class="flex justify-end gap-2 pt-3 border-t border-slate-100">
+                        <button type="button" onclick="document.getElementById('modalContainer').innerHTML = ''" class="px-4 py-2 bg-slate-100 text-slate-700 font-bold rounded-lg">منسوخ</button>
+                        <button type="submit" class="px-5 py-2 bg-[#4885a6] text-white font-bold rounded-lg shadow-xs">محفوظ کریں</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    `;
+}
+
+async function saveNewEmployee(event) {
+    event.preventDefault();
+    const isUrdu = window.apnStore.lang === 'ur';
+
+    const emp = {
+        emp_code: document.getElementById('newEmpCode').value.trim(),
+        full_name: document.getElementById('newEmpName').value.trim(),
+        father_name: document.getElementById('newEmpFather').value.trim(),
+        phone: document.getElementById('newEmpPhone').value.trim(),
+        department: document.getElementById('newEmpDept').value,
+        designation: document.getElementById('newEmpDesig').value.trim(),
+        basic_salary: parseFloat(document.getElementById('newEmpSalary').value || 0),
+        status: 'ACTIVE'
+    };
+
+    await APN_API.addEmployee(emp);
+    document.getElementById('modalContainer').innerHTML = '';
+    alert(isUrdu ? 'نیا ملازم کامیابی سے شامل ہو گیا ہے۔' : 'Employee added successfully.');
+    refreshData().then(() => renderApp());
+}
+
+
+// ==================== 11. CHART OF ACCOUNTS & FINANCE MODULE ====================
+
+function renderAccounts() {
+    const s = window.apnStore;
+    const isUrdu = s.lang === 'ur';
+    const subTab = s.accountsSubTab || 'accounts';
+
+    return `
+        <div class="bg-white rounded-xl border border-slate-200 p-4 sm:p-6 shadow-xs">
+            <!-- COA Header & Subtabs -->
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-slate-100">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 border border-emerald-200/80 flex items-center justify-center shrink-0 shadow-xs">
+                        ${APN_ICONS.accounts}
+                    </div>
+                    <div>
+                        <h3 class="text-base font-bold text-slate-900">${s.t('dept_accounts_title')}</h3>
+                        <p class="text-xs text-slate-500">${s.t('dept_accounts_sub')}</p>
+                    </div>
+                </div>
+
+                <!-- Subtabs -->
+                <div class="flex items-center bg-slate-100 p-1 rounded-lg text-xs font-semibold self-start sm:self-auto gap-1">
+                    <button onclick="setAccountsSubTab('accounts')" class="px-3 py-1.5 rounded-md transition ${subTab === 'accounts' ? 'bg-white text-emerald-800 shadow-xs font-bold' : 'text-slate-600 hover:text-slate-900'}">
+                        📂 ${isUrdu ? 'کھاتہ جات چارٹ' : 'Chart of Accounts'}
+                    </button>
+                    <button onclick="setAccountsSubTab('vouchers')" class="px-3 py-1.5 rounded-md transition ${subTab === 'vouchers' ? 'bg-white text-emerald-800 shadow-xs font-bold' : 'text-slate-600 hover:text-slate-900'}">
+                        📝 ${isUrdu ? 'روزنامچہ و واؤچرز' : 'Journal Vouchers'}
+                    </button>
+                    <button onclick="setAccountsSubTab('trial_balance')" class="px-3 py-1.5 rounded-md transition ${subTab === 'trial_balance' ? 'bg-white text-emerald-800 shadow-xs font-bold' : 'text-slate-600 hover:text-slate-900'}">
+                        ⚖️ ${isUrdu ? 'میزانِ محاکمہ' : 'Trial Balance'}
+                    </button>
+                </div>
+            </div>
+
+            <!-- Content -->
+            <div class="mt-4">
+                ${subTab === 'accounts' ? renderCOAAccountsList() : ''}
+                ${subTab === 'vouchers' ? renderCOAVouchersList() : ''}
+                ${subTab === 'trial_balance' ? renderCOATrialBalance() : ''}
+            </div>
+        </div>
+    `;
+}
+
+function setAccountsSubTab(subTab) {
+    window.apnStore.accountsSubTab = subTab;
+    renderApp();
+}
+
+function renderCOAAccountsList() {
+    const s = window.apnStore;
+    const isUrdu = s.lang === 'ur';
+    const accounts = s.accounts || [];
+
+    const typeBadges = {
+        ASSET: 'bg-blue-50 text-blue-700 border-blue-200',
+        LIABILITY: 'bg-rose-50 text-rose-700 border-rose-200',
+        EQUITY: 'bg-purple-50 text-purple-700 border-purple-200',
+        REVENUE: 'bg-emerald-50 text-emerald-700 border-emerald-200',
+        EXPENSE: 'bg-amber-50 text-amber-700 border-amber-200'
+    };
+
+    return `
+        <div>
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
+                <div class="text-xs text-slate-500">
+                    ${isUrdu ? `کل ایکٹو کھاتہ جات: <b>${accounts.length}</b>` : `Total Accounts: <b>${accounts.length}</b>`}
+                </div>
+                <button onclick="openAddAccountModal()" class="px-3 py-1.5 bg-[#4885a6] hover:bg-[#3b7596] text-white text-xs font-bold rounded-lg shadow-xs transition flex items-center gap-1.5 self-start sm:self-auto">
+                    <span>+</span>
+                    <span>${isUrdu ? 'نیا کھاتہ شامل کریں' : 'Add Account'}</span>
+                </button>
+            </div>
+
+            <div class="overflow-x-auto border border-slate-200 rounded-lg">
+                <table class="w-full text-xs text-right border-collapse">
+                    <thead class="bg-slate-50 text-slate-700 font-bold border-b border-slate-200">
+                        <tr>
+                            <th class="p-2.5">کوڈ</th>
+                            <th class="p-2.5">عنوانِ کھاتہ (اردو)</th>
+                            <th class="p-2.5">Account Title (English)</th>
+                            <th class="p-2.5">نوعیت (Type)</th>
+                            <th class="p-2.5">ذیلی کیٹیگری</th>
+                            <th class="p-2.5">موجودہ بیلنس (PKR)</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-100">
+                        ${accounts.map(a => `
+                            <tr class="hover:bg-slate-50/80 transition">
+                                <td class="p-2.5 font-mono font-bold text-slate-700">${a.account_code}</td>
+                                <td class="p-2.5 font-bold text-slate-900">${a.account_name_ur}</td>
+                                <td class="p-2.5 font-medium text-slate-600">${a.account_name_en}</td>
+                                <td class="p-2.5">
+                                    <span class="px-2 py-0.5 rounded text-[10px] font-bold border ${typeBadges[a.account_type] || 'bg-slate-100 text-slate-600'}">
+                                        ${a.account_type}
+                                    </span>
+                                </td>
+                                <td class="p-2.5 text-slate-500">${a.subcategory || '—'}</td>
+                                <td class="p-2.5 font-mono font-bold text-slate-900">${(a.current_balance || 0).toLocaleString()}</td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    `;
+}
+
+function renderCOAVouchersList() {
+    const s = window.apnStore;
+    const isUrdu = s.lang === 'ur';
+    const vouchers = s.vouchers || [];
+
+    return `
+        <div>
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
+                <div class="text-xs text-slate-500">
+                    ${isUrdu ? `کل واؤچرز اندراج: <b>${vouchers.length}</b>` : `Total Vouchers: <b>${vouchers.length}</b>`}
+                </div>
+                <button onclick="openNewVoucherModal()" class="px-3 py-1.5 bg-[#4885a6] hover:bg-[#3b7596] text-white text-xs font-bold rounded-lg shadow-xs transition flex items-center gap-1.5 self-start sm:self-auto">
+                    <span>+</span>
+                    <span>${isUrdu ? 'نیا واؤچر درج کریں' : 'New Voucher'}</span>
+                </button>
+            </div>
+
+            <div class="overflow-x-auto border border-slate-200 rounded-lg">
+                <table class="w-full text-xs text-right border-collapse">
+                    <thead class="bg-slate-50 text-slate-700 font-bold border-b border-slate-200">
+                        <tr>
+                            <th class="p-2.5">واؤچر نمبر</th>
+                            <th class="p-2.5">قسم (Type)</th>
+                            <th class="p-2.5">تاریخ</th>
+                            <th class="p-2.5">تفصیل / Narration</th>
+                            <th class="p-2.5">کل رقم (PKR)</th>
+                            <th class="p-2.5">اندراج کنندہ</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-100">
+                        ${vouchers.length === 0 ? `
+                            <tr><td colspan="6" class="p-6 text-center text-slate-400">کوئی واؤچر موجود نہیں ہے۔ اوپر دیے گئے بٹن سے نیا واؤچر بنائیں۔</td></tr>
+                        ` : vouchers.map(v => `
+                            <tr class="hover:bg-slate-50/80 transition">
+                                <td class="p-2.5 font-mono font-bold text-slate-700">${v.voucher_no}</td>
+                                <td class="p-2.5">
+                                    <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-blue-50 text-blue-700 border border-blue-200">
+                                        ${v.voucher_type}
+                                    </span>
+                                </td>
+                                <td class="p-2.5 font-mono text-slate-500">${(v.voucher_date || '').slice(0, 10)}</td>
+                                <td class="p-2.5 text-slate-800">${v.description || '—'}</td>
+                                <td class="p-2.5 font-mono font-bold text-slate-900">${(v.total_amount || 0).toLocaleString()}</td>
+                                <td class="p-2.5 text-slate-600">${v.created_by || 'Admin'}</td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    `;
+}
+
+function renderCOATrialBalance() {
+    const s = window.apnStore;
+    const isUrdu = s.lang === 'ur';
+    const accounts = s.accounts || [];
+
+    let totalDebit = 0;
+    let totalCredit = 0;
+
+    const rows = accounts.map(a => {
+        const bal = a.current_balance || 0;
+        let debit = 0;
+        let credit = 0;
+        if (a.account_type === 'ASSET' || a.account_type === 'EXPENSE') {
+            if (bal >= 0) debit = bal; else credit = Math.abs(bal);
+        } else {
+            if (bal >= 0) credit = bal; else debit = Math.abs(bal);
+        }
+        totalDebit += debit;
+        totalCredit += credit;
+        return { ...a, debit, credit };
+    });
+
+    const isBalanced = Math.abs(totalDebit - totalCredit) < 0.01;
+
+    return `
+        <div>
+            <!-- Balanced Status Banner -->
+            <div class="flex items-center justify-between p-3.5 rounded-xl border mb-4 ${isBalanced ? 'bg-emerald-50 border-emerald-200 text-emerald-800' : 'bg-rose-50 border-rose-200 text-rose-800'}">
+                <div class="flex items-center gap-2">
+                    <span class="text-base">${isBalanced ? '✓' : '⚠️'}</span>
+                    <span class="font-bold text-xs">
+                        ${isBalanced 
+                            ? (isUrdu ? 'میزانِ محاکمہ متوازن ہے (Trial Balance is Balanced: Total Debit = Total Credit)' : 'Trial Balance is perfectly balanced.') 
+                            : (isUrdu ? 'توجہ فرمائیں! ڈیبٹ اور کریڈٹ میں فرق موجود ہے۔' : 'Warning: Debit and Credit are not equal.')}
+                    </span>
+                </div>
+                <button onclick="window.print()" class="px-3 py-1 bg-white border border-slate-300 rounded text-xs font-bold text-slate-700 shadow-2xs hover:bg-slate-50">
+                    🖨️ پرنٹ
+                </button>
+            </div>
+
+            <div class="overflow-x-auto border border-slate-200 rounded-lg">
+                <table class="w-full text-xs text-right border-collapse">
+                    <thead class="bg-slate-50 text-slate-700 font-bold border-b border-slate-200">
+                        <tr>
+                            <th class="p-2.5">کوڈ</th>
+                            <th class="p-2.5">عنوانِ کھاتہ</th>
+                            <th class="p-2.5">قسم</th>
+                            <th class="p-2.5 text-left">ڈیبٹ (Debit PKR)</th>
+                            <th class="p-2.5 text-left">کریڈٹ (Credit PKR)</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-100">
+                        ${rows.map(r => `
+                            <tr class="hover:bg-slate-50/80 transition">
+                                <td class="p-2.5 font-mono text-slate-600">${r.account_code}</td>
+                                <td class="p-2.5 font-bold text-slate-800">${r.account_name_ur} <span class="text-[10px] text-slate-400 font-normal">(${r.account_name_en})</span></td>
+                                <td class="p-2.5 text-slate-500">${r.account_type}</td>
+                                <td class="p-2.5 text-left font-mono font-bold ${r.debit > 0 ? 'text-slate-900' : 'text-slate-300'}">${r.debit > 0 ? r.debit.toLocaleString() : '—'}</td>
+                                <td class="p-2.5 text-left font-mono font-bold ${r.credit > 0 ? 'text-slate-900' : 'text-slate-300'}">${r.credit > 0 ? r.credit.toLocaleString() : '—'}</td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                    <tfoot class="bg-slate-100 font-extrabold text-sm border-t-2 border-slate-300">
+                        <tr>
+                            <td colspan="3" class="p-3 text-right">کل میزان (Total Balanced)</td>
+                            <td class="p-3 text-left font-mono text-blue-700">${totalDebit.toLocaleString()} PKR</td>
+                            <td class="p-3 text-left font-mono text-blue-700">${totalCredit.toLocaleString()} PKR</td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    `;
+}
+
+function openAddAccountModal() {
+    const isUrdu = window.apnStore.lang === 'ur';
+    const modal = document.getElementById('modalContainer');
+    modal.innerHTML = `
+        <div class="fixed inset-0 z-50 bg-black/50 backdrop-blur-xs flex items-center justify-center p-4">
+            <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl border border-slate-200 text-right">
+                <div class="flex justify-between items-center pb-3 border-b border-slate-100">
+                    <h3 class="text-base font-bold text-slate-800">${isUrdu ? 'نیا کھاتہ کھولیں (New Account)' : 'Open New Account'}</h3>
+                    <button onclick="document.getElementById('modalContainer').innerHTML = ''" class="text-slate-400 hover:text-slate-600 font-bold">✕</button>
+                </div>
+
+                <form onsubmit="saveNewAccount(event)" class="space-y-3 mt-4 text-xs">
+                    <div>
+                        <label class="block font-bold text-slate-700 mb-1">کھاتہ کوڈ (Account Code) *</label>
+                        <input type="text" id="newAccCode" required placeholder="مثلاً: 1080 یا 5090" class="w-full p-2 border border-slate-300 rounded font-mono font-bold" />
+                    </div>
+                    <div>
+                        <label class="block font-bold text-slate-700 mb-1">عنوانِ کھاتہ اردو میں *</label>
+                        <input type="text" id="newAccUr" required placeholder="مثلاً: فیکٹری کرایہ کھاتہ" class="w-full p-2 border border-slate-300 rounded font-bold" />
+                    </div>
+                    <div>
+                        <label class="block font-bold text-slate-700 mb-1">Account Title (English) *</label>
+                        <input type="text" id="newAccEn" required placeholder="e.g. Factory Rent Expense" class="w-full p-2 border border-slate-300 rounded" />
+                    </div>
+                    <div class="grid grid-cols-2 gap-2">
+                        <div>
+                            <label class="block font-bold text-slate-700 mb-1">کھاتے کی بنیادی قسم *</label>
+                            <select id="newAccType" class="w-full p-2 border border-slate-300 rounded bg-white">
+                                <option value="ASSET">اثاثہ جات (ASSET)</option>
+                                <option value="LIABILITY">واجبات (LIABILITY)</option>
+                                <option value="EQUITY">سرمایہ (EQUITY)</option>
+                                <option value="REVENUE">آمدنی (REVENUE)</option>
+                                <option value="EXPENSE" selected>اخراجات (EXPENSE)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block font-bold text-slate-700 mb-1">ابتدائی بیلنس (Opening PKR)</label>
+                            <input type="number" id="newAccBal" min="0" value="0" class="w-full p-2 border border-slate-300 rounded font-mono" />
+                        </div>
+                    </div>
+
+                    <div class="flex justify-end gap-2 pt-3 border-t border-slate-100">
+                        <button type="button" onclick="document.getElementById('modalContainer').innerHTML = ''" class="px-4 py-2 bg-slate-100 text-slate-700 font-bold rounded-lg">منسوخ</button>
+                        <button type="submit" class="px-5 py-2 bg-[#4885a6] text-white font-bold rounded-lg shadow-xs">کھاتہ محفوظ کریں</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    `;
+}
+
+async function saveNewAccount(event) {
+    event.preventDefault();
+    const isUrdu = window.apnStore.lang === 'ur';
+
+    const acc = {
+        account_code: document.getElementById('newAccCode').value.trim(),
+        account_name_ur: document.getElementById('newAccUr').value.trim(),
+        account_name_en: document.getElementById('newAccEn').value.trim(),
+        account_type: document.getElementById('newAccType').value,
+        opening_balance: parseFloat(document.getElementById('newAccBal').value || 0)
+    };
+
+    await APN_API.addAccount(acc);
+    document.getElementById('modalContainer').innerHTML = '';
+    alert(isUrdu ? 'نیا کھاتہ کامیابی سے شامل ہو گیا ہے۔' : 'Account created successfully.');
+    refreshData().then(() => renderApp());
+}
+
+function openNewVoucherModal() {
+    const s = window.apnStore;
+    const isUrdu = s.lang === 'ur';
+    const accounts = s.accounts || [];
+
+    const optionsHtml = accounts.map(a => `<option value="${a.id}">${a.account_code} - ${a.account_name_ur} (${a.account_name_en})</option>`).join('');
+
+    const modal = document.getElementById('modalContainer');
+    modal.innerHTML = `
+        <div class="fixed inset-0 z-50 bg-black/50 backdrop-blur-xs flex items-center justify-center p-4">
+            <div class="bg-white rounded-2xl max-w-2xl w-full p-6 shadow-2xl border border-slate-200 text-right">
+                <div class="flex justify-between items-center pb-3 border-b border-slate-100">
+                    <h3 class="text-base font-bold text-slate-800">${isUrdu ? 'نیا مالیاتی واؤچر درج کریں' : 'New Journal Voucher Entry'}</h3>
+                    <button onclick="document.getElementById('modalContainer').innerHTML = ''" class="text-slate-400 hover:text-slate-600 font-bold">✕</button>
+                </div>
+
+                <form onsubmit="saveNewVoucher(event)" class="space-y-3 mt-4 text-xs">
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                        <div>
+                            <label class="block font-bold text-slate-700 mb-1">واؤچر کی قسم *</label>
+                            <select id="vType" class="w-full p-2 border border-slate-300 rounded bg-white font-bold">
+                                <option value="CPV">کیش ادائیگی (CPV - Cash Payment)</option>
+                                <option value="CRV">کیش وصولی (CRV - Cash Receipt)</option>
+                                <option value="BPV">بینک ادائیگی (BPV - Bank Payment)</option>
+                                <option value="BRV">بینک وصولی (BRV - Bank Receipt)</option>
+                                <option value="JV" selected>جرنل واؤچر (JV - Journal Voucher)</option>
+                            </select>
+                        </div>
+                        <div class="sm:col-span-2">
+                            <label class="block font-bold text-slate-700 mb-1">تفصیل / Narration *</label>
+                            <input type="text" id="vDesc" required placeholder="مثلاً: کاغذ سپلائر کو نقد ادائیگی بذریعہ چیک" class="w-full p-2 border border-slate-300 rounded" />
+                        </div>
+                    </div>
+
+                    <!-- Entries Rows -->
+                    <div>
+                        <div class="flex justify-between items-center mb-1">
+                            <label class="font-bold text-slate-700">کھاتہ جات کے اندراجات (ڈیبٹ اور کریڈٹ برابر ہونے چاہئیں):</label>
+                            <button type="button" onclick="addVoucherRow()" class="px-2 py-1 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded font-bold text-[11px]">+ مزید قطار</button>
+                        </div>
+                        <div id="voucherRowsContainer" class="space-y-2 max-h-56 overflow-y-auto pr-1">
+                            <div class="voucher-row flex items-center gap-2 bg-slate-50 p-2 rounded border border-slate-200">
+                                <select class="v-acc w-1/2 p-1.5 border border-slate-300 rounded bg-white text-xs" required>
+                                    ${optionsHtml}
+                                </select>
+                                <input type="number" min="0" placeholder="ڈیبٹ Debit" oninput="updateVoucherTotals()" class="v-debit w-1/4 p-1.5 border border-slate-300 rounded text-left font-mono" value="0" />
+                                <input type="number" min="0" placeholder="کریڈٹ Credit" oninput="updateVoucherTotals()" class="v-credit w-1/4 p-1.5 border border-slate-300 rounded text-left font-mono" value="0" />
+                            </div>
+                            <div class="voucher-row flex items-center gap-2 bg-slate-50 p-2 rounded border border-slate-200">
+                                <select class="v-acc w-1/2 p-1.5 border border-slate-300 rounded bg-white text-xs" required>
+                                    ${optionsHtml}
+                                </select>
+                                <input type="number" min="0" placeholder="ڈیبٹ Debit" oninput="updateVoucherTotals()" class="v-debit w-1/4 p-1.5 border border-slate-300 rounded text-left font-mono" value="0" />
+                                <input type="number" min="0" placeholder="کریڈٹ Credit" oninput="updateVoucherTotals()" class="v-credit w-1/4 p-1.5 border border-slate-300 rounded text-left font-mono" value="0" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Totals Display -->
+                    <div class="flex items-center justify-between p-2.5 bg-slate-100 rounded-lg text-xs font-bold border border-slate-300">
+                        <div>کل ڈیبٹ: <span id="vTotDebit" class="font-mono text-blue-700">0</span> PKR</div>
+                        <div>کل کریڈٹ: <span id="vTotCredit" class="font-mono text-blue-700">0</span> PKR</div>
+                        <div id="vBalanceNotice" class="text-rose-600">برابر نہیں ہیں ✕</div>
+                    </div>
+
+                    <div class="flex justify-end gap-2 pt-3 border-t border-slate-100">
+                        <button type="button" onclick="document.getElementById('modalContainer').innerHTML = ''" class="px-4 py-2 bg-slate-100 text-slate-700 font-bold rounded-lg">منسوخ</button>
+                        <button type="submit" id="vSubmitBtn" disabled class="px-5 py-2 bg-slate-400 text-white font-bold rounded-lg shadow-xs cursor-not-allowed">واؤچر محفوظ کریں</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    `;
+}
+
+function addVoucherRow() {
+    const s = window.apnStore;
+    const accounts = s.accounts || [];
+    const optionsHtml = accounts.map(a => `<option value="${a.id}">${a.account_code} - ${a.account_name_ur} (${a.account_name_en})</option>`).join('');
+
+    const container = document.getElementById('voucherRowsContainer');
+    const div = document.createElement('div');
+    div.className = 'voucher-row flex items-center gap-2 bg-slate-50 p-2 rounded border border-slate-200';
+    div.innerHTML = `
+        <select class="v-acc w-1/2 p-1.5 border border-slate-300 rounded bg-white text-xs" required>
+            ${optionsHtml}
+        </select>
+        <input type="number" min="0" placeholder="ڈیبٹ Debit" oninput="updateVoucherTotals()" class="v-debit w-1/4 p-1.5 border border-slate-300 rounded text-left font-mono" value="0" />
+        <input type="number" min="0" placeholder="کریڈٹ Credit" oninput="updateVoucherTotals()" class="v-credit w-1/4 p-1.5 border border-slate-300 rounded text-left font-mono" value="0" />
+        <button type="button" onclick="this.parentElement.remove(); updateVoucherTotals();" class="text-red-500 font-bold px-1 hover:text-red-700">✕</button>
+    `;
+    container.appendChild(div);
+}
+
+function updateVoucherTotals() {
+    let totDebit = 0;
+    let totCredit = 0;
+    document.querySelectorAll('.v-debit').forEach(inp => totDebit += parseFloat(inp.value || 0));
+    document.querySelectorAll('.v-credit').forEach(inp => totCredit += parseFloat(inp.value || 0));
+
+    document.getElementById('vTotDebit').innerText = totDebit.toLocaleString();
+    document.getElementById('vTotCredit').innerText = totCredit.toLocaleString();
+
+    const isBalanced = totDebit > 0 && Math.abs(totDebit - totCredit) < 0.01;
+    const notice = document.getElementById('vBalanceNotice');
+    const btn = document.getElementById('vSubmitBtn');
+
+    if (isBalanced) {
+        notice.innerText = 'متوازن ہے ✓';
+        notice.className = 'text-emerald-700 font-bold';
+        btn.disabled = false;
+        btn.className = 'px-5 py-2 bg-[#4885a6] hover:bg-[#3b7596] text-white font-bold rounded-lg shadow-xs cursor-pointer';
+    } else {
+        notice.innerText = totDebit === 0 ? 'رقم درج کریں' : 'برابر نہیں ہیں ✕';
+        notice.className = 'text-rose-600 font-bold';
+        btn.disabled = true;
+        btn.className = 'px-5 py-2 bg-slate-400 text-white font-bold rounded-lg shadow-xs cursor-not-allowed';
+    }
+}
+
+async function saveNewVoucher(event) {
+    event.preventDefault();
+    const isUrdu = window.apnStore.lang === 'ur';
+
+    const vType = document.getElementById('vType').value;
+    const vDesc = document.getElementById('vDesc').value.trim();
+
+    const entries = [];
+    document.querySelectorAll('.voucher-row').forEach(row => {
+        const accId = parseInt(row.querySelector('.v-acc').value);
+        const debit = parseFloat(row.querySelector('.v-debit').value || 0);
+        const credit = parseFloat(row.querySelector('.v-credit').value || 0);
+        if (debit > 0 || credit > 0) {
+            entries.push({
+                account_id: accId,
+                debit: debit,
+                credit: credit,
+                narration: vDesc
+            });
+        }
+    });
+
+    await APN_API.addVoucher({
+        voucher_type: vType,
+        description: vDesc,
+        entries: entries
+    });
+
+    document.getElementById('modalContainer').innerHTML = '';
+    alert(isUrdu ? 'واؤچر کامیابی سے محفوظ کر لیا گیا ہے۔' : 'Voucher saved successfully.');
+    refreshData().then(() => renderApp());
+}
+
+
+// ==================== 12. EXCEL BULK HUB MODULE ====================
+
+function renderExcelHub() {
+    const s = window.apnStore;
+    const isUrdu = s.lang === 'ur';
+    const uploadType = s.excelUploadType || 'raw_materials';
+
+    return `
+        <div class="bg-white rounded-xl border border-slate-200 p-4 sm:p-6 shadow-xs">
+            <!-- Header -->
+            <div class="flex items-center gap-3 pb-4 border-b border-slate-100">
+                <div class="w-10 h-10 rounded-xl bg-green-50 text-green-700 border border-green-200/80 flex items-center justify-center shrink-0 shadow-xs">
+                    ${APN_ICONS.excel_hub}
+                </div>
+                <div>
+                    <h3 class="text-base font-bold text-slate-900">${s.t('dept_excel_title')}</h3>
+                    <p class="text-xs text-slate-500">${s.t('dept_excel_sub')}</p>
+                </div>
+            </div>
+
+            <!-- Hero: QuickBooks Packages Old File One-Click Import -->
+            <div class="my-5 p-4 rounded-xl bg-gradient-to-r from-emerald-50 via-teal-50 to-sky-50 border border-emerald-200 shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div>
+                    <div class="flex items-center gap-2">
+                        <span class="px-2 py-0.5 rounded bg-emerald-600 text-white text-[10px] font-bold">پرانا کوئیک بکس ڈیٹا</span>
+                        <h4 class="font-bold text-slate-800 text-sm">report 05-aug-2026 Pakeges.xlsx</h4>
+                    </div>
+                    <p class="text-xs text-slate-600 mt-1">
+                        اس ایکسل فائل میں کوئیک بکس سے ایکسپورٹ شدہ <b>730 پیکیجنگ اور خام مال آئٹمز</b> (تھرمل رولز، بارکوڈ، گٹہ ٹرے، پیپر وغیرہ) موجود ہیں۔
+                    </p>
+                </div>
+                <button onclick="importPackagesReportNow()" id="btnImportPackages" class="px-4 py-2.5 bg-emerald-700 hover:bg-emerald-800 text-white text-xs font-extrabold rounded-xl shadow-md transition shrink-0 flex items-center gap-2 self-start md:self-auto">
+                    <span>⚡</span>
+                    <span>${isUrdu ? 'یہ 730 آئٹمز اب درآمد کریں' : 'Import 730 Items Now'}</span>
+                </button>
+            </div>
+
+            <!-- Module Target Selector -->
+            <div class="mt-6">
+                <h4 class="font-bold text-xs text-slate-700 mb-2">1. ایکسل فائل کی کیٹیگری منتخب کریں:</h4>
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs">
+                    <button onclick="setExcelType('raw_materials')" class="p-3 rounded-xl border text-center transition ${uploadType === 'raw_materials' ? 'border-[#4885a6] bg-blue-50/50 text-[#1b3240] font-bold ring-2 ring-[#4885a6]/20' : 'border-slate-200 bg-white hover:bg-slate-50'}">
+                        📦 خام مال و اسٹاک
+                    </button>
+                    <button onclick="setExcelType('books')" class="p-3 rounded-xl border text-center transition ${uploadType === 'books' ? 'border-[#4885a6] bg-blue-50/50 text-[#1b3240] font-bold ring-2 ring-[#4885a6]/20' : 'border-slate-200 bg-white hover:bg-slate-50'}">
+                        📚 کتب ماسٹر (Books)
+                    </button>
+                    <button onclick="setExcelType('accounts')" class="p-3 rounded-xl border text-center transition ${uploadType === 'accounts' ? 'border-[#4885a6] bg-blue-50/50 text-[#1b3240] font-bold ring-2 ring-[#4885a6]/20' : 'border-slate-200 bg-white hover:bg-slate-50'}">
+                        📊 چارٹ آف اکاؤنٹ
+                    </button>
+                    <button onclick="setExcelType('employees')" class="p-3 rounded-xl border text-center transition ${uploadType === 'employees' ? 'border-[#4885a6] bg-blue-50/50 text-[#1b3240] font-bold ring-2 ring-[#4885a6]/20' : 'border-slate-200 bg-white hover:bg-slate-50'}">
+                        👥 ملازمین کی فہرست
+                    </button>
+                </div>
+            </div>
+
+            <!-- Download Template & Upload Area -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+                <!-- Left: Download Template -->
+                <div class="p-4 rounded-xl border border-slate-200 bg-slate-50 flex flex-col justify-between">
+                    <div>
+                        <h4 class="font-bold text-slate-800 text-xs mb-1">نمونہ ایکسل ٹیمپلیٹ ڈاؤنلوڈ کریں:</h4>
+                        <p class="text-xs text-slate-500 leading-relaxed">
+                            اس خالی ایکسل فارمیٹ میں اپنے پرانے کالمز بھر کر اپلوڈ کریں۔ کالمز کے نام پہلے سے سیٹ ہیں۔
+                        </p>
+                    </div>
+                    <button onclick="downloadExcelTemplate('${uploadType}')" class="mt-4 px-4 py-2 bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 font-bold text-xs rounded-lg shadow-2xs transition flex items-center justify-center gap-2">
+                        <span>📥</span>
+                        <span>${isUrdu ? 'نمونہ ٹیمپلیٹ فائل ڈاؤنلوڈ (.xlsx)' : 'Download Template (.xlsx)'}</span>
+                    </button>
+                </div>
+
+                <!-- Right: File Drop / Pick -->
+                <div class="p-4 rounded-xl border-2 border-dashed border-slate-300 hover:border-[#4885a6] bg-white transition flex flex-col items-center justify-center text-center">
+                    <svg class="w-8 h-8 text-slate-400 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
+                    </svg>
+                    <p class="text-xs font-bold text-slate-700">ایکسل فائل یہاں ڈراپ کریں یا منتخب کریں</p>
+                    <p class="text-[10px] text-slate-400 mt-0.5">سپورٹڈ فائلز: .xlsx, .xls, .csv</p>
+                    <input type="file" id="excelFileInput" accept=".xlsx,.xls,.csv" onchange="handleExcelFileSelect(event)" class="mt-3 text-xs" />
+                </div>
+            </div>
+
+            <!-- Preview & Confirm Area -->
+            <div id="excelPreviewContainer" class="mt-6 ${s.uploadedPreview ? '' : 'hidden'}">
+                ${s.uploadedPreview ? renderExcelPreviewTable() : ''}
+            </div>
+        </div>
+    `;
+}
+
+function setExcelType(type) {
+    window.apnStore.excelUploadType = type;
+    window.apnStore.uploadedPreview = null;
+    renderApp();
+}
+
+async function importPackagesReportNow() {
+    const isUrdu = window.apnStore.lang === 'ur';
+    const btn = document.getElementById('btnImportPackages');
+    if (btn) {
+        btn.disabled = true;
+        btn.innerHTML = `<span>⏳</span><span>درآمد ہو رہا ہے...</span>`;
+    }
+
+    try {
+        const res = await APN_API.importPackagesReport();
+        alert(isUrdu 
+            ? `مبارک ہو! کوئیک بکس پیکیجز فائل سے ${res.total_processed || 730} آئٹمز کامیابی سے درآمد کر لیے گئے ہیں۔ اب آپ خام مال اسٹور میں دیکھ سکتے ہیں۔` 
+            : `Successfully imported ${res.total_processed || 730} items into Raw Materials Store.`);
+        await refreshData();
+        renderApp();
+    } catch (e) {
+        alert("امپورٹ کے دوران خرابی: " + e.message);
+        if (btn) btn.disabled = false;
+    }
+}
+
+function handleExcelFileSelect(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    if (typeof XLSX === 'undefined') {
+        alert("SheetJS لائبریری ابھی لوڈ ہو رہی ہے، براہِ کرم 2 سیکنڈ بعد دوبارہ کوشش کریں۔");
+        return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        try {
+            const data = new Uint8Array(e.target.result);
+            const workbook = XLSX.read(data, { type: 'array' });
+            const firstSheet = workbook.SheetNames[0];
+            const jsonData = XLSX.utils.sheet_to_json(workbook.Sheets[firstSheet]);
+
+            if (!jsonData || jsonData.length === 0) {
+                alert("منتخب کردہ ایکسل فائل خالی ہے!");
+                return;
+            }
+
+            window.apnStore.uploadedPreview = {
+                fileName: file.name,
+                rowCount: jsonData.length,
+                rows: jsonData
+            };
+            renderApp();
+        } catch (err) {
+            alert("ایکسل فائل پڑھنے میں خرابی: " + err.message);
+        }
+    };
+    reader.readAsArrayBuffer(file);
+}
+
+function renderExcelPreviewTable() {
+    const s = window.apnStore;
+    const isUrdu = s.lang === 'ur';
+    const p = s.uploadedPreview;
+    if (!p) return '';
+
+    const firstRow = p.rows[0] || {};
+    const cols = Object.keys(firstRow);
+
+    return `
+        <div class="p-4 rounded-xl border border-blue-200 bg-blue-50/40">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-3 pb-2 border-b border-blue-200">
+                <div>
+                    <h4 class="font-bold text-slate-800 text-xs">پیشگی معائنہ: ${p.fileName}</h4>
+                    <p class="text-[11px] text-slate-500">کل قطاریں: <b>${p.rowCount}</b> • ٹارگٹ کیٹیگری: <b>${s.excelUploadType}</b></p>
+                </div>
+                <button onclick="executeExcelImport()" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-lg shadow-sm transition flex items-center gap-1.5 self-start sm:self-auto">
+                    <span>✓</span>
+                    <span>${isUrdu ? `یہ ${p.rowCount} ریکارڈز ERP میں شامل کریں` : `Confirm & Import ${p.rowCount} Rows`}</span>
+                </button>
+            </div>
+
+            <div class="overflow-x-auto max-h-60 bg-white border border-slate-200 rounded-lg">
+                <table class="w-full text-[11px] text-right border-collapse">
+                    <thead class="bg-slate-100 font-bold text-slate-700 border-b border-slate-200 sticky top-0">
+                        <tr>${cols.slice(0, 8).map(c => `<th class="p-2">${c}</th>`).join('')}</tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-100">
+                        ${p.rows.slice(0, 10).map(r => `
+                            <tr class="hover:bg-slate-50">${cols.slice(0, 8).map(c => `<td class="p-2">${r[c] !== undefined ? r[c] : '—'}</td>`).join('')}</tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+            </div>
+            ${p.rowCount > 10 ? `<p class="text-[10px] text-slate-400 mt-1">صرف ابتدائی 10 قطاریں دکھائی جا رہی ہیں (کل: ${p.rowCount})</p>` : ''}
+        </div>
+    `;
+}
+
+async function executeExcelImport() {
+    const s = window.apnStore;
+    const isUrdu = s.lang === 'ur';
+    const p = s.uploadedPreview;
+    if (!p) return;
+
+    const type = s.excelUploadType;
+    try {
+        if (type === 'raw_materials') {
+            await APN_API.bulkImportRawMaterials(p.rows);
+        } else if (type === 'books') {
+            await APN_API.bulkImportBooks(p.rows);
+        } else if (type === 'accounts') {
+            await APN_API.bulkImportAccounts(p.rows);
+        } else if (type === 'employees') {
+            await APN_API.bulkImportEmployees(p.rows);
+        }
+
+        alert(isUrdu ? `${p.rowCount} ریکارڈز کامیابی سے درآمد ہو گئے ہیں۔` : `Imported ${p.rowCount} records successfully.`);
+        s.uploadedPreview = null;
+        await refreshData();
+        renderApp();
+    } catch (e) {
+        alert("امپورٹ کے دوران خرابی: " + e.message);
+    }
+}
+
+function downloadExcelTemplate(type) {
+    if (typeof XLSX === 'undefined') {
+        alert("SheetJS لائبریری ابھی لوڈ ہو رہی ہے، براہِ کرم ایک لمحہ بعد کلک کریں۔");
+        return;
+    }
+
+    let data = [];
+    let fileName = `apn_template_${type}.xlsx`;
+
+    if (type === 'raw_materials') {
+        data = [
+            { name: "68 GSM Offset Paper (23x36)", category: "PAPER_INNER", size: "23x36", gsm: 68, unit: "REAMS", current_stock: 50, min_reorder_level: 10, unit_cost: 4500 },
+            { name: "260 GSM Art Card (Gloss)", category: "CARD_OUTER", size: "20x30", gsm: 260, unit: "SHEETS", current_stock: 2000, min_reorder_level: 500, unit_cost: 15 }
+        ];
+    } else if (type === 'books') {
+        data = [
+            { article_id: "APN-BK-0201", title: "اردو قواعد و انشا - جماعت ششم", language: "Urdu", subject: "Urdu", page_count: 144, inner_paper_spec: "68 GSM Offset (23x36)", outer_card_spec: "260 GSM Art Card", colors: "4-Color", standard_cost_per_copy: 110 }
+        ];
+    } else if (type === 'accounts') {
+        data = [
+            { account_code: "1080", account_name_en: "Raw Material Warehouse Advance", account_name_ur: "خام مال گودام ایڈوانس", account_type: "ASSET", subcategory: "Current Asset", opening_balance: 50000 },
+            { account_code: "5090", account_name_en: "Factory Generator Fuel", account_name_ur: "فیکٹری جنریٹر ڈیزل خرچ", account_type: "EXPENSE", subcategory: "Factory Overhead", opening_balance: 0 }
+        ];
+    } else if (type === 'employees') {
+        data = [
+            { emp_code: "EMP-010", full_name: "محمد عمران", father_name: "عبدالحمید", cnic: "35201-9988776-1", phone: "0300-9988776", department: "پرنٹنگ فلور", designation: "پریس ہیلپر", salary_type: "MONTHLY", basic_salary: 32000 }
+        ];
+    }
+
+    const ws = XLSX.utils.json_to_sheet(data);
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, "Sheet1");
+    XLSX.writeFile(wb, fileName);
+}
+
+
+// ==================== 13. USER LIMITATIONS & ROLES MODULE ====================
+
+function renderUserPermissions() {
+    const s = window.apnStore;
+    const isUrdu = s.lang === 'ur';
+    const users = s.users || [];
+
+    return `
+        <div class="bg-white rounded-xl border border-slate-200 p-4 sm:p-6 shadow-xs">
+            <!-- Header -->
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-slate-100">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-indigo-50 text-indigo-600 border border-indigo-200/80 flex items-center justify-center shrink-0 shadow-xs">
+                        ${APN_ICONS.users}
+                    </div>
+                    <div>
+                        <h3 class="text-base font-bold text-slate-900">${s.t('dept_users_title')}</h3>
+                        <p class="text-xs text-slate-500">${s.t('dept_users_sub')}</p>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-2">
+                    <button onclick="openUserSwitcherModal()" class="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold rounded-lg transition">
+                        👤 ${isUrdu ? 'لاگ اِن تبدیل کریں' : 'Switch User'}
+                    </button>
+                    <button onclick="openAddUserModal()" class="px-3 py-1.5 bg-[#4885a6] hover:bg-[#3b7596] text-white text-xs font-bold rounded-lg shadow-xs transition flex items-center gap-1.5">
+                        <span>+</span>
+                        <span>${isUrdu ? 'نیا صارف بنائیں' : 'Add User'}</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Current Active User Notice -->
+            <div class="my-4 p-3 bg-indigo-50/60 border border-indigo-200 rounded-xl flex items-center justify-between text-xs">
+                <div class="flex items-center gap-2">
+                    <span class="w-3 h-3 rounded-full bg-emerald-500"></span>
+                    <span>${isUrdu ? 'موجودہ فعال لاگ اِن صارف:' : 'Currently Active User:'} <b>${s.currentUser?.full_name || 'Admin'}</b> (${s.currentUser?.role || 'ADMIN'})</span>
+                </div>
+                <span class="px-2 py-0.5 rounded bg-white font-mono text-[11px] font-bold text-indigo-700 border border-indigo-200">
+                    Username: ${s.currentUser?.username || 'admin'}
+                </span>
+            </div>
+
+            <!-- Users List Table -->
+            <div class="overflow-x-auto border border-slate-200 rounded-lg mt-4">
+                <table class="w-full text-xs text-right border-collapse">
+                    <thead class="bg-slate-50 text-slate-700 font-bold border-b border-slate-200">
+                        <tr>
+                            <th class="p-2.5">صارف کا نام</th>
+                            <th class="p-2.5">مکمل نام</th>
+                            <th class="p-2.5">رول (کردار)</th>
+                            <th class="p-2.5">مجاز ماڈیولز (Permissions)</th>
+                            <th class="p-2.5">ایکشن</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-100">
+                        ${users.map(u => `
+                            <tr class="hover:bg-slate-50/80 transition">
+                                <td class="p-2.5 font-mono font-bold text-slate-700">@${u.username}</td>
+                                <td class="p-2.5 font-bold text-slate-900">${u.full_name}</td>
+                                <td class="p-2.5">
+                                    <span class="px-2 py-0.5 rounded text-[10px] font-bold ${u.role === 'ADMIN' ? 'bg-purple-100 text-purple-800' : 'bg-slate-100 text-slate-700'}">
+                                        ${u.role}
+                                    </span>
+                                </td>
+                                <td class="p-2.5">
+                                    <div class="flex flex-wrap gap-1 max-w-md">
+                                        ${(u.permissions || []).includes('*') ? `
+                                            <span class="px-1.5 py-0.5 bg-emerald-50 text-emerald-700 rounded text-[10px] font-semibold">تمام ماڈیولز (All)</span>
+                                        ` : (u.permissions || []).map(p => `
+                                            <span class="px-1.5 py-0.5 bg-blue-50 text-blue-700 rounded text-[10px]">${p}</span>
+                                        `).join('')}
+                                    </div>
+                                </td>
+                                <td class="p-2.5 flex items-center gap-1.5">
+                                    <button onclick="switchActiveUser(${u.id})" class="px-2.5 py-1 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 rounded font-bold text-xs">
+                                        سوئچ لاگ اِن
+                                    </button>
+                                </td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    `;
+}
+
+function openAddUserModal() {
+    const isUrdu = window.apnStore.lang === 'ur';
+    const modules = [
+        { key: 'raw_materials', label: 'خام مال اسٹور' },
+        { key: 'books', label: 'کتب ماسٹر و BOM' },
+        { key: 'work_orders', label: 'ورک آرڈرز' },
+        { key: 'printing', label: 'انر پرنٹنگ فلور' },
+        { key: 'outer', label: 'کور و لیمینیشن' },
+        { key: 'binding', label: 'بائنڈنگ یونٹ' },
+        { key: 'warehouse', label: 'فنش گڈز گودام' },
+        { key: 'damage', label: 'ڈیمیج و ویسٹیج لاگ' },
+        { key: 'hr', label: 'ایچ آر و پے رول' },
+        { key: 'accounts', label: 'چارٹ آف اکاؤنٹ و فنانس' },
+        { key: 'excel_hub', label: 'ایکسل ڈیٹا امپورٹ' },
+        { key: 'users', label: 'صارفین کی پرمیشنز' }
+    ];
+
+    const modal = document.getElementById('modalContainer');
+    modal.innerHTML = `
+        <div class="fixed inset-0 z-50 bg-black/50 backdrop-blur-xs flex items-center justify-center p-4">
+            <div class="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl border border-slate-200 text-right">
+                <div class="flex justify-between items-center pb-3 border-b border-slate-100">
+                    <h3 class="text-base font-bold text-slate-800">${isUrdu ? 'نیا صارف رجسٹر کریں' : 'Register New User'}</h3>
+                    <button onclick="document.getElementById('modalContainer').innerHTML = ''" class="text-slate-400 hover:text-slate-600 font-bold">✕</button>
+                </div>
+
+                <form onsubmit="saveNewUser(event)" class="space-y-3 mt-4 text-xs">
+                    <div class="grid grid-cols-2 gap-2">
+                        <div>
+                            <label class="block font-bold text-slate-700 mb-1">یوزر نام (Username) *</label>
+                            <input type="text" id="newUsername" required placeholder="e.g. printer1" class="w-full p-2 border border-slate-300 rounded font-mono" />
+                        </div>
+                        <div>
+                            <label class="block font-bold text-slate-700 mb-1">پاس ورڈ / پن کوڈ *</label>
+                            <input type="password" id="newUserPass" required value="1234" class="w-full p-2 border border-slate-300 rounded font-mono" />
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block font-bold text-slate-700 mb-1">صارف کا مکمل نام *</label>
+                        <input type="text" id="newUserFullName" required placeholder="مثلاً: محمد سلیمان (پریس آپریٹر)" class="w-full p-2 border border-slate-300 rounded font-bold" />
+                    </div>
+                    <div>
+                        <label class="block font-bold text-slate-700 mb-1">پری سیٹ رول (Preset Role)</label>
+                        <select id="newUserRole" onchange="applyRolePreset(this.value)" class="w-full p-2 border border-slate-300 rounded bg-white">
+                            <option value="CUSTOM">کسٹم اختیارات (Custom)</option>
+                            <option value="ADMIN">ایڈمنسٹریٹر (تمام اختیارات)</option>
+                            <option value="STORE">اسٹور انچارج (خام مال، ایکسل)</option>
+                            <option value="FLOOR">فلور سپروائزر (ورک آرڈرز، پرنٹنگ، بائنڈنگ، ڈیمیج)</option>
+                            <option value="WAREHOUSE">گودام انچارج (گودام، ورک آرڈرز)</option>
+                            <option value="ACCOUNTS">اکاؤنٹس مینیجر (اکاؤنٹس، ایکسل)</option>
+                            <option value="HR">ایچ آر آفیسر (ایچ آر، پے رول)</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block font-bold text-slate-700 mb-1.5">ماڈیولز کے اختیارات تفویض کریں:</label>
+                        <div class="grid grid-cols-2 gap-1.5 p-2 bg-slate-50 rounded-lg border border-slate-200">
+                            ${modules.map(m => `
+                                <label class="flex items-center gap-1.5 cursor-pointer text-[11px]">
+                                    <input type="checkbox" name="modulePerm" value="${m.key}" class="rounded text-[#4885a6]" />
+                                    <span>${m.label}</span>
+                                </label>
+                            `).join('')}
+                        </div>
+                    </div>
+
+                    <div class="flex justify-end gap-2 pt-3 border-t border-slate-100">
+                        <button type="button" onclick="document.getElementById('modalContainer').innerHTML = ''" class="px-4 py-2 bg-slate-100 text-slate-700 font-bold rounded-lg">منسوخ</button>
+                        <button type="submit" class="px-5 py-2 bg-[#4885a6] text-white font-bold rounded-lg shadow-xs">صارف محفوظ کریں</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    `;
+}
+
+function applyRolePreset(role) {
+    const checks = document.querySelectorAll('input[name="modulePerm"]');
+    checks.forEach(c => c.checked = false);
+
+    const map = {
+        ADMIN: ['raw_materials', 'books', 'work_orders', 'printing', 'outer', 'binding', 'warehouse', 'damage', 'hr', 'accounts', 'excel_hub', 'users', 'admin'],
+        STORE: ['raw_materials', 'excel_hub'],
+        FLOOR: ['work_orders', 'printing', 'outer', 'binding', 'damage'],
+        WAREHOUSE: ['warehouse', 'work_orders'],
+        ACCOUNTS: ['accounts', 'excel_hub', 'damage'],
+        HR: ['hr', 'excel_hub']
+    };
+
+    if (map[role]) {
+        checks.forEach(c => {
+            if (map[role].includes(c.value)) c.checked = true;
+        });
+    }
+}
+
+async function saveNewUser(event) {
+    event.preventDefault();
+    const isUrdu = window.apnStore.lang === 'ur';
+
+    const username = document.getElementById('newUsername').value.trim();
+    const password = document.getElementById('newUserPass').value.trim();
+    const fullName = document.getElementById('newUserFullName').value.trim();
+    const role = document.getElementById('newUserRole').value;
+
+    const permissions = [];
+    document.querySelectorAll('input[name="modulePerm"]:checked').forEach(c => permissions.push(c.value));
+    if (role === 'ADMIN') permissions.push('*');
+
+    await APN_API.addUser({
+        username: username,
+        password: password,
+        full_name: fullName,
+        role: role,
+        permissions: permissions
+    });
+
+    document.getElementById('modalContainer').innerHTML = '';
+    alert(isUrdu ? 'نیا صارف کامیابی سے شامل ہو گیا۔' : 'User added successfully.');
+    refreshData().then(() => renderApp());
+}
+
+function openUserSwitcherModal() {
+    const s = window.apnStore;
+    const isUrdu = s.lang === 'ur';
+    const users = s.users || [];
+
+    const modal = document.getElementById('modalContainer');
+    modal.innerHTML = `
+        <div class="fixed inset-0 z-50 bg-black/50 backdrop-blur-xs flex items-center justify-center p-4">
+            <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl border border-slate-200 text-right">
+                <div class="flex justify-between items-center pb-3 border-b border-slate-100">
+                    <h3 class="text-base font-bold text-slate-800">👤 ${isUrdu ? 'صارف اکاؤنٹ منتخب کریں (سوئچ لاگ اِن)' : 'Switch Active User Account'}</h3>
+                    <button onclick="document.getElementById('modalContainer').innerHTML = ''" class="text-slate-400 hover:text-slate-600 font-bold">✕</button>
+                </div>
+                <p class="text-xs text-slate-500 mt-2">
+                    ${isUrdu ? 'جس صارف سے لاگ اِن کریں گے، سسٹم اسی صارف کی پرمیشنز کے مطابق ماڈیولز دکھائے گا۔' : 'Switching users dynamically alters visible modules and access limits.'}
+                </p>
+
+                <div class="space-y-2 mt-4 max-h-72 overflow-y-auto pr-1">
+                    ${users.map(u => `
+                        <div onclick="switchActiveUser(${u.id})" class="p-3 rounded-xl border cursor-pointer transition flex items-center justify-between ${s.currentUser?.id === u.id || s.currentUser?.username === u.username ? 'border-[#4885a6] bg-blue-50/60 ring-2 ring-[#4885a6]/20' : 'border-slate-200 hover:bg-slate-50'}">
+                            <div class="flex items-center gap-3">
+                                <div class="w-8 h-8 rounded-full bg-[#1b3240] text-white flex items-center justify-center font-bold text-xs">
+                                    ${(u.username || 'U')[0].toUpperCase()}
+                                </div>
+                                <div class="text-right">
+                                    <div class="font-bold text-slate-800 text-xs">${u.full_name}</div>
+                                    <div class="text-[10px] text-slate-400 font-mono">@${u.username} • <span class="font-semibold text-blue-700">${u.role}</span></div>
+                                </div>
+                            </div>
+                            <span class="text-xs font-bold text-[#4885a6]">
+                                ${s.currentUser?.id === u.id || s.currentUser?.username === u.username ? 'فعال ✓' : 'لاگ اِن کریں'}
+                            </span>
+                        </div>
+                    `).join('')}
+                </div>
+
+                <div class="mt-4 pt-3 border-t border-slate-100 text-left">
+                    <button onclick="document.getElementById('modalContainer').innerHTML = ''" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold rounded-lg transition">بند کریں</button>
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+function switchActiveUser(userId) {
+    const s = window.apnStore;
+    const u = (s.users || []).find(x => x.id === userId);
+    if (!u) return;
+
+    s.setCurrentUser(u);
+    document.getElementById('modalContainer').innerHTML = '';
+}
+
 
 // ==================== MODALS & ACTIONS (FULLY BILINGUAL) ====================
 

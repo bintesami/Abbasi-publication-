@@ -17,6 +17,10 @@ const translations = {
         nav_warehouse: "Finished Warehouse",
         nav_damage: "Damage & Loss",
         nav_reports: "Reports & Ledger",
+        nav_hr: "HR و پے رول",
+        nav_accounts: "چارٹ آف اکاؤنٹ",
+        nav_excel_hub: "ایکسل ڈیٹا امپورٹ",
+        nav_users: "صارفین و پرمیشنز",
         nav_settings: "Settings",
 
         // Top 4 Buttons Tooltips
@@ -44,6 +48,14 @@ const translations = {
         dept_damage_sub: "نقصان لاگ اور مالی تخمینہ",
         dept_admin_title: "ایڈمن و کنٹرول",
         dept_admin_sub: "لیجر، سمری اور کنٹرول",
+        dept_hr_title: "ہیومن ریسورس و پے رول",
+        dept_hr_sub: "ملازمین، روزانہ حاضری، تنخواہیں و پرچیاں",
+        dept_accounts_title: "چارٹ آف اکاؤنٹ و فنانس",
+        dept_accounts_sub: "کھاتہ جات، واؤچرز اندراج اور میزانِ محاکمہ",
+        dept_excel_title: "ایکسل امپورٹ سینٹر",
+        dept_excel_sub: "بلک ایکسل شیٹ اپلوڈ و ٹیمپلیٹس",
+        dept_users_title: "صارفین و پرمیشنز",
+        dept_users_sub: "یوزر لمیٹیشنز، ماڈیول پابندی اور کنٹرول",
 
         // KPI Cards
         kpi_total_finished: "کل تیار کتب (اسٹاک)",
@@ -214,6 +226,10 @@ const translations = {
         nav_warehouse: "Finished Warehouse",
         nav_damage: "Damage & Loss",
         nav_reports: "Reports & Ledger",
+        nav_hr: "HR & Payroll",
+        nav_accounts: "Chart of Accounts",
+        nav_excel_hub: "Excel Bulk Hub",
+        nav_users: "Users & Roles",
         nav_settings: "Settings",
 
         // Top 4 Buttons Tooltips
@@ -241,6 +257,14 @@ const translations = {
         dept_damage_sub: "Wastage Log & Financial Impact",
         dept_admin_title: "Admin & Reports",
         dept_admin_sub: "Ledger, Analytics & Controls",
+        dept_hr_title: "HR & Payroll Unit",
+        dept_hr_sub: "Employees, Attendance & Salary Slips",
+        dept_accounts_title: "Chart of Accounts & Finance",
+        dept_accounts_sub: "Accounts Tree, Vouchers & Trial Balance",
+        dept_excel_title: "Excel Bulk Hub",
+        dept_excel_sub: "Bulk Excel Upload & Templates",
+        dept_users_title: "User Limitations & Roles",
+        dept_users_sub: "Access Limits, Roles & Module Permissions",
 
         // KPI Cards
         kpi_total_finished: "Total Finished Stock",
@@ -413,6 +437,25 @@ class APNStore {
         this.finishedGoods = [];
         this.damageRecords = [];
         this.dashboardMetrics = {};
+
+        // New Extended Modules State
+        this.employees = [];
+        this.attendances = [];
+        this.payrolls = [];
+        this.accounts = [];
+        this.vouchers = [];
+        this.users = [];
+        this.currentUser = JSON.parse(localStorage.getItem('apn_current_user') || 'null') || {
+            id: 1,
+            username: 'admin',
+            full_name: 'ایڈمنسٹریٹر (محمد عامر عباسی)',
+            role: 'ADMIN',
+            permissions: ['*']
+        };
+        this.hrSubTab = 'employees'; // 'employees', 'attendance', 'payroll'
+        this.accountsSubTab = 'accounts'; // 'accounts', 'vouchers', 'trial_balance'
+        this.excelUploadType = 'raw_materials';
+        this.uploadedPreview = null;
     }
 
     t(key) {
@@ -422,13 +465,32 @@ class APNStore {
     setLanguage(newLang) {
         this.lang = newLang;
         localStorage.setItem('apn_lang', newLang);
-        window.renderApp();
+        if (window.renderApp) window.renderApp();
     }
 
     toggleMobileSidebar(openState) {
         this.mobileSidebarOpen = typeof openState === 'boolean' ? openState : !this.mobileSidebarOpen;
         if (window.renderApp) window.renderApp();
     }
+
+    hasPermission(moduleKey) {
+        if (!this.currentUser) return true;
+        if (this.currentUser.role === 'ADMIN') return true;
+        const perms = this.currentUser.permissions || [];
+        if (perms.includes('*')) return true;
+        return perms.includes(moduleKey);
+    }
+
+    setCurrentUser(user) {
+        this.currentUser = user;
+        localStorage.setItem('apn_current_user', JSON.stringify(user));
+        // If activeTab is now forbidden, fallback to dashboard
+        if (this.activeTab !== 'dashboard' && !this.hasPermission(this.activeTab)) {
+            this.activeTab = 'dashboard';
+        }
+        if (window.renderApp) window.renderApp();
+    }
 }
+
 
 window.apnStore = new APNStore();
