@@ -902,9 +902,59 @@ function renderRawMaterials() {
 
 // 2. Book Master & BOM View
 function renderBooks() {
+function renderBookCard(b, isUrdu, s) {
+    return `
+        <div class="border border-slate-200 rounded-xl p-4 hover:shadow-sm transition bg-white">
+            <div class="flex items-start justify-between">
+                <div>
+                    <span class="font-mono text-xs font-bold bg-blue-50 text-blue-800 px-2 py-0.5 rounded border border-blue-200">${b.article_id}</span>
+                    <h4 class="text-base font-bold text-slate-900 mt-2">${b.title}</h4>
+                    <p class="text-xs text-slate-500 font-medium">${b.subject || ''} • ${isUrdu ? 'زبان' : 'Language'}: ${b.language}</p>
+                </div>
+                <div class="w-9 h-9 rounded-lg bg-violet-50 text-violet-600 border border-violet-200/80 flex items-center justify-center shrink-0">
+                    ${APN_ICONS.books}
+                </div>
+            </div>
+
+            <div class="grid grid-cols-3 gap-2 bg-slate-50 p-2.5 rounded-lg mt-3 text-xs text-center border border-slate-100">
+                <div>
+                    <span class="text-slate-500 block text-[11px]">${isUrdu ? 'کل صفحات' : 'Pages'}</span>
+                    <b class="text-slate-800 text-sm">${b.page_count}</b>
+                </div>
+                <div>
+                    <span class="text-slate-500 block text-[11px]">${isUrdu ? 'فارمے' : 'Forms'}</span>
+                    <b class="text-blue-700 text-sm">${b.forms_count}</b>
+                </div>
+                <div>
+                    <span class="text-slate-500 block text-[11px]">${isUrdu ? 'تخمینہ لاگت' : 'Est. Cost'}</span>
+                    <b class="text-emerald-700 text-sm">${b.standard_cost_per_copy} PKR</b>
+                </div>
+            </div>
+
+            <div class="mt-3 text-xs text-slate-600 space-y-1">
+                <p><b>${isUrdu ? 'انر پیپر:' : 'Inner Paper:'}</b> ${b.inner_paper_spec || 'Offset Paper'}</p>
+                <p><b>${isUrdu ? 'کور کارڈ:' : 'Outer Card:'}</b> ${b.outer_card_spec || 'Art Card'}</p>
+            </div>
+
+            <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+                <span class="text-[11px] text-slate-400">BOM Active</span>
+                <button onclick="openNewWorkOrderModal('${b.article_id}')" class="px-3 py-1 bg-[#4885a6] hover:bg-[#3b7596] text-white text-xs font-bold rounded-lg transition shadow-xs">
+                    ${s.t('btn_issue_wo')}
+                </button>
+            </div>
+        </div>
+    `;
+}
+
+function renderBooks() {
     const s = window.apnStore;
     const books = s.books;
     const isUrdu = s.lang === 'ur';
+    const query = (window.bookSearchQuery || '').toLowerCase().trim();
+    const filtered = query 
+        ? books.filter(b => (b.title || '').toLowerCase().includes(query) || (b.article_id || '').toLowerCase().includes(query) || (b.subject || '').toLowerCase().includes(query))
+        : books;
+    const displayBooks = query ? filtered : filtered.slice(0, 60);
 
     return `
         <div class="bg-white rounded-xl border border-slate-200 p-3 sm:p-5 md:p-6 shadow-xs">
@@ -915,57 +965,25 @@ function renderBooks() {
                     </div>
                     <div>
                         <h3 class="text-base font-bold text-slate-900">${s.t('dept_book_title')}</h3>
-                        <p class="text-xs text-slate-500">${s.t('dept_book_sub')}</p>
+                        <p class="text-xs text-slate-500">${s.t('dept_book_sub')} (<span id="bookFilteredCount">${filtered.length} / ${books.length} ${isUrdu ? 'کتب' : 'Books'}</span>)</p>
                     </div>
                 </div>
-                <button onclick="openAddBookModal()" class="px-3.5 py-1.5 bg-[#4885a6] hover:bg-[#3b7596] text-white text-xs font-bold rounded-lg shadow-xs transition">
-                    ${s.t('btn_add_book')}
-                </button>
+                <div class="flex items-center gap-2">
+                    <input type="text" id="bookSearchInput" value="${window.bookSearchQuery || ''}" oninput="handleBookSearch(this.value)" placeholder="${isUrdu ? 'کتاب کا نام، کوڈ یا مضمون تلاش کریں...' : 'Search book name, code, subject...'}" class="w-48 sm:w-64 px-3 py-1.5 text-xs bg-slate-50 border border-slate-300 rounded-lg focus:outline-none focus:border-[#4885a6]">
+                    <button onclick="openAddBookModal()" class="px-3.5 py-1.5 bg-[#4885a6] hover:bg-[#3b7596] text-white text-xs font-bold rounded-lg shadow-xs transition shrink-0">
+                        ${s.t('btn_add_book')}
+                    </button>
+                </div>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
-                ${books.map(b => `
-                    <div class="border border-slate-200 rounded-xl p-4 hover:shadow-sm transition bg-white">
-                        <div class="flex items-start justify-between">
-                            <div>
-                                <span class="font-mono text-xs font-bold bg-blue-50 text-blue-800 px-2 py-0.5 rounded border border-blue-200">${b.article_id}</span>
-                                <h4 class="text-base font-bold text-slate-900 mt-2">${b.title}</h4>
-                                <p class="text-xs text-slate-500 font-medium">${b.subject || ''} • ${isUrdu ? 'زبان' : 'Language'}: ${b.language}</p>
-                            </div>
-                            <div class="w-9 h-9 rounded-lg bg-violet-50 text-violet-600 border border-violet-200/80 flex items-center justify-center shrink-0">
-                                ${APN_ICONS.books}
-                            </div>
-                        </div>
-
-                        <div class="grid grid-cols-3 gap-2 bg-slate-50 p-2.5 rounded-lg mt-3 text-xs text-center border border-slate-100">
-                            <div>
-                                <span class="text-slate-500 block text-[11px]">${isUrdu ? 'کل صفحات' : 'Pages'}</span>
-                                <b class="text-slate-800 text-sm">${b.page_count}</b>
-                            </div>
-                            <div>
-                                <span class="text-slate-500 block text-[11px]">${isUrdu ? 'فارمے' : 'Forms'}</span>
-                                <b class="text-blue-700 text-sm">${b.forms_count}</b>
-                            </div>
-                            <div>
-                                <span class="text-slate-500 block text-[11px]">${isUrdu ? 'تخمینہ لاگت' : 'Est. Cost'}</span>
-                                <b class="text-emerald-700 text-sm">${b.standard_cost_per_copy} PKR</b>
-                            </div>
-                        </div>
-
-                        <div class="mt-3 text-xs text-slate-600 space-y-1">
-                            <p><b>${isUrdu ? 'انر پیپر:' : 'Inner Paper:'}</b> ${b.inner_paper_spec || 'Offset Paper'}</p>
-                            <p><b>${isUrdu ? 'کور کارڈ:' : 'Outer Card:'}</b> ${b.outer_card_spec || 'Art Card'}</p>
-                        </div>
-
-                        <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
-                            <span class="text-[11px] text-slate-400">BOM Active</span>
-                            <button onclick="openNewWorkOrderModal('${b.article_id}')" class="px-3 py-1 bg-[#4885a6] hover:bg-[#3b7596] text-white text-xs font-bold rounded-lg transition shadow-xs">
-                                ${s.t('btn_issue_wo')}
-                            </button>
-                        </div>
-                    </div>
-                `).join('')}
+            <div id="bookCardsGrid" class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                ${displayBooks.map(b => renderBookCard(b, isUrdu, s)).join('')}
             </div>
+            ${!query && books.length > 60 ? `
+                <div class="mt-4 p-3 text-center bg-slate-50 rounded-lg border border-slate-200 text-xs text-slate-500 font-medium">
+                    ${isUrdu ? `کل ${books.length} کتب میں سے پہلی 60 دکھائی جا رہی ہیں۔ تمام کتب دیکھنے کے لیے اوپر سرچ بار میں نام تلاش کریں۔` : `Showing first 60 of ${books.length} books. Use the search bar above to instantly find any book.`}
+                </div>
+            ` : ''}
         </div>
     `;
 }
@@ -1182,10 +1200,44 @@ function renderProductionFloor(specificStage = null) {
 }
 
 // 5. Warehouse View
+function renderWarehouseRow(item, isUrdu, s) {
+    return `
+        <tr class="hover:bg-slate-50 transition ${isUrdu ? 'text-right' : 'text-left'}">
+            <td class="py-3 px-3">
+                <span class="font-mono text-xs font-bold text-slate-500">${item.book_article_id}</span>
+                <div class="font-bold text-slate-900 text-sm mt-0.5">${item.book_title || item.book_article_id}</div>
+                ${item.subject ? `<span class="text-[11px] text-slate-400 block">${item.subject}</span>` : ''}
+            </td>
+            <td class="py-3 px-3 font-mono font-bold text-blue-700">${item.batch_no}</td>
+            <td class="py-3 px-3 text-slate-700">${item.warehouse_name}</td>
+            <td class="py-3 px-3 text-center">
+                <span class="px-2.5 py-1 rounded bg-blue-50 text-blue-800 font-extrabold border border-blue-200">
+                    ${item.rack_location} / ${item.shelf_location}
+                </span>
+            </td>
+            <td class="py-3 px-3 font-extrabold text-emerald-700 text-sm">
+                ${(item.quantity_on_hand || 0).toLocaleString()} <span class="text-xs font-normal text-slate-500">${s.t('kpi_books_unit')}</span>
+            </td>
+            <td class="py-3 px-3 text-slate-500">${new Date(item.received_date || Date.now()).toLocaleDateString(isUrdu ? 'ur-PK' : 'en-US')}</td>
+            <td class="py-3 px-3 text-center">
+                <button onclick="openRelocateModal(${item.id}, '${item.rack_location}', '${item.shelf_location}')" class="px-2.5 py-1 text-xs font-bold text-slate-700 hover:bg-slate-100 rounded border border-slate-300">
+                    ${s.t('btn_relocate')}
+                </button>
+            </td>
+        </tr>
+    `;
+}
+
 function renderWarehouse() {
     const s = window.apnStore;
-    const fg = s.finishedGoods;
     const isUrdu = s.lang === 'ur';
+    const fg = s.finishedGoods;
+    const query = (window.warehouseSearchQuery || '').toLowerCase().trim();
+    const filtered = query
+        ? fg.filter(item => (item.book_title || item.book_article_id || '').toLowerCase().includes(query) || (item.batch_no || '').toLowerCase().includes(query) || (item.rack_location || '').toLowerCase().includes(query) || (item.subject || '').toLowerCase().includes(query))
+        : fg;
+    const displayFg = query ? filtered : filtered.slice(0, 100);
+    const totalFinishedStock = fg.reduce((a,c) => a + (c.quantity_on_hand || 0), 0);
 
     return `
         <div class="bg-white rounded-xl border border-slate-200 p-3 sm:p-5 md:p-6 shadow-xs">
@@ -1196,11 +1248,14 @@ function renderWarehouse() {
                     </div>
                     <div>
                         <h3 class="text-base font-bold text-slate-900">${s.t('dept_warehouse_title')}</h3>
-                        <p class="text-xs text-slate-500">${s.t('dept_warehouse_sub')}</p>
+                        <p class="text-xs text-slate-500">${s.t('dept_warehouse_sub')} (<span id="warehouseFilteredCount">${filtered.length} / ${fg.length} ${isUrdu ? 'ٹائٹلز' : 'Titles'}</span>)</p>
                     </div>
                 </div>
-                <div class="text-xs font-bold text-slate-700 bg-slate-100 px-3 py-1.5 rounded-lg border border-slate-300">
-                    ${isUrdu ? 'کل دستیاب کتب:' : 'Total Finished Stock:'} <span class="text-blue-700 font-extrabold">${fg.reduce((a,c) => a + c.quantity_on_hand, 0).toLocaleString()}</span> ${s.t('kpi_books_unit')}
+                <div class="flex items-center gap-2">
+                    <input type="text" id="warehouseSearchInput" value="${window.warehouseSearchQuery || ''}" oninput="handleWarehouseSearch(this.value)" placeholder="${isUrdu ? 'کتاب، بیچ یا ریک تلاش کریں...' : 'Search book, batch, rack...'}" class="w-48 sm:w-64 px-3 py-1.5 text-xs bg-slate-50 border border-slate-300 rounded-lg focus:outline-none focus:border-[#4885a6]">
+                    <div class="text-xs font-bold text-slate-700 bg-slate-100 px-3 py-1.5 rounded-lg border border-slate-300 shrink-0">
+                        ${isUrdu ? 'کل دستیاب کتب:' : 'Total Finished Stock:'} <span class="text-blue-700 font-extrabold">${totalFinishedStock.toLocaleString()}</span> ${s.t('kpi_books_unit')}
+                    </div>
                 </div>
             </div>
 
@@ -1217,34 +1272,16 @@ function renderWarehouse() {
                             <th class="py-3 px-3 text-center">${s.t('th_action')}</th>
                         </tr>
                     </thead>
-                    <tbody class="divide-y divide-slate-100">
-                        ${fg.map(item => `
-                            <tr class="hover:bg-slate-50 transition ${isUrdu ? 'text-right' : 'text-left'}">
-                                <td class="py-3 px-3">
-                                    <span class="font-mono text-xs font-bold text-slate-500">${item.book_article_id}</span>
-                                    <div class="font-bold text-slate-900 text-sm mt-0.5">${item.book_title || item.book_article_id}</div>
-                                </td>
-                                <td class="py-3 px-3 font-mono font-bold text-blue-700">${item.batch_no}</td>
-                                <td class="py-3 px-3 text-slate-700">${item.warehouse_name}</td>
-                                <td class="py-3 px-3 text-center">
-                                    <span class="px-2.5 py-1 rounded bg-blue-50 text-blue-800 font-extrabold border border-blue-200">
-                                        ${item.rack_location} / ${item.shelf_location}
-                                    </span>
-                                </td>
-                                <td class="py-3 px-3 font-extrabold text-emerald-700 text-sm">
-                                    ${item.quantity_on_hand.toLocaleString()} <span class="text-xs font-normal text-slate-500">${s.t('kpi_books_unit')}</span>
-                                </td>
-                                <td class="py-3 px-3 text-slate-500">${new Date(item.received_date).toLocaleDateString(isUrdu ? 'ur-PK' : 'en-US')}</td>
-                                <td class="py-3 px-3 text-center">
-                                    <button onclick="openRelocateModal(${item.id}, '${item.rack_location}', '${item.shelf_location}')" class="px-2.5 py-1 text-xs font-bold text-slate-700 hover:bg-slate-100 rounded border border-slate-300">
-                                        ${s.t('btn_relocate')}
-                                    </button>
-                                </td>
-                            </tr>
-                        `).join('')}
+                    <tbody id="warehouseTableBody" class="divide-y divide-slate-100">
+                        ${displayFg.map(item => renderWarehouseRow(item, isUrdu, s)).join('')}
                     </tbody>
                 </table>
             </div>
+            ${!query && fg.length > 100 ? `
+                <div class="mt-4 p-3 text-center bg-slate-50 rounded-lg border border-slate-200 text-xs text-slate-500 font-medium">
+                    ${isUrdu ? `کل ${fg.length} گودام آئٹمز میں سے پہلے 100 دکھائے جا رہے ہیں۔ کسی بھی مخصوص کتاب کو تلاش کرنے کے لیے اوپر سرچ بار استعمال کریں۔` : `Showing first 100 of ${fg.length} warehouse items. Use the search bar above to filter.`}
+                </div>
+            ` : ''}
         </div>
     `;
 }
@@ -3483,7 +3520,42 @@ function closeModal() {
     if (modal) modal.innerHTML = '';
 }
 
+function handleBookSearch(q) {
+    window.bookSearchQuery = q;
+    const container = document.getElementById('bookCardsGrid');
+    const countEl = document.getElementById('bookFilteredCount');
+    if (!container) return;
+    const s = window.apnStore;
+    const isUrdu = s.lang === 'ur';
+    const query = (q || '').toLowerCase().trim();
+    const filtered = query 
+        ? s.books.filter(b => (b.title || '').toLowerCase().includes(query) || (b.article_id || '').toLowerCase().includes(query) || (b.subject || '').toLowerCase().includes(query))
+        : s.books;
+    if (countEl) countEl.innerText = `${filtered.length} / ${s.books.length} ${isUrdu ? 'کتب' : 'Books'}`;
+    const display = query ? filtered : filtered.slice(0, 60);
+    container.innerHTML = display.map(b => renderBookCard(b, isUrdu, s)).join('');
+}
+
+function handleWarehouseSearch(q) {
+    window.warehouseSearchQuery = q;
+    const tbody = document.getElementById('warehouseTableBody');
+    const countEl = document.getElementById('warehouseFilteredCount');
+    if (!tbody) return;
+    const s = window.apnStore;
+    const isUrdu = s.lang === 'ur';
+    const fg = s.finishedGoods;
+    const query = (q || '').toLowerCase().trim();
+    const filtered = query
+        ? fg.filter(item => (item.book_title || item.book_article_id || '').toLowerCase().includes(query) || (item.batch_no || '').toLowerCase().includes(query) || (item.rack_location || '').toLowerCase().includes(query) || (item.subject || '').toLowerCase().includes(query))
+        : fg;
+    if (countEl) countEl.innerText = `${filtered.length} / ${fg.length} ${isUrdu ? 'ٹائٹلز' : 'Titles'}`;
+    const display = query ? filtered : filtered.slice(0, 100);
+    tbody.innerHTML = display.map(item => renderWarehouseRow(item, isUrdu, s)).join('');
+}
+
 // Global Exports
+window.handleBookSearch = handleBookSearch;
+window.handleWarehouseSearch = handleWarehouseSearch;
 window.switchTab = switchTab;
 window.toggleSidebar = toggleSidebar;
 window.toggleMobileSidebar = toggleMobileSidebar;
@@ -3512,3 +3584,4 @@ window.closeModal = closeModal;
 window.renderApp = renderApp;
 
 document.addEventListener('DOMContentLoaded', initApp);
+

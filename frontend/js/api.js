@@ -715,38 +715,32 @@ const APN_API = {
 
     seedLocalMockData() {
         const existingMaterials = JSON.parse(localStorage.getItem('apn_raw_materials') || '[]');
-        const needsReseed = !localStorage.getItem('apn_seeded_v2') || 
+        const existingFg = JSON.parse(localStorage.getItem('apn_finished_goods') || '[]');
+        const existingBooks = JSON.parse(localStorage.getItem('apn_books') || '[]');
+        const needsReseed = !localStorage.getItem('apn_seeded_v3') || 
                             !localStorage.getItem('apn_employees') || 
                             !localStorage.getItem('apn_accounts') ||
-                            existingMaterials.length < 50;
+                            existingMaterials.length < 50 ||
+                            existingFg.length < 50 ||
+                            existingBooks.length < 50;
 
         if (!needsReseed) return;
         
         const rawMaterials = (window.APN_DEFAULT_MATERIALS && window.APN_DEFAULT_MATERIALS.length > 0)
             ? window.APN_DEFAULT_MATERIALS
             : [
-            { id: 1, name: "68 GSM Local Offset Paper (23x36)", category: "PAPER_INNER", size: "23x36", gsm: 68, unit: "REAMS", current_stock: 145.0, min_reorder_level: 20.0, unit_cost: 4200.0 },
-            { id: 2, name: "70 GSM Imported Woodfree Paper (20x30)", category: "PAPER_INNER", size: "20x30", gsm: 70, unit: "REAMS", current_stock: 65.0, min_reorder_level: 15.0, unit_cost: 4800.0 },
-            { id: 3, name: "80 GSM White Offset Paper (25x36)", category: "PAPER_INNER", size: "25x36", gsm: 80, unit: "REAMS", current_stock: 4.0, min_reorder_level: 10.0, unit_cost: 5300.0 },
-            { id: 4, name: "260 GSM Art Card (25x36)", category: "CARD_OUTER", size: "25x36", gsm: 260, unit: "REAMS", current_stock: 42.0, min_reorder_level: 10.0, unit_cost: 8500.0 },
-            { id: 5, name: "300 GSM Bleached Board (23x36)", category: "CARD_OUTER", size: "23x36", gsm: 300, unit: "REAMS", current_stock: 3.0, min_reorder_level: 8.0, unit_cost: 9800.0 },
-            { id: 6, name: "Toyo Process Cyan Ink (سیان نیلی سیاہی)", category: "INK", size: "1 KG", gsm: null, unit: "KG", current_stock: 25.0, min_reorder_level: 5.0, unit_cost: 2100.0 },
-            { id: 7, name: "Toyo Process Magenta Ink (میجنٹا گلابی سیاہی)", category: "INK", size: "1 KG", gsm: null, unit: "KG", current_stock: 18.0, min_reorder_level: 5.0, unit_cost: 2100.0 },
-            { id: 8, name: "Toyo Process Yellow Ink (پیلی سیاہی)", category: "INK", size: "1 KG", gsm: null, unit: "KG", current_stock: 22.0, min_reorder_level: 5.0, unit_cost: 2100.0 },
-            { id: 9, name: "Toyo Process Black Ink (کالی سیاہی)", category: "INK", size: "1 KG", gsm: null, unit: "KG", current_stock: 2.5, min_reorder_level: 6.0, unit_cost: 1950.0 },
-            { id: 10, name: "Gloss Thermal Lamination Film 24\"", category: "LAMINATION", size: "24 inch", gsm: null, unit: "ROLLS", current_stock: 14.0, min_reorder_level: 4.0, unit_cost: 7200.0 },
-            { id: 11, name: "Matt Thermal Lamination Film 26\"", category: "LAMINATION", size: "26 inch", gsm: null, unit: "ROLLS", current_stock: 1.0, min_reorder_level: 3.0, unit_cost: 7800.0 },
-            { id: 12, name: "Hot Melt Spine Binding Glue (ہاٹ میلٹ گوند)", category: "GLUE_BINDING", size: "25 KG", gsm: null, unit: "KG", current_stock: 75.0, min_reorder_level: 20.0, unit_cost: 850.0 }
+            { id: 1, name: "68 GSM Local Offset Paper (23x36)", category: "PAPER_INNER", size: "23x36", gsm: 68, unit: "REAMS", current_stock: 145.0, min_reorder_level: 20.0, unit_cost: 4200.0 }
         ];
 
-        const books = [
-            { article_id: "APN-BK-0101", title: "اردو قواعد و انشا - جماعت پنجم", language: "Urdu", subject: "اردو لازمی", page_count: 128, forms_count: 8.0, inner_paper_spec: "68 GSM Local Offset (23x36)", outer_card_spec: "260 GSM Art Card (Gloss Lam)", colors: "4-Color", standard_cost_per_copy: 95.50 },
-            { article_id: "APN-BK-0102", title: "Oxford Modern English - Grade 4", language: "English", subject: "English Literature", page_count: 144, forms_count: 9.0, inner_paper_spec: "70 GSM Imported Woodfree (20x30)", outer_card_spec: "260 GSM Art Card (Matt Lam)", colors: "4-Color", standard_cost_per_copy: 115.00 },
-            { article_id: "APN-BK-0103", title: "اسلامیات لازمی - جماعت ہشتم", language: "Urdu", subject: "اسلامیات", page_count: 160, forms_count: 10.0, inner_paper_spec: "68 GSM Local Offset (23x36)", outer_card_spec: "260 GSM Art Card (Gloss Lam)", colors: "2-Color", standard_cost_per_copy: 88.00 },
-            { article_id: "APN-BK-0104", title: "General Science & Technology - Grade 5", language: "English", subject: "General Science", page_count: 192, forms_count: 12.0, inner_paper_spec: "70 GSM Imported Woodfree (20x30)", outer_card_spec: "300 GSM Bleached Board (Gloss Lam)", colors: "4-Color", standard_cost_per_copy: 142.00 }
+        const books = (window.APN_DEFAULT_BOOKS && window.APN_DEFAULT_BOOKS.length > 0)
+            ? window.APN_DEFAULT_BOOKS
+            : [
+            { article_id: "APN-BK-0101", title: "اردو قواعد و انشا - جماعت پنجم", language: "Urdu", subject: "اردو لازمی", page_count: 128, forms_count: 8.0, inner_paper_spec: "68 GSM Local Offset (23x36)", outer_card_spec: "260 GSM Art Card (Gloss Lam)", colors: "4-Color", standard_cost_per_copy: 95.50 }
         ];
 
-        const workOrders = [
+        const workOrders = (window.APN_DEFAULT_WORK_ORDERS && window.APN_DEFAULT_WORK_ORDERS.length > 0)
+            ? window.APN_DEFAULT_WORK_ORDERS
+            : [
             {
                 work_order_no: "APN-WO-2026-0001",
                 book_article_id: "APN-BK-0101",
@@ -767,50 +761,12 @@ const APN_API = {
                 start_date: new Date(Date.now() - 7*86400000).toISOString(),
                 completed_date: new Date(Date.now() - 1*86400000).toISOString(),
                 notes: "سیشن 2026-2027 ایڈیشن - مکمل تیار و گودام منتقل"
-            },
-            {
-                work_order_no: "APN-WO-2026-0002",
-                book_article_id: "APN-BK-0102",
-                book_title: "Oxford Modern English - Grade 4",
-                target_quantity: 3000,
-                status: "IN_BINDING",
-                inner_printed_sheets: 3000,
-                inner_damage_sheets: 30,
-                inner_status: "COMPLETED",
-                outer_printed_covers: 3000,
-                outer_damage_covers: 15,
-                outer_status: "READY_FOR_BINDING",
-                binding_assembled_qty: 1650,
-                binding_damage_qty: 8,
-                binding_status: "IN_PROGRESS",
-                actual_finished_quantity: 0,
-                total_damage_quantity: 53,
-                start_date: new Date(Date.now() - 3*86400000).toISOString(),
-                notes: "انر اور آؤٹر پرنٹنگ مکمل ہو چکی ہے، بائنڈنگ فلور پر اسمبلی جاری ہے"
-            },
-            {
-                work_order_no: "APN-WO-2026-0003",
-                book_article_id: "APN-BK-0103",
-                book_title: "اسلامیات لازمی - جماعت ہشتم",
-                target_quantity: 4000,
-                status: "IN_PRINTING",
-                inner_printed_sheets: 2400,
-                inner_damage_sheets: 22,
-                inner_status: "IN_PROGRESS",
-                outer_printed_covers: 4000,
-                outer_damage_covers: 18,
-                outer_status: "READY_FOR_BINDING",
-                binding_assembled_qty: 0,
-                binding_damage_qty: 0,
-                binding_status: "PENDING",
-                actual_finished_quantity: 0,
-                total_damage_quantity: 40,
-                start_date: new Date(Date.now() - 1*86400000).toISOString(),
-                notes: "انر کے فارمے مشین نمبر 2 پر چھپ رہے ہیں"
             }
         ];
 
-        const finishedGoods = [
+        const finishedGoods = (window.APN_DEFAULT_FINISHED_GOODS && window.APN_DEFAULT_FINISHED_GOODS.length > 0)
+            ? window.APN_DEFAULT_FINISHED_GOODS
+            : [
             {
                 id: 1,
                 book_article_id: "APN-BK-0101",
@@ -824,6 +780,10 @@ const APN_API = {
                 received_date: new Date(Date.now() - 1*86400000).toISOString()
             }
         ];
+
+        if (window.APN_DEFAULT_TRANSACTIONS && window.APN_DEFAULT_TRANSACTIONS.length > 0) {
+            localStorage.setItem('apn_material_transactions', JSON.stringify(window.APN_DEFAULT_TRANSACTIONS));
+        }
 
         const damageRecords = [
             { id: 1, work_order_no: "APN-WO-2026-0001", stage: "PRINTING_INNER", item_type: "انر فارمے (Inner Sheets)", damaged_quantity: 45, unit: "SHEETS", reason: "مشین پر فیڈر جیم اور مس پرنٹنگ", cost_loss: 202.50, recorded_at: new Date(Date.now() - 5*86400000).toISOString() },
@@ -877,6 +837,7 @@ const APN_API = {
         localStorage.setItem('apn_users', JSON.stringify(users));
         localStorage.setItem('apn_seeded_v1', 'true');
         localStorage.setItem('apn_seeded_v2', 'true');
+        localStorage.setItem('apn_seeded_v3', 'true');
     }
 };
 
