@@ -379,156 +379,168 @@ function renderDepartmentGrid() {
             category: 'inventory',
             icon: APN_ICONS.raw_materials, 
             accent: '#0284c7',
-            iconBg: 'bg-sky-50 text-sky-600 border border-sky-200/60',
+            iconBg: 'bg-sky-50 text-sky-600 border border-sky-200/80',
             badgeClass: 'bg-sky-50 text-sky-700 border border-sky-200',
             titleEn: 'Raw Material Store', 
             titleUr: 'خام مال و پیکیجنگ اسٹور', 
-            subEn: 'Paper, Board, Inks & Supplies',
-            subUr: 'کاغذ، بورڈ، سیاہی اور کیمیکلز',
-            statPill: `${s.rawMaterials.length} ${isUrdu ? 'آئٹمز' : 'SKUs'}` 
+            subEn: 'Paper, Art Board, Printing Inks & Lamination Supplies',
+            subUr: 'کاغذ، آرٹ بورڈ، پرنٹنگ سیاہی اور لیمینیشن میٹریل',
+            countEn: `${s.rawMaterials.length} Items`,
+            countUr: `${s.rawMaterials.length} آئٹمز`
         },
         { 
             id: 'books', 
             category: 'manufacturing',
             icon: APN_ICONS.books, 
             accent: '#7c3aed',
-            iconBg: 'bg-violet-50 text-violet-600 border border-violet-200/60',
+            iconBg: 'bg-violet-50 text-violet-600 border border-violet-200/80',
             badgeClass: 'bg-violet-50 text-violet-700 border border-violet-200',
             titleEn: 'Book Master & BOM', 
-            titleUr: 'کتب ماسٹر و فارمولا (BOM)', 
-            subEn: 'Specs, Forms, Pages & Costing',
-            subUr: 'صفحات، فارمے، لاگت اور فارمولا',
-            statPill: `${s.books.length} ${s.t('kpi_books_unit')}` 
+            titleUr: 'کتب ماسٹر اور فارمولا (BOM)', 
+            subEn: 'Book Specs, Inner Forms, Paper Types & Standard Costing',
+            subUr: 'کتابوں کے صفحات، فارمے، پیپر سائز اور لاگت کا تخمینہ',
+            countEn: `${s.books.length} Books`,
+            countUr: `${s.books.length} کتب`
         },
         { 
             id: 'work_orders', 
             category: 'manufacturing',
             icon: APN_ICONS.work_orders, 
             accent: '#d97706',
-            iconBg: 'bg-amber-50 text-amber-600 border border-amber-200/60',
+            iconBg: 'bg-amber-50 text-amber-600 border border-amber-200/80',
             badgeClass: 'bg-amber-50 text-amber-700 border border-amber-200',
-            titleEn: 'Work Orders & Jobs', 
-            titleUr: 'پروڈکشن جابز و ورک آرڈرز', 
-            subEn: 'Job Cards, Barcodes & Tracking',
-            subUr: 'جاب کارڈز، بارکوڈ اور اخراج',
-            statPill: `${m.active_jobs_count || 0} ${isUrdu ? 'فعال جابز' : 'Active'}` 
+            titleEn: 'Work Orders & Production', 
+            titleUr: 'ورک آرڈرز اور پروڈکشن جابز', 
+            subEn: 'Job Card Issuance, Barcode Tracking & Floor Progress',
+            subUr: 'جاب کارڈز کا اجراء، بارکوڈ ٹریکنگ اور شیٹس کنٹرول',
+            countEn: `${m.active_jobs_count || 0} Active Jobs`,
+            countUr: `${m.active_jobs_count || 0} فعال آرڈرز`
         },
         { 
             id: 'printing', 
             category: 'manufacturing',
             icon: APN_ICONS.printing, 
             accent: '#2563eb',
-            iconBg: 'bg-blue-50 text-blue-600 border border-blue-200/60',
+            iconBg: 'bg-blue-50 text-blue-600 border border-blue-200/80',
             badgeClass: 'bg-blue-50 text-blue-700 border border-blue-200',
             titleEn: 'Inner Printing Floor', 
             titleUr: 'انر پرنٹنگ پریس فلور', 
-            subEn: 'Offset Presses & Text Forms',
-            subUr: 'متن کے فارمے اور شیٹس',
-            statPill: isUrdu ? 'مشین روم 1' : 'Room 1' 
+            subEn: 'Offset Presses, Text Forms & Sheet Counters',
+            subUr: 'آفسیٹ پریس مشینیں، اندرونی فارمے اور شیٹس مانیٹرنگ',
+            countEn: 'Press Unit 1',
+            countUr: 'مشین روم 1'
         },
         { 
             id: 'outer', 
             category: 'manufacturing',
             icon: APN_ICONS.outer, 
             accent: '#db2777',
-            iconBg: 'bg-pink-50 text-pink-600 border border-pink-200/60',
+            iconBg: 'bg-pink-50 text-pink-600 border border-pink-200/80',
             badgeClass: 'bg-pink-50 text-pink-700 border border-pink-200',
-            titleEn: 'Cover & Lamination', 
-            titleUr: 'ٹائٹل کور و لیمینیشن', 
-            subEn: 'Title Cards & Thermal Film',
-            subUr: 'ٹائٹل کارڈ اور تھرمل فلم',
-            statPill: isUrdu ? 'مشین روم 2' : 'Room 2' 
+            titleEn: 'Cover & Lamination Unit', 
+            titleUr: 'ٹائٹل کور اور لیمینیشن', 
+            subEn: 'Cover Printing, Matt & Gloss Thermal Lamination',
+            subUr: 'ٹائٹل کارڈ پرنٹنگ، میٹ و گلوس تھرمل لیمینیشن',
+            countEn: 'Press Unit 2',
+            countUr: 'مشین روم 2'
         },
         { 
             id: 'binding', 
             category: 'manufacturing',
             icon: APN_ICONS.binding, 
             accent: '#0d9488',
-            iconBg: 'bg-teal-50 text-teal-600 border border-teal-200/60',
+            iconBg: 'bg-teal-50 text-teal-600 border border-teal-200/80',
             badgeClass: 'bg-teal-50 text-teal-700 border border-teal-200',
             titleEn: 'Binding & Finishing', 
-            titleUr: 'بائنڈنگ و فنشنگ فلور', 
-            subEn: 'Folding, Gluing & Trimming',
-            subUr: 'فولڈنگ، گلو، کٹنگ اور ملاپ',
-            statPill: isUrdu ? 'بائنڈنگ فلور' : 'Floor 1' 
+            titleUr: 'بائنڈنگ اور فنشنگ فلور', 
+            subEn: 'Folding, Hot Melt Glue, Stitching & 3-Knife Trimming',
+            subUr: 'فولڈنگ، ہاٹ میلٹ گوند، سلائی اور تھری نائف کٹنگ',
+            countEn: 'Binding Floor',
+            countUr: 'بائنڈنگ فلور'
         },
         { 
             id: 'warehouse', 
             category: 'inventory',
             icon: APN_ICONS.warehouse, 
             accent: '#16a34a',
-            iconBg: 'bg-emerald-50 text-emerald-600 border border-emerald-200/60',
+            iconBg: 'bg-emerald-50 text-emerald-600 border border-emerald-200/80',
             badgeClass: 'bg-emerald-50 text-emerald-700 border border-emerald-200',
             titleEn: 'Finished Goods Warehouse', 
             titleUr: 'تیار کتب مرکزی گودام', 
-            subEn: 'Rack, Shelf & Dispatch Storage',
-            subUr: 'ریک، شیلف اور تیار کتب',
-            statPill: `${(m.total_finished_books || 0).toLocaleString()} ${s.t('kpi_books_unit')}` 
+            subEn: 'Rack & Shelf Inventory, Ready Stock & Dispatch Delivery',
+            subUr: 'ریک اور شیلف انوینٹری، اسٹاک بیلنس اور کتب ترسیل',
+            countEn: `${(m.total_finished_books || 0).toLocaleString()} Books`,
+            countUr: `${(m.total_finished_books || 0).toLocaleString()} کتب`
         },
         { 
             id: 'damage', 
             category: 'finance_hr',
             icon: APN_ICONS.damage, 
             accent: '#e11d48',
-            iconBg: 'bg-rose-50 text-rose-600 border border-rose-200/60',
+            iconBg: 'bg-rose-50 text-rose-600 border border-rose-200/80',
             badgeClass: 'bg-rose-50 text-rose-700 border border-rose-200',
-            titleEn: 'Damage & Wastage Log', 
-            titleUr: 'ڈیمیج و ویسٹیج تجزیہ', 
-            subEn: 'Press Spoilage & Financial Loss',
-            subUr: 'نقصان لاگ اور مالی تخمینہ',
-            statPill: `${m.total_damage_items || 0} ${isUrdu ? 'ویسٹیج' : 'Loss'}` 
+            titleEn: 'Damage & Spoilage Log', 
+            titleUr: 'ڈیمیج اور ویسٹیج تجزیہ', 
+            subEn: 'Press Spoilage, Damage Reasons & Financial Impact',
+            subUr: 'پرنٹنگ و بائنڈنگ اسپوائلج، وجوہات اور مالی نقصان',
+            countEn: `${m.total_damage_items || 0} Losses`,
+            countUr: `${m.total_damage_items || 0} ضایعات`
         },
         { 
             id: 'hr', 
             category: 'finance_hr',
             icon: APN_ICONS.hr, 
             accent: '#0891b2',
-            iconBg: 'bg-cyan-50 text-cyan-600 border border-cyan-200/60',
+            iconBg: 'bg-cyan-50 text-cyan-600 border border-cyan-200/80',
             badgeClass: 'bg-cyan-50 text-cyan-700 border border-cyan-200',
-            titleEn: 'HR & Payroll Unit', 
-            titleUr: 'ہیومن ریسورس و پے رول', 
-            subEn: 'Staff, Attendance & Salary Slips',
-            subUr: 'ملازمین، روزانہ حاضری، تنخواہیں',
-            statPill: `${(s.employees || []).length} ${isUrdu ? 'ملازمین' : 'Staff'}` 
+            titleEn: 'HR & Payroll Management', 
+            titleUr: 'ہیومن ریسورس اور پے رول', 
+            subEn: 'Staff Directory, Daily Attendance & Salary Slips',
+            subUr: 'ملازمین کا ریکارڈ، روزانہ حاضری، تنخواہیں اور پرچیاں',
+            countEn: `${(s.employees || []).length} Staff`,
+            countUr: `${(s.employees || []).length} ملازمین`
         },
         { 
             id: 'accounts', 
             category: 'finance_hr',
             icon: APN_ICONS.accounts, 
             accent: '#059669',
-            iconBg: 'bg-emerald-50 text-emerald-600 border border-emerald-200/60',
+            iconBg: 'bg-emerald-50 text-emerald-600 border border-emerald-200/80',
             badgeClass: 'bg-emerald-50 text-emerald-700 border border-emerald-200',
             titleEn: 'Chart of Accounts & GL', 
-            titleUr: 'چارٹ آف اکاؤنٹ و مالیات', 
-            subEn: 'Ledgers, Vouchers & Trial Balance',
-            subUr: 'کھاتہ جات، واؤچرز و میزان محاکمہ',
-            statPill: `${(s.accounts || []).length} ${isUrdu ? 'کھاتہ جات' : 'Ledgers'}` 
+            titleUr: 'چارٹ آف اکاؤنٹس اور مالیات', 
+            subEn: 'Ledgers, Cash/Bank Vouchers & Trial Balance',
+            subUr: 'کھاتہ جات، کیش و بینک واؤچرز اور میزان محاکمہ',
+            countEn: `${(s.accounts || []).length} Accounts`,
+            countUr: `${(s.accounts || []).length} کھاتے`
         },
         { 
             id: 'excel_hub', 
             category: 'finance_hr',
             icon: APN_ICONS.excel_hub, 
             accent: '#15803d',
-            iconBg: 'bg-green-50 text-green-700 border border-green-200/60',
+            iconBg: 'bg-green-50 text-green-700 border border-green-200/80',
             badgeClass: 'bg-green-50 text-green-700 border border-green-200',
             titleEn: 'Excel Bulk Data Hub', 
-            titleUr: 'ایکسل بلک امپورٹ سینٹر', 
-            subEn: 'Bulk Upload, Preview & Templates',
-            subUr: 'بلک شیٹ اپلوڈ و نمونہ ٹیمپلیٹس',
-            statPill: isUrdu ? 'ایکسل حب' : 'Upload Hub' 
+            titleUr: 'ایکسل ڈیٹا امپورٹ سینٹر', 
+            subEn: 'Bulk Sheet Upload, Live Preview & Sample Templates',
+            subUr: 'ایکسل شیٹس کا بلک اپلوڈ، ڈیٹا معائنہ اور ٹیمپلیٹس',
+            countEn: 'Bulk Import',
+            countUr: 'بلک امپورٹ'
         },
         { 
             id: 'users', 
             category: 'finance_hr',
             icon: APN_ICONS.users, 
             accent: '#6366f1',
-            iconBg: 'bg-indigo-50 text-indigo-600 border border-indigo-200/60',
+            iconBg: 'bg-indigo-50 text-indigo-600 border border-indigo-200/80',
             badgeClass: 'bg-indigo-50 text-indigo-700 border border-indigo-200',
-            titleEn: 'User Access & RBAC', 
-            titleUr: 'صارفین و پرمیشنز کنٹرول', 
-            subEn: 'User Roles & Module Limits',
-            subUr: 'یوزر لمیٹیشنز، ماڈیول پابندی',
-            statPill: `${(s.users || []).length} ${isUrdu ? 'صارفین' : 'Users'}` 
+            titleEn: 'User Access & Permissions', 
+            titleUr: 'صارفین اور اختیارات کنٹرول', 
+            subEn: 'Role Permissions, Access Limits & Module Control',
+            subUr: 'یوزرز کی لمیٹیشنز، ماڈیول پابندیاں اور رولز',
+            countEn: `${(s.users || []).length} Users`,
+            countUr: `${(s.users || []).length} صارفین`
         },
         { 
             id: 'admin', 
@@ -537,11 +549,12 @@ function renderDepartmentGrid() {
             accent: '#475569',
             iconBg: 'bg-slate-100 text-slate-700 border border-slate-200',
             badgeClass: 'bg-slate-100 text-slate-700 border border-slate-300',
-            titleEn: 'Admin Analytics & Audit', 
-            titleUr: 'ایڈمن کنٹرول و آڈٹ لیجر', 
-            subEn: 'System Logs, Analytics & Controls',
-            subUr: 'لیجر، سمری اور ایڈمن کنٹرول',
-            statPill: isUrdu ? 'کنٹرول' : 'Controls' 
+            titleEn: 'Admin Reports & Audit', 
+            titleUr: 'ایڈمن رپورٹس اور آڈٹ لیجر', 
+            subEn: 'System Audit Trail, Analytics & Controls',
+            subUr: 'مکمل سسٹم کا آڈٹ ٹریل، کارکردگی اور ڈیٹا تجزیہ',
+            countEn: 'System Controls',
+            countUr: 'سسٹم کنٹرول'
         }
     ];
 
@@ -555,80 +568,80 @@ function renderDepartmentGrid() {
         <div class="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-3.5 mb-5 sm:mb-6">
             <div class="bg-white p-3 sm:p-3.5 rounded-xl border border-slate-200/90 shadow-2xs hover:shadow-xs transition relative overflow-hidden">
                 <div class="flex items-center justify-between">
-                    <span class="text-[10px] sm:text-[11px] font-extrabold uppercase tracking-wider text-slate-500 font-sans">
+                    <span class="text-[10.5px] sm:text-[11.5px] font-bold uppercase tracking-wider text-slate-500 font-sans">
                         ${isUrdu ? 'کل تیار کتب اسٹاک' : 'Total Finished Stock'}
                     </span>
-                    <div class="w-7 h-7 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center">
+                    <div class="w-8 h-8 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center">
                         ${APN_ICONS.kpi_books}
                     </div>
                 </div>
-                <div class="mt-1 flex items-baseline gap-1.5">
+                <div class="mt-1.5 flex items-baseline gap-1.5">
                     <span class="text-xl sm:text-2xl font-black text-slate-900 tabular-nums tracking-tight font-sans">
                         ${(m.total_finished_books || 0).toLocaleString()}
                     </span>
-                    <span class="text-[11px] text-slate-500 font-medium">${s.t('kpi_books_unit')}</span>
+                    <span class="text-xs text-slate-500 font-medium">${s.t('kpi_books_unit')}</span>
                 </div>
-                <div class="mt-1.5 flex items-center gap-1.5 text-[10px] text-emerald-600 font-semibold">
-                    <span>● ${isUrdu ? 'محفوظ و معائنہ شدہ' : 'Optimal Inventory'}</span>
+                <div class="mt-1.5 flex items-center gap-1.5 text-[10.5px] text-emerald-600 font-semibold">
+                    <span>● ${isUrdu ? 'محفوظ و معائنہ شدہ اسٹاک' : 'Optimal Inventory'}</span>
                 </div>
             </div>
 
             <div class="bg-white p-3 sm:p-3.5 rounded-xl border border-slate-200/90 shadow-2xs hover:shadow-xs transition relative overflow-hidden">
                 <div class="flex items-center justify-between">
-                    <span class="text-[10px] sm:text-[11px] font-extrabold uppercase tracking-wider text-slate-500 font-sans">
+                    <span class="text-[10.5px] sm:text-[11.5px] font-bold uppercase tracking-wider text-slate-500 font-sans">
                         ${isUrdu ? 'زیرِ تکمیل جابز' : 'Active Work Orders'}
                     </span>
-                    <div class="w-7 h-7 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center">
+                    <div class="w-8 h-8 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center">
                         ${APN_ICONS.kpi_jobs}
                     </div>
                 </div>
-                <div class="mt-1 flex items-baseline gap-1.5">
+                <div class="mt-1.5 flex items-baseline gap-1.5">
                     <span class="text-xl sm:text-2xl font-black text-slate-900 tabular-nums tracking-tight font-sans">
                         ${m.active_jobs_count || 0}
                     </span>
-                    <span class="text-[11px] text-slate-500 font-medium">${s.t('kpi_jobs_unit')}</span>
+                    <span class="text-xs text-slate-500 font-medium">${s.t('kpi_jobs_unit')}</span>
                 </div>
-                <div class="mt-1.5 flex items-center gap-1.5 text-[10px] text-amber-600 font-semibold">
+                <div class="mt-1.5 flex items-center gap-1.5 text-[10.5px] text-amber-600 font-semibold">
                     <span>● ${isUrdu ? 'پرنٹنگ و بائنڈنگ جاری' : 'Press & Binding Active'}</span>
                 </div>
             </div>
 
             <div class="bg-white p-3 sm:p-3.5 rounded-xl border border-slate-200/90 shadow-2xs hover:shadow-xs transition relative overflow-hidden">
                 <div class="flex items-center justify-between">
-                    <span class="text-[10px] sm:text-[11px] font-extrabold uppercase tracking-wider text-slate-500 font-sans">
+                    <span class="text-[10.5px] sm:text-[11.5px] font-bold uppercase tracking-wider text-slate-500 font-sans">
                         ${isUrdu ? 'کم اسٹاک الرٹس' : 'Low Stock Alerts'}
                     </span>
-                    <div class="w-7 h-7 rounded-lg bg-red-50 text-red-600 flex items-center justify-center ${(m.low_stock_count || 0) > 0 ? 'badge-pulse-red' : ''}">
+                    <div class="w-8 h-8 rounded-lg bg-red-50 text-red-600 flex items-center justify-center ${(m.low_stock_count || 0) > 0 ? 'badge-pulse-red' : ''}">
                         ${APN_ICONS.kpi_alerts}
                     </div>
                 </div>
-                <div class="mt-1 flex items-baseline gap-1.5">
+                <div class="mt-1.5 flex items-baseline gap-1.5">
                     <span class="text-xl sm:text-2xl font-black ${(m.low_stock_count || 0) > 0 ? 'text-red-600' : 'text-slate-900'} tabular-nums tracking-tight font-sans">
                         ${m.low_stock_count || 0}
                     </span>
-                    <span class="text-[11px] text-slate-500 font-medium">${s.t('kpi_alerts_unit')}</span>
+                    <span class="text-xs text-slate-500 font-medium">${s.t('kpi_alerts_unit')}</span>
                 </div>
-                <div class="mt-1.5 flex items-center gap-1.5 text-[10px] ${(m.low_stock_count || 0) > 0 ? 'text-red-600 font-bold' : 'text-slate-500 font-semibold'}">
-                    <span>${(m.low_stock_count || 0) > 0 ? (isUrdu ? '⚠️ ری آرڈر درکار ہے' : '⚠️ Reorder Needed') : (isUrdu ? '✓ تمام اسٹاک تسلی بخش' : '✓ Stock Healthy')}</span>
+                <div class="mt-1.5 flex items-center gap-1.5 text-[10.5px] ${(m.low_stock_count || 0) > 0 ? 'text-red-600 font-bold' : 'text-slate-500 font-semibold'}">
+                    <span>${(m.low_stock_count || 0) > 0 ? (isUrdu ? '⚠️ فوری خریداری درکار' : '⚠️ Immediate Reorder') : (isUrdu ? '✓ اسٹاک تسلی بخش' : '✓ Stock Healthy')}</span>
                 </div>
             </div>
 
             <div class="bg-white p-3 sm:p-3.5 rounded-xl border border-slate-200/90 shadow-2xs hover:shadow-xs transition relative overflow-hidden">
                 <div class="flex items-center justify-between">
-                    <span class="text-[10px] sm:text-[11px] font-extrabold uppercase tracking-wider text-slate-500 font-sans">
+                    <span class="text-[10.5px] sm:text-[11.5px] font-bold uppercase tracking-wider text-slate-500 font-sans">
                         ${isUrdu ? 'کل ڈیمیج و نقصان' : 'Total Spoilage Loss'}
                     </span>
-                    <div class="w-7 h-7 rounded-lg bg-rose-50 text-rose-600 flex items-center justify-center">
+                    <div class="w-8 h-8 rounded-lg bg-rose-50 text-rose-600 flex items-center justify-center">
                         ${APN_ICONS.kpi_loss}
                     </div>
                 </div>
-                <div class="mt-1 flex items-baseline gap-1.5">
+                <div class="mt-1.5 flex items-baseline gap-1.5">
                     <span class="text-xl sm:text-2xl font-black text-slate-900 tabular-nums tracking-tight font-sans">
                         ${(m.total_financial_loss || 0).toLocaleString()}
                     </span>
-                    <span class="text-[11px] text-slate-500 font-medium">${s.t('kpi_pkr')}</span>
+                    <span class="text-xs text-slate-500 font-medium">${s.t('kpi_pkr')}</span>
                 </div>
-                <div class="mt-1.5 flex items-center gap-1.5 text-[10px] text-slate-500 font-semibold">
+                <div class="mt-1.5 flex items-center gap-1.5 text-[10.5px] text-slate-500 font-semibold">
                     <span>● ${isUrdu ? 'مجموعی ویسٹیج تخمینہ' : 'Logged Spoilage Cost'}</span>
                 </div>
             </div>
@@ -637,11 +650,11 @@ function renderDepartmentGrid() {
         <!-- Operational Workspace Filter Strip (Enterprise Cockpit Navigation) -->
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 mb-4 pb-2 border-b border-slate-200/80">
             <div class="flex items-center gap-2">
-                <div class="w-2 h-2 rounded-full bg-[#0284c7]"></div>
-                <h3 class="text-xs font-extrabold uppercase tracking-wider text-slate-700 font-sans">
+                <div class="w-2.5 h-2.5 rounded-full bg-[#0284c7]"></div>
+                <h3 class="text-xs sm:text-sm font-extrabold uppercase tracking-wider text-slate-800 font-sans">
                     ${isUrdu ? 'کاروباری شعبہ جات و ماڈیولز' : 'ENTERPRISE MODULES & WORK CENTERS'}
                 </h3>
-                <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-slate-100 text-slate-600 border border-slate-200">
+                <span class="text-xs font-bold px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-700 border border-slate-200">
                     ${accessibleDepts.length} ${isUrdu ? 'شعبے' : 'Active'}
                 </span>
             </div>
@@ -663,39 +676,41 @@ function renderDepartmentGrid() {
             </div>
         </div>
 
-        <!-- Enterprise Department Cards Grid (Compact & Sleek) -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-3.5 mb-6">
+        <!-- Landscape Executive Department Cards Grid (Wide, Readable, Single-Language) -->
+        <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3.5 sm:gap-4 mb-6">
             ${filteredDepts.map(d => `
-                <div onclick="switchTab('${d.id}')" class="dept-card-enterprise group" style="--card-accent: ${d.accent};">
-                    <!-- Top: Icon + Metric Pill + Arrow -->
-                    <div class="flex items-center justify-between gap-2 mb-2">
-                        <div class="dept-card-icon-wrapper ${d.iconBg}">
+                <div onclick="switchTab('${d.id}')" class="dept-card-landscape group" style="--card-accent: ${d.accent};">
+                    <div class="flex items-start gap-3.5 sm:gap-4">
+                        <!-- Big Clear Vector Icon Container -->
+                        <div class="card-icon-container ${d.iconBg}">
                             ${d.icon}
                         </div>
-                        <div class="flex items-center gap-1.5">
-                            <span class="text-[10.5px] font-bold px-2 py-0.5 rounded-full ${d.badgeClass} tabular-nums tracking-wide shadow-2xs">
-                                ${d.statPill}
-                            </span>
-                            <span class="text-slate-300 group-hover:text-slate-700 group-hover:translate-x-0.5 transition-all text-xs shrink-0">
-                                <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-                            </span>
-                        </div>
-                    </div>
 
-                    <!-- Middle: Prominent English Title + Authentic Jameel Noori Nastaleeq Urdu Title -->
-                    <div class="space-y-0.5 my-1">
-                        <div class="dept-card-en-title truncate font-sans">
-                            ${d.titleEn}
-                        </div>
-                        <div class="dept-card-ur-title truncate urdu-nastaliq" dir="rtl">
-                            ${d.titleUr}
-                        </div>
-                    </div>
+                        <!-- Center: Strictly Single Language Title + Big Readable Specification in Landscape -->
+                        <div class="flex-1 min-w-0">
+                            <div class="flex items-center justify-between gap-2">
+                                <h4 class="${isUrdu ? 'urdu-nastaliq text-[17px] sm:text-[18px] font-bold text-slate-900 leading-snug' : 'font-sans text-sm sm:text-base font-bold text-slate-900 tracking-tight'} truncate">
+                                    ${isUrdu ? d.titleUr : d.titleEn}
+                                </h4>
 
-                    <!-- Bottom: Subtitle & Live Status Dot -->
-                    <div class="pt-2 mt-auto border-t border-slate-100/90 flex items-center justify-between text-[10.5px] text-slate-400">
-                        <span class="truncate pr-1 text-slate-500 font-medium">${isUrdu ? d.subUr : d.subEn}</span>
-                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 shrink-0 group-hover:animate-ping" title="Active"></span>
+                                <!-- Prominent Item Count Badge -->
+                                <span class="text-xs font-bold px-2.5 py-1 rounded-lg ${d.badgeClass} tabular-nums whitespace-nowrap shrink-0 shadow-2xs">
+                                    ${isUrdu ? d.countUr : d.countEn}
+                                </span>
+                            </div>
+
+                            <!-- Readable, Large Specification Text -->
+                            <p class="${isUrdu ? 'urdu-nastaliq text-[13px] sm:text-[13.5px] text-slate-600 font-normal mt-1 leading-normal' : 'text-xs text-slate-500 font-medium mt-1 leading-normal'}">
+                                ${isUrdu ? d.subUr : d.subEn}
+                            </p>
+                        </div>
+
+                        <!-- Subtle Arrow Indicator -->
+                        <div class="text-slate-300 group-hover:text-slate-700 group-hover:translate-x-1 transition-all shrink-0 pt-1 hidden sm:block">
+                            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                ${isUrdu ? '<path d="m15 18-6-6 6-6"/>' : '<path d="m9 18 6-6-6-6"/>'}
+                            </svg>
+                        </div>
                     </div>
                 </div>
             `).join('')}
