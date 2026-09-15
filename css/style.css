@@ -1,156 +1,210 @@
+@import url('https://fonts.cdnfonts.com/css/jameel-noori-nastaleeq');
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800&family=Noto+Nastaliq+Urdu:wght@400;600;700&family=Noto+Sans+Arabic:wght@400;500;600;700;800&family=Amiri:wght@700&display=swap');
 
+@font-face {
+    font-family: 'Jameel Noori Nastaleeq';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Jameel Noori Nastaleeq'),
+         local('Jameel-Noori-Nastaleeq'),
+         local('Jameel Noori Nastaleeq Regular'),
+         url('https://fonts.cdnfonts.com/s/149204/JameelNooriNastaleeqRegular.woff') format('woff');
+    font-display: swap;
+}
+
 :root {
-    --theme-header: #4885a6;
-    --theme-header-hover: #3d7391;
+    --theme-header: #1b3240;
+    --theme-header-accent: #4885a6;
     --theme-sidebar-bg: #ffffff;
     --theme-sidebar-text: #334155;
     --theme-sidebar-hover: #f1f5f9;
     --theme-sidebar-active: #0288d1;
-    --theme-card-icon: #3a6b88;
     --theme-card-border: #e2e8f0;
-    --theme-card-hover-border: #4885a6;
     --theme-bg: #f8fafc;
 }
 
+/* Base Body Typography */
 body {
-    font-family: 'Plus Jakarta Sans', 'Inter', system-ui, -apple-system, sans-serif;
+    font-family: 'Plus Jakarta Sans', 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     background-color: var(--theme-bg);
-    color: #1e293b;
+    color: #0f172a;
     margin: 0;
     padding: 0;
     direction: ltr !important;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
 }
 
-/* Urdu Typography with high readability */
+/* Urdu Typography: Authentic Jameel Noori Nastaleeq */
+.urdu-nastaliq,
+.font-urdu,
+.urdu-title,
+[lang="ur"] {
+    font-family: 'Jameel Noori Nastaleeq', 'Noto Nastaliq Urdu', 'Noto Sans Arabic', serif !important;
+    letter-spacing: 0;
+}
+
 body.lang-ur {
-    font-family: 'Noto Sans Arabic', 'Plus Jakarta Sans', system-ui, sans-serif;
+    font-family: 'Plus Jakarta Sans', 'Jameel Noori Nastaleeq', 'Noto Nastaliq Urdu', system-ui, sans-serif;
 }
 
-body.lang-ur .urdu-nastaliq {
-    font-family: 'Noto Nastaliq Urdu', serif;
+body.lang-ur .urdu-text,
+body.lang-ur .urdu-heading {
+    font-family: 'Jameel Noori Nastaleeq', 'Noto Nastaliq Urdu', serif;
     line-height: 1.8;
 }
 
-.calligraphy-title {
-    font-family: 'Amiri', 'Noto Nastaliq Urdu', serif;
-    font-weight: 700;
-    letter-spacing: 0.5px;
+/* English Typography: Enterprise Grade Authoritative */
+.font-english,
+.english-title,
+body.lang-en {
+    font-family: 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;
+    letter-spacing: -0.015em;
 }
 
-/* Top 4 Buttons */
-.top-btn-green { background-color: #8bc34a; }
-.top-btn-green:hover { background-color: #7cb342; }
-.top-btn-blue { background-color: #03a9f4; }
-.top-btn-blue:hover { background-color: #039be5; }
-.top-btn-orange { background-color: #ff9800; }
-.top-btn-orange:hover { background-color: #f57c00; }
-.top-btn-red { background-color: #e53935; }
-.top-btn-red:hover { background-color: #d32f2f; }
+/* Tabular Figures for Numbers, Codes, and Financial Ledgers */
+.tabular-nums,
+.font-mono,
+.kpi-value,
+td.num-col,
+th.num-col {
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: 'tnum' 1;
+}
 
-/* Department Cards - Ultra Professional Enterprise Design */
-.dept-card {
+/* Top Action Buttons */
+.top-btn-green { background-color: #10b981; }
+.top-btn-green:hover { background-color: #059669; }
+.top-btn-blue { background-color: #0284c7; }
+.top-btn-blue:hover { background-color: #0369a1; }
+.top-btn-orange { background-color: #f59e0b; }
+.top-btn-orange:hover { background-color: #d97706; }
+.top-btn-red { background-color: #ef4444; }
+.top-btn-red:hover { background-color: #dc2626; }
+
+/* ==================== ENTERPRISE DEPARTMENT CARDS ==================== */
+/* Sleek, Compact, High-Density Executive Cockpit Cards (Oracle/Dynamics 365 Grade) */
+.dept-card-enterprise {
     background: #ffffff;
     border: 1px solid #e2e8f0;
-    border-radius: 16px;
-    padding: 20px 14px;
-    text-align: center;
-    transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+    border-radius: 14px;
+    padding: 13px 14px 11px 14px;
+    transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
     cursor: pointer;
-    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.04), 0 1px 2px -1px rgba(0, 0, 0, 0.03);
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.03), 0 1px 2px -1px rgba(0, 0, 0, 0.02);
     position: relative;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 122px;
 }
 
-.dept-card::before {
+/* Top Hairline Accent (Activates on Hover) */
+.dept-card-enterprise::before {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
-    height: 3px;
-    background: transparent;
-    transition: background-color 0.25s ease;
+    height: 2.5px;
+    background: #f1f5f9;
+    transition: background-color 0.22s ease;
 }
 
-.dept-card:hover {
+.dept-card-enterprise:hover {
     border-color: #cbd5e1;
-    box-shadow: 0 12px 28px -6px rgba(15, 23, 42, 0.12), 0 8px 10px -6px rgba(15, 23, 42, 0.06);
-    transform: translateY(-4px);
+    box-shadow: 0 10px 25px -4px rgba(15, 23, 42, 0.08), 0 6px 10px -4px rgba(15, 23, 42, 0.03);
+    transform: translateY(-2.5px);
 }
 
-.dept-card:hover::before {
-    background: var(--card-accent, #4885a6);
+.dept-card-enterprise:hover::before {
+    background: var(--card-accent, #0284c7);
 }
 
+/* Micro Icon Wrapper */
 .dept-card-icon-wrapper {
-    width: 52px;
-    height: 52px;
-    border-radius: 14px;
-    margin: 0 auto 12px auto;
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
-    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.8), 0 2px 4px rgba(0, 0, 0, 0.04);
+    transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+    flex-shrink: 0;
+    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.8), 0 1px 2px rgba(0, 0, 0, 0.03);
 }
 
-.dept-card:hover .dept-card-icon-wrapper {
-    transform: scale(1.1) rotate(1deg);
-    box-shadow: 0 6px 16px -2px rgba(0, 0, 0, 0.12);
+.dept-card-enterprise:hover .dept-card-icon-wrapper {
+    transform: scale(1.08);
 }
 
-.dept-card-title {
-    font-size: 14.5px;
-    font-weight: 700;
+/* English Primary Header */
+.dept-card-en-title {
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: #475569;
+    line-height: 1.25;
+    transition: color 0.18s ease;
+}
+
+.dept-card-enterprise:hover .dept-card-en-title {
     color: #0f172a;
-    margin-bottom: 4px;
+}
+
+/* Urdu Nastaliq Subtitle */
+.dept-card-ur-title {
+    font-family: 'Jameel Noori Nastaleeq', 'Noto Nastaliq Urdu', serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: #0f172a;
     line-height: 1.4;
+    margin-top: 1px;
 }
 
-.dept-card-subtitle {
-    font-size: 11.5px;
-    color: #64748b;
-    font-weight: 500;
-    line-height: 1.45;
+/* Legacy fallback for dept-card */
+.dept-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    padding: 14px 12px;
+    transition: all 0.22s ease;
+    cursor: pointer;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+}
+.dept-card:hover {
+    border-color: #cbd5e1;
+    box-shadow: 0 8px 20px -4px rgba(15, 23, 42, 0.08);
+    transform: translateY(-2px);
 }
 
-/* Language specific typography tuning */
-body.lang-ur .dept-card-title {
-    font-family: 'Noto Sans Arabic', 'Plus Jakarta Sans', system-ui, sans-serif;
-    font-size: 15.5px;
-    font-weight: 700;
-    line-height: 1.55;
-}
-
-body.lang-ur .dept-card-subtitle {
-    font-family: 'Noto Sans Arabic', system-ui, sans-serif;
+/* Workspace Filter Tabs (Oracle/Dynamics 365 Work Center Style) */
+.workspace-filter-tab {
     font-size: 12px;
-    line-height: 1.5;
-    color: #64748b;
-}
-
-body.lang-ur .sidebar-link span {
-    font-family: 'Noto Sans Arabic', 'Plus Jakarta Sans', system-ui, sans-serif;
-    font-size: 12.5px;
-}
-
-body.lang-ur h1, body.lang-ur h2, body.lang-ur h3, body.lang-ur h4, body.lang-ur th, body.lang-ur button {
-    font-family: 'Noto Sans Arabic', 'Plus Jakarta Sans', system-ui, sans-serif;
-}
-
-body.lang-en .dept-card-title {
-    font-family: 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;
-    font-size: 14px;
     font-weight: 700;
-    letter-spacing: -0.01em;
+    padding: 5px 12px;
+    border-radius: 8px;
+    transition: all 0.15s ease;
+    cursor: pointer;
+    border: 1px solid transparent;
 }
-
-body.lang-en .sidebar-link span {
-    font-family: 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;
-    font-size: 12px;
+.workspace-filter-tab.active {
+    background: #0f172a;
+    color: #ffffff;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+.workspace-filter-tab:not(.active) {
+    color: #64748b;
+    background: #ffffff;
+    border-color: #e2e8f0;
+}
+.workspace-filter-tab:not(.active):hover {
+    background: #f8fafc;
+    color: #0f172a;
+    border-color: #cbd5e1;
 }
 
 /* Sidebar Menu Items */
@@ -158,14 +212,14 @@ body.lang-en .sidebar-link span {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 9px 12px;
-    font-size: 12.5px;
+    padding: 8px 11px;
+    font-size: 12px;
     font-weight: 600;
     color: #475569;
-    border-radius: 8px;
+    border-radius: 7px;
     transition: all 0.15s ease;
     cursor: pointer;
-    border-left: 3px solid transparent;
+    border-left: 2.5px solid transparent;
 }
 
 .sidebar-link:hover {
@@ -174,21 +228,21 @@ body.lang-en .sidebar-link span {
 }
 
 .sidebar-link.active {
-    color: #0288d1;
+    color: #0284c7;
     background-color: #f0f9ff;
-    border-left-color: #0288d1;
+    border-left-color: #0284c7;
     font-weight: 700;
 }
 
 /* Tab Header */
 .dashboard-tab {
     background: #ffffff;
-    border-top: 2.5px solid #4885a6;
+    border-top: 2.5px solid #0284c7;
     border-left: 1px solid #e2e8f0;
     border-right: 1px solid #e2e8f0;
     border-bottom: 1px solid #ffffff;
-    padding: 8px 20px;
-    font-size: 13px;
+    padding: 7px 18px;
+    font-size: 12.5px;
     font-weight: 700;
     color: #1e293b;
     border-radius: 6px 6px 0 0;
@@ -234,35 +288,29 @@ body.lang-en .sidebar-link span {
 
 /* Responsive adjustments for Mobile & Tablet screens */
 @media (max-width: 640px) {
-    .dept-card {
-        padding: 14px 8px;
+    .dept-card-enterprise {
+        padding: 11px 10px;
         border-radius: 12px;
+        min-height: 110px;
     }
     .dept-card-icon-wrapper {
-        width: 44px;
-        height: 44px;
-        border-radius: 12px;
-        margin-bottom: 8px;
+        width: 32px;
+        height: 32px;
+        border-radius: 8px;
     }
     .dept-card-icon-wrapper svg {
-        width: 1.35rem;
-        height: 1.35rem;
+        width: 1.15rem;
+        height: 1.15rem;
     }
-    .dept-card-title {
-        font-size: 12.5px;
-    }
-    body.lang-ur .dept-card-title {
-        font-size: 13.5px;
-    }
-    .dept-card-subtitle {
+    .dept-card-en-title {
         font-size: 10px;
     }
-    body.lang-ur .dept-card-subtitle {
-        font-size: 10.5px;
+    .dept-card-ur-title {
+        font-size: 13.5px;
     }
     .dashboard-tab {
-        padding: 6px 14px;
-        font-size: 12px;
+        padding: 5px 12px;
+        font-size: 11.5px;
     }
 }
 
@@ -276,7 +324,7 @@ body.lang-en .sidebar-link span {
 }
 
 .overflow-x-auto::-webkit-scrollbar {
-    height: 5px;
+    height: 4px;
 }
 .overflow-x-auto::-webkit-scrollbar-track {
     background: #f1f5f9;
@@ -289,4 +337,3 @@ body.lang-en .sidebar-link span {
 .overflow-x-auto::-webkit-scrollbar-thumb:hover {
     background: #94a3b8;
 }
-
