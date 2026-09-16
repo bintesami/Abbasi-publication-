@@ -901,7 +901,6 @@ function renderRawMaterials() {
 }
 
 // 2. Book Master & BOM View
-function renderBooks() {
 function renderBookCard(b, isUrdu, s) {
     return `
         <div class="border border-slate-200 rounded-xl p-4 hover:shadow-sm transition bg-white">
